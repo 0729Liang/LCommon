@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00E4FF</color>
+    <color name="colorPrimaryDark">#00E4FF</color>
+    <color name="colorAccent">#00E4FF</color>
+
+    <!--透明色-->
+    <color name="blue">#59A3F8</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="text_black">#ff333333</color>
+    <color name="text_blue">#ff00e4ff</color>
+    <color name="text_gray">#ff999999</color>
+    <color name="text_gray_cc">#FFCCCCCC</color>
+    <color name="text_gray_ff888888">#FF888888</color>
+    <color name="text_gray_FFA9A9A9">#FFA9A9A9</color>
+    <color name="text_tag">#858585</color>
+    <color name="bg_blue">#ff05D2FE</color>
+    <color name="bg_drar_fff9f9f9">#fff9f9f9</color>
+
+    <color name="transparent_black_00">#00000000</color>
+    <color name="transparent_black_36">#5c000000</color>
+    <!--黑色  不透明度63%-->
+    <color name="transparent_black_63">#a1000000</color>
+    <!--黑色  透明度80%-->
+    <color name="transparent_black">#cc000000</color>
+
+    <color name="transparent_black_88000000">#88000000</color>
+
+    <color name="tag_red">#F95968</color>
+    <color name="redPrimary">#F95968</color>
+    <color name="orange_bg">#FFB755</color>
+
+    <!--分割线颜色-->
+    <color name="divide_line_gray">#ffededed</color>
+
+    <!--个人中心活动背景颜色-->
+    <color name="gray_bg">#FFF4F4F4</color>
+
+    <color name="webview_progress_color">@color/colorPrimary</color>
+    <color name="color333">#333333</color>
+    <color name="color999">#999999</color>
+    <color name="colorCCC">#cccccc</color>
+    <color name="color5DCFF9">#5DCFF9</color>
+
+    <color name="music_progress_stop">#BBBBBB</color>
+    <color name="music_progress_play">#DDDDDD</color>
+    <color name="color444">#444444</color>
+    <color name="color666">#666666</color>
+    <color name="colorRipple">#328e8e8e</color>
+</resources>

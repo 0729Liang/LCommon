@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.liang.lcommon.view.LCircleSeekBar
+        android:id="@+id/lseekbar"
+        android:layout_width="@dimen/dp150"
+        android:layout_height="@dimen/dp150"
+        android:background="@android:color/holo_green_light"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:lcircleseekbar_baseLineColor="@android:color/holo_blue_dark"
+        app:lcircleseekbar_lineCap="round"
+        app:lcircleseekbar_progress="20"
+        app:lcircleseekbar_progressColor="@android:color/holo_purple"
+        app:lcircleseekbar_secondProgress="30"
+        app:lcircleseekbar_secondProgressColor="@android:color/holo_orange_dark"
+        app:lcircleseekbar_shape="ring"
+        app:lcircleseekbar_thumbPosition="above"
+        app:lcircleseekbar_thumb="@drawable/icon_lseekbar_point" />
+
+    <TextView
+        android:id="@+id/progressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/lseekbar"
+        app:layout_constraintRight_toRightOf="@id/lseekbar"
+        app:layout_constraintTop_toBottomOf="@id/lseekbar" />
+</android.support.constraint.ConstraintLayout>

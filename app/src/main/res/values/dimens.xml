@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_height">50dp</dimen>
+    <!--播放器播放按钮的大小-->
+    <dimen name="videoplayer_start_button_w_h_normal">16dp</dimen>
+    <dimen name="videoplayer_start_button_w_h_fullscreen">18dp</dimen>
+
+    <dimen name="storyWidth">70dp</dimen>
+    <dimen name="storyHeight">70dp</dimen>
+    <dimen name="animWidth">129dp</dimen>
+    <dimen name="animHeight">73dp</dimen>
+    <dimen name="itemRadius">7dp</dimen>
+
+    <!--
+     第一套
+    1、专辑封面（【合集情况】简介，播放量与播放进度）（【单集情况】时间与播放量与播放进度）。
+    2、免费故事封面（时间与播放量与播放进度）。
+    3、付费故事封面（时间与播放量）。firstCorner-->
+    <dimen name="storyWidthV1">70dp</dimen>
+    <dimen name="storyHeightV1">70dp</dimen>
+    <dimen name="animWidthV1">129dp</dimen>
+    <dimen name="animHeightV1">70dp</dimen>
+    <dimen name="itemTopBottomPaddingV1">9dp</dimen>
+    <dimen name="itemLeftRightPaddingV1">15dp</dimen>
+    <dimen name="itemRadiusV1">5dp</dimen>
+    <!--
+    1、我的下载（集数）。
+    2、我的收藏（播放量与集数）。
+    3、我的购买（集数）。
+    4、小科普（时间与播放量）。
+    5、热听榜（时间与播放量）。
+    6、精品内容（播放量与集数）。
+    7、分类内容（播放量）。
+    8、搜索结果故事与动画tab（播放量与集数）。
+    9、最近播放（播放进度与播放日期）。-->
+    <dimen name="storyWidthV2">70dp</dimen>
+    <dimen name="storyHeightV2">70dp</dimen>
+    <dimen name="animWidthV2">129dp</dimen>
+    <dimen name="animHeightV2">70dp</dimen>>
+    <dimen name="itemTopBottomPaddingV2">12dp</dimen>
+    <dimen name="itemLeftRightPaddingV2">15dp</dimen>
+    <dimen name="itemRadiusV2">5dp</dimen>
+    <dimen name="bigWordSizeV2">15sp</dimen>
+    <dimen name="bigWorldMarginIconV2">13dp</dimen>
+    <dimen name="smallWordSizeV2">12sp</dimen>
+    <dimen name="bigWordMarginTopV2">5dp</dimen>
+    <dimen name="smallWordMarginBottomV2">5dp</dimen>
+    <dimen name="smallToSmallWorldMarginV2">18dp</dimen>
+    <!--1、音频播放列表弹窗 （时间与播放量与播放进度）。-->
+    <dimen name="storyWidthV3">57dp</dimen>
+    <dimen name="storyHeightV3">57dp</dimen>
+    <dimen name="itemTopBottomPaddingV3">6.5dp</dimen>
+    <dimen name="itemLeftRightPaddingV3">15dp</dimen>
+    <dimen name="itemRadiusV3">5dp</dimen>
+
+</resources>
