@@ -29,18 +29,18 @@ class LBaseActivity : AppCompatActivity() {
                 lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_RING
             }
         }
-        Handler().postDelayed({ lseekbar.isHideThumb = true }, 3000L)
-        Handler().postDelayed({
-            lseekbar.isHideThumb = false
-            lseekbar.progress = 35F
-            lseekbar.secondProgress = 15F
-        }, 6000L)
-        Handler().postDelayed({
-            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_MIDDLE
-        }, 9000L)
-        Handler().postDelayed({
-            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_BELOW
-        }, 12000L)
+//        Handler().postDelayed({ lseekbar.isHideThumb = true }, 3000L)
+//        Handler().postDelayed({
+//            lseekbar.isHideThumb = false
+//            lseekbar.progress = 35F
+//            lseekbar.secondProgress = 15F
+//        }, 6000L)
+//        Handler().postDelayed({
+//            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_MIDDLE
+//        }, 9000L)
+//        Handler().postDelayed({
+//            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_BELOW
+//        }, 12000L)
     }
 
 }
