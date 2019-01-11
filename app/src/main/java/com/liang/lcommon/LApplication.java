@@ -2,6 +2,7 @@ package com.liang.lcommon;
 
 import android.app.Application;
 
+import com.blankj.utilcode.util.Utils;
 import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.view.LCircleSeekBar;
 
@@ -16,6 +17,5 @@ public class LApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LCommon.init(this, BuildConfig.class);
-
     }
 }
