@@ -9,26 +9,34 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.liang.lcommon.R;
+import com.liang.lcommon.utils.LBitmapX;
 import com.liang.lcommon.utils.LSizeX;
 
 /**
  * @author : Amarao
  * CreateAt : 14:10 2019/1/5
- * Describe :
+ * Describe :  圆形 环形 seekBar
  */
 public class LCircleSeekBar extends View {
     private static final double RADIAN      = 180 / Math.PI;// 1弧度对应的角度，180°= π弧度
-    public static final  int    START_ANGLE = -90;// 起始角度
-    public static final  int    CIRCLE_ANLE = 360; // 一圈的角度
-    public final         String TAG         = getClass().getSimpleName();
+    private static final int    START_ANGLE = -90;// 起始角度
+    private static final int    CIRCLE_ANLE = 360; // 一圈的角度
+    private final        String TAG         = getClass().getSimpleName();
 
+    /**
+     * xml 属性对应值
+     */
     private class LCircleSeekBarConfig {
         private static final int LSEEKBAR_SHAPE_RING   = 0;
         private static final int LSEEKBAR_SHAPE_CIRCLE = 1;
@@ -96,28 +104,31 @@ public class LCircleSeekBar extends View {
     private float mSecondProgressAngle;
 
     /*暴露属性*/
-    private LShape         mShape;
-    private LCap           mLineCap;
-    private LThumbPosition mThumbPosition;
+    private LShape         mShape; // bar形状
+    private LCap           mLineCap; // 进度笔帽形状
+    private LThumbPosition mThumbPosition; // 锚点偏移位置
 
-    private boolean mHideThumb;
-    private float   mProgress;
-    private float   mSecondProgress;
-    private float   mMaxProgress;
-    private float   mMinProgress;
-    private float   mLineWidth;
-    private float   mThumbSize;
-    private int     mThumb;
-    private int     mBaseLineColor;
-    private int     mProgressColor;
-    private int     mSecondProgressColor;
+    private boolean  mHideThumb; // 隐藏锚点
+    private float    mProgress;
+    private float    mSecondProgress;
+    private float    mMaxProgress;
+    private float    mMinProgress;
+    private float    mLineWidth;
+    private float    mThumbSize;
+    private int      mThumb;
+    private Drawable mThumDrawable;
+    private int      mBaseLineColor;
+    private int      mProgressColor;
+    private int      mSecondProgressColor;
 
     private onLSeekBarStartListener     mStartListener; // 触摸开始监听
     private onLSeekBarStopListener      mStopListener; // 触摸结束监听
     private onLSeekBarChangeListener    mChangeListener; // 进度改变监听
     private OnLSeekBarScdChangeListener mScdChangeListener; // 二级进度条改变监听
 
-    private float mTempX;
+    // 私有字段
+    private float   mTempX;
+    private boolean mThumbIsColor; // 锚点是否是颜色
 
     public interface onLSeekBarStartListener {
         void onLSeekBarStart(LCircleSeekBar view);
@@ -166,21 +177,7 @@ public class LCircleSeekBar extends View {
         mCircleRadius = mSize / 2 - mThumbSize;
         mTempX = mSize / 2;
         mPointOfftX = mCircleX - mThumbSize / 2;
-
-        switch (mThumbPosition) {
-            case LSEEKBAR_THUMB_POSITION_ABOVE:
-                mPointOfftY = 0;
-                break;
-            case LSEEKBAR_THUMB_POSITION_MIDDLE:
-                //mThumbSize = mLineWidth = Math.min(mThumbSize, mLineWidth);
-                mPointOfftY = mThumbSize / 2;
-                break;
-            case LSEEKBAR_THUMB_POSITION_BELOW:
-                mPointOfftY = mThumbSize;
-                break;
-            default:
-                mPointOfftY = 0;
-        }
+        refreshPointY(mThumbPosition); // 确定mPointOfftY的偏移量
 
         setMeasuredDimension(mWidth, mHeight);
     }
@@ -231,9 +228,9 @@ public class LCircleSeekBar extends View {
         }
 
         if (!mHideThumb) {
+            // 锚点
             mMatrix.setTranslate(mPointOfftX, mPointOfftY);
             mMatrix.postRotate(mProgressAngle, mCircleX, mCircleY);
-            // 锚点
             canvas.drawBitmap(mThumBbitmap, mMatrix, mScdProPaint);
         }
 
@@ -334,20 +331,46 @@ public class LCircleSeekBar extends View {
         mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lcircleseekbar_thumb_size, LSizeX.dp2px(15));
 
         mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lcircleseekbar_thumb, R.drawable.icon_lseekbar_point);
+        mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lcircleseekbar_thumb);
         mBaseLineColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_baseLineColor, ContextCompat.getColor(mContext, R.color.text_gray));
         mProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_progressColor, ContextCompat.getColor(mContext, R.color.text_blue));
         mSecondProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_secondProgressColor, ContextCompat.getColor(mContext, R.color.text_tag));
 
         typedArray.recycle();
 
-        mThumBbitmap = BitmapFactory.decodeResource(getResources(), mThumb);
-        if (mThumbSize == 0) {
-            mThumbSize = mLineWidth;
+        // thumb 是图片
+        if (!judgeThumbStatus(mThumDrawable)) {
+            mThumBbitmap = BitmapFactory.decodeResource(getResources(), mThumb);
+            mThumBbitmap = reSizeBitmap(mThumBbitmap, mThumbSize, mThumbSize);
+        } else {
+            mThumBbitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
+            if (mThumDrawable == null){
+                mThumBbitmap.eraseColor(ContextCompat.getColor(mContext,R.color.white));
+            }else {
+                mThumBbitmap.eraseColor(((ColorDrawable) mThumDrawable).getColor());
+            }
         }
-        mThumBbitmap = reSizeBitmap(mThumBbitmap, mThumbSize, mThumbSize);
+
+        mThumBbitmap = LBitmapX.toRoundBitmap(mThumBbitmap); // 转化为圆形
 
         setProgressAngle(360 * mProgress / mMaxProgress);
         setSecondProgressAngle(360 * mSecondProgress / mMaxProgress);
+    }
+
+
+    /**
+     * 判断thumb是颜色还是图片
+     *
+     * @param drawable thumb
+     * @return true 颜色 false 图片
+     */
+    private boolean judgeThumbStatus(Drawable drawable) {
+        if (drawable == null || drawable instanceof ColorDrawable) {
+            mThumbIsColor = true;
+        } else if (drawable instanceof BitmapDrawable) {
+            mThumbIsColor = false;
+        }
+        return mThumbIsColor;
     }
 
     /*初始化画笔*/
@@ -415,6 +438,25 @@ public class LCircleSeekBar extends View {
      */
     public float angleToProgress(float angle) {
         return mMaxProgress * angle / CIRCLE_ANLE;
+    }
+
+    /**
+     * @param position 确定mPointOfftY的偏移量
+     */
+    private void refreshPointY(LThumbPosition position) {
+        switch (position) {
+            case LSEEKBAR_THUMB_POSITION_ABOVE:
+                mPointOfftY = 0;
+                break;
+            case LSEEKBAR_THUMB_POSITION_MIDDLE:
+                mPointOfftY = mThumbSize / 2;
+                break;
+            case LSEEKBAR_THUMB_POSITION_BELOW:
+                mPointOfftY = mThumbSize;
+                break;
+            default:
+                mPointOfftY = 0;
+        }
     }
 
     /**
@@ -543,6 +585,7 @@ public class LCircleSeekBar extends View {
 
     public void setThumbPosition(LThumbPosition thumbPosition) {
         mThumbPosition = thumbPosition;
+        refreshPointY(mThumbPosition);
     }
 
     public boolean isHideThumb() {

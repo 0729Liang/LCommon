@@ -21,6 +21,16 @@ class LBaseActivity : AppCompatActivity() {
             } else {
                 lseekbar.lineCap = LCircleSeekBar.LCap.LSEEKBAR_LINE_CAP_SQUARE
             }
+            if (pro > 60) {
+                lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_MIDDLE
+            } else {
+                lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_BELOW
+            }
+            if (pro > 80) {
+                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_CIRCLE
+            } else {
+                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_RING
+            }
         }
         lseekbar.setScdChangeListener() { view, pro ->
             if (pro > 80) {
