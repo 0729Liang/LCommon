@@ -12,7 +12,7 @@ import com.liang.lcommon.utils.LSizeX;
  * Describe :
  */
 public class LCommon {
-    public static Exports exports = new Exports();
+    private static Exports exports = new Exports();
 
     public static Context app()
     {
@@ -24,10 +24,10 @@ public class LCommon {
         return exports.appConfig;
     }
 
-    public static void init(Application paramApplication, Class paramClass)
+    public static void init(Application application, Class paramClass)
     {
         exports.init = true;
-        exports.app = paramApplication;
+        exports.app = application;
         LSizeX.init();
     }
 

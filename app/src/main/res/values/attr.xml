@@ -2,32 +2,32 @@
 <resources>
     <declare-styleable name="LCircleSeekBar">
         <!--特殊-->
-        <attr name="lcircleseekbar_shape" format="integer">
+        <attr name="lseekbar_shape" format="integer">
             <enum name="ring" value="0" />
             <enum name="circle" value="1" />
         </attr>
-        <attr name="lcircleseekbar_lineCap" format="integer">
+        <attr name="lseekbar_lineCap" format="integer">
             <enum name="round" value="0" />
             <enum name="square" value="1" />
         </attr><!--笔/线帽-->
-        <attr name="lcircleseekbar_thumbPosition" format="integer">
+        <attr name="lseekbar_thumbPosition" format="integer">
             <enum name="middle" value="0" />
             <enum name="above" value="1" />
             <enum name="below" value="2" />
         </attr><!--滑块位置-->
-        <attr name="lcircleseekbar_hideThumb" format="boolean"/><!--隐藏锚点-->
+        <attr name="lseekbar_hideThumb" format="boolean" /><!--隐藏锚点-->
         <!--进度-->
-        <attr name="lcircleseekbar_progress" format="float" />
-        <attr name="lcircleseekbar_secondProgress" format="float" />
-        <attr name="lcircleseekbar_maxProgress" format="float" />
-        <attr name="lcircleseekbar_minProgress" format="float" />
+        <attr name="lseekbar_progress" format="float" />
+        <attr name="lseekbar_secondProgress" format="float" />
+        <attr name="lseekbar_maxProgress" format="float" />
+        <attr name="lseekbar_minProgress" format="float" />
         <!--尺寸-->
-        <attr name="lcircleseekbar_lineWidth" format="dimension" /><!--线宽-->
-        <attr name="lcircleseekbar_thumb_size" format="dimension" /><!--滑块大小-->
+        <attr name="lseekbar_lineWidth" format="dimension" /><!--线宽-->
+        <attr name="lseekbar_thumb_size" format="dimension" /><!--滑块大小-->
         <!--颜色-->
-        <attr name="lcircleseekbar_thumb" format="reference|color" /><!--滑动块-->
-        <attr name="lcircleseekbar_baseLineColor" format="color" /><!--进度底色-->
-        <attr name="lcircleseekbar_progressColor" format="color" /><!--进度条颜色-->
-        <attr name="lcircleseekbar_secondProgressColor" format="color" /><!--缓冲条颜色-->
+        <attr name="lseekbar_thumb" format="reference|color" /><!--滑动块-->
+        <attr name="lseekbar_baseLineColor" format="color" /><!--进度底色-->
+        <attr name="lseekbar_progressColor" format="color" /><!--进度条颜色-->
+        <attr name="lseekbar_secondProgressColor" format="color" /><!--缓冲条颜色-->
     </declare-styleable>
 </resources>

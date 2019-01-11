@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -88,6 +87,7 @@ public class LCircleSeekBar extends View {
     private Paint  mBasePaint;
     private Paint  mProPaint;
     private Paint  mScdProPaint;
+    private Paint  mThumbPaint;
     private RectF  mArcRectF;
     private Bitmap mThumBbitmap;
     private Matrix mMatrix;
@@ -231,7 +231,7 @@ public class LCircleSeekBar extends View {
             // 锚点
             mMatrix.setTranslate(mPointOfftX, mPointOfftY);
             mMatrix.postRotate(mProgressAngle, mCircleX, mCircleY);
-            canvas.drawBitmap(mThumBbitmap, mMatrix, mScdProPaint);
+            canvas.drawBitmap(mThumBbitmap, mMatrix, mThumbPaint);
         }
 
         this.invalidate(); //开启后实时更新
@@ -287,7 +287,7 @@ public class LCircleSeekBar extends View {
     /*初始化配置*/
     private void initAttrs(AttributeSet attrs) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.LCircleSeekBar);
-        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lcircleseekbar_shape, LCircleSeekBarConfig.LSEEKBAR_SHAPE_RING)) {
+        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lseekbar_shape, LCircleSeekBarConfig.LSEEKBAR_SHAPE_RING)) {
             case LCircleSeekBarConfig.LSEEKBAR_SHAPE_RING:
                 mShape = LShape.LSEEKBAR_SHAPE_RING;
                 break;
@@ -297,7 +297,7 @@ public class LCircleSeekBar extends View {
             default:
                 mShape = LShape.LSEEKBAR_SHAPE_RING;
         }
-        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lcircleseekbar_lineCap, LCircleSeekBarConfig.LSEEKBAR_LINE_CAP_SQUARE)) {
+        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lseekbar_lineCap, LCircleSeekBarConfig.LSEEKBAR_LINE_CAP_SQUARE)) {
             case LCircleSeekBarConfig.LSEEKBAR_LINE_CAP_SQUARE:
                 mLineCap = LCap.LSEEKBAR_LINE_CAP_SQUARE;
                 break;
@@ -307,7 +307,7 @@ public class LCircleSeekBar extends View {
             default:
                 mLineCap = LCap.LSEEKBAR_LINE_CAP_SQUARE;
         }
-        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lcircleseekbar_thumbPosition, LCircleSeekBarConfig.LSEEKBAR_THUMB_POSITION_ABOVE)) {
+        switch (typedArray.getInteger(R.styleable.LCircleSeekBar_lseekbar_thumbPosition, LCircleSeekBarConfig.LSEEKBAR_THUMB_POSITION_MIDDLE)) {
             case LCircleSeekBarConfig.LSEEKBAR_THUMB_POSITION_ABOVE:
                 mThumbPosition = LThumbPosition.LSEEKBAR_THUMB_POSITION_ABOVE;
                 break;
@@ -321,20 +321,20 @@ public class LCircleSeekBar extends View {
                 mThumbPosition = LThumbPosition.LSEEKBAR_THUMB_POSITION_ABOVE;
         }
 
-        mHideThumb = typedArray.getBoolean(R.styleable.LCircleSeekBar_lcircleseekbar_hideThumb, false);
-        mProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lcircleseekbar_progress, 0);
-        mSecondProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lcircleseekbar_secondProgress, 0);
-        mMaxProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lcircleseekbar_maxProgress, 100);
-        mMinProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lcircleseekbar_minProgress, 0);
+        mHideThumb = typedArray.getBoolean(R.styleable.LCircleSeekBar_lseekbar_hideThumb, false);
+        mProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_progress, 0);
+        mSecondProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_secondProgress, 0);
+        mMaxProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_maxProgress, 100);
+        mMinProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_minProgress, 0);
 
-        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lcircleseekbar_lineWidth, LSizeX.dp2px(15));
-        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lcircleseekbar_thumb_size, LSizeX.dp2px(15));
+        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_lineWidth, LSizeX.dp2px(15,mContext));
+        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_thumb_size, LSizeX.dp2px(15,mContext));
 
-        mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lcircleseekbar_thumb, R.drawable.icon_lseekbar_point);
-        mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lcircleseekbar_thumb);
-        mBaseLineColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_baseLineColor, ContextCompat.getColor(mContext, R.color.text_gray));
-        mProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_progressColor, ContextCompat.getColor(mContext, R.color.text_blue));
-        mSecondProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lcircleseekbar_secondProgressColor, ContextCompat.getColor(mContext, R.color.text_tag));
+        mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lseekbar_thumb, R.drawable.icon_lseekbar_point);
+        mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lseekbar_thumb);
+        mBaseLineColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_baseLineColor, ContextCompat.getColor(mContext, R.color.lseekbar_baseline_color));
+        mProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_progressColor, ContextCompat.getColor(mContext, R.color.lseekbar_progress_color));
+        mSecondProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_secondProgressColor, ContextCompat.getColor(mContext, R.color.lseekbar_scdprogress_color));
 
         typedArray.recycle();
 
@@ -344,9 +344,9 @@ public class LCircleSeekBar extends View {
             mThumBbitmap = reSizeBitmap(mThumBbitmap, mThumbSize, mThumbSize);
         } else {
             mThumBbitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
-            if (mThumDrawable == null){
-                mThumBbitmap.eraseColor(ContextCompat.getColor(mContext,R.color.white));
-            }else {
+            if (mThumDrawable == null) {
+                mThumBbitmap.eraseColor(ContextCompat.getColor(mContext, R.color.lseekbar_thumb_color));
+            } else {
                 mThumBbitmap.eraseColor(((ColorDrawable) mThumDrawable).getColor());
             }
         }
@@ -378,6 +378,7 @@ public class LCircleSeekBar extends View {
         mBasePaint = createBasePaint();
         mProPaint = createProPaint();
         mScdProPaint = createScdProPaint();
+        mThumbPaint = creatThumbPaint();
         mArcRectF = new RectF(mThumbSize, mThumbSize, mWidth - mThumbSize, mHeight - mThumbSize);
         if (mLineCap == LCap.LSEEKBAR_LINE_CAP_ROUND) {
             mProPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -491,6 +492,11 @@ public class LCircleSeekBar extends View {
         return paint;
     }
 
+    public Paint creatThumbPaint() {
+        Paint paint = new Paint();
+        paint.setAntiAlias(true); //平滑
+        return paint;
+    }
 
     public onLSeekBarStartListener getStartListener() {
         return mStartListener;

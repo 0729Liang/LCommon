@@ -8,18 +8,11 @@
         android:id="@+id/lseekbar"
         android:layout_width="@dimen/dp150"
         android:layout_height="@dimen/dp150"
-        android:background="@android:color/holo_green_light"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:lcircleseekbar_baseLineColor="@android:color/holo_blue_dark"
-        app:lcircleseekbar_lineCap="round"
-        app:lcircleseekbar_progress="20"
-        app:lcircleseekbar_progressColor="@android:color/holo_purple"
-        app:lcircleseekbar_secondProgress="30"
-        app:lcircleseekbar_secondProgressColor="@android:color/holo_orange_dark"
-        app:lcircleseekbar_shape="ring"
-        app:lcircleseekbar_thumbPosition="above"
-        />
+        app:lseekbar_lineCap="round"
+        app:lseekbar_progress="20"
+        app:lseekbar_secondProgress="30" />
 
     <TextView
         android:id="@+id/progressTv"

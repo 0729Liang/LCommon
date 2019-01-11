@@ -26,7 +26,7 @@ public class LSizeX {
         SCALED_DENSITY = metrics.scaledDensity;
     }
 
-    public static DisplayMetrics getDisplayMetrics() {
+    private static DisplayMetrics getDisplayMetrics() {
         return LCommon.app().getResources().getDisplayMetrics();
     }
 
@@ -39,6 +39,17 @@ public class LSizeX {
     public static int dp2px(float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpVal, getDisplayMetrics());
+    }
+
+    /**
+     * dp转px
+     *
+     * @param dpVal dp值
+     * @return px值
+     */
+    public static int dp2px(float dpVal,Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, context.getResources().getDisplayMetrics());
     }
 
     public static int dp2px(Context context, float dpVal) {

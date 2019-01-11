@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#00E4FF</color>
     <color name="colorAccent">#00E4FF</color>
 
+    <!--circleSeekBar-->
+    <color name="lseekbar_baseline_color">#FFCCCCCC</color>
+    <color name="lseekbar_progress_color">#00E4FF</color>
+    <color name="lseekbar_scdprogress_color">#40ccdd</color>
+    <color name="lseekbar_thumb_color">#ffffff</color>
+
     <!--透明色-->
     <color name="blue">#59A3F8</color>
     <color name="white">#ffffff</color>
