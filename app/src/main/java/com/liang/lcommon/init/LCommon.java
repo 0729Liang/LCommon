@@ -22,7 +22,6 @@ public class LCommon {
     public static void init(Application application, Class paramClass) {
         exports.init = true;
         exports.app = application;
-        LSizeX.init();
     }
 
     public Context getContext() {

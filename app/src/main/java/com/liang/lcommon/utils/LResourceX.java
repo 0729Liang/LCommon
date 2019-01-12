@@ -11,6 +11,11 @@ import android.support.v4.content.ContextCompat;
  * @author : Amarao
  * CreateAt : 18:32 2019/1/12
  * Describe : 得到颜色和图片
+ * <p>
+ * createRoundRectDrawable 创建圆角矩形
+ * getDrawable 获取drawable 资源
+ * getColor 得到颜色
+ * parseColor 解析颜色
  */
 public class LResourceX {
 
@@ -73,6 +78,4 @@ public class LResourceX {
         }
 
     }
-
-
 }

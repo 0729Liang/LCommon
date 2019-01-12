@@ -20,7 +20,7 @@ import android.view.View;
 import com.liang.lcommon.R;
 import com.liang.lcommon.utils.LBitmapX;
 import com.liang.lcommon.utils.LResourceX;
-import com.liang.lcommon.utils.LSizeX;
+import com.liang.lcommon.utils.LSizeUtils;
 
 /**
  * @author : Amarao
@@ -328,8 +328,8 @@ public class LCircleSeekBar extends View {
         mMaxProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_maxProgress, 100);
         mMinProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_minProgress, 0);
 
-        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_lineWidth, LSizeX.dp2px(15, mContext));
-        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_thumb_size, LSizeX.dp2px(16, mContext));
+        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_lineWidth, LSizeUtils.dp2px(15, mContext));
+        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_thumb_size, LSizeUtils.dp2px(16, mContext));
 
         mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lseekbar_thumb, R.drawable.icon_lseekbar_point);
         mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lseekbar_thumb);

@@ -15,6 +15,11 @@ import android.graphics.Shader;
  * @author : Amarao
  * CreateAt : 10:52 2019/1/11
  * Describe :
+ * <p>
+ * resizeBitmap 重置bitmap大小
+ * toRoundBitmapByXfermode 将bitmap设置为圆形（不剪裁）
+ * toRoundBitmapByShaper 将bitmap设置为圆形（画笔渲染）
+ * toRoundBitmapByXfermode 将bitmap设置为圆形（剪裁）
  */
 public class LBitmapX {
 
@@ -137,7 +142,5 @@ public class LBitmapX {
             canvas.drawBitmap(bitmap, src, dst, paint);
             return output;
         }
-
-
-    }
+    }// RoundBitmap
 }

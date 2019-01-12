@@ -9,22 +9,19 @@ import com.liang.lcommon.init.LCommon;
 /**
  * @author : Amarao
  * CreateAt : 15:32 2019/1/10
- * Describe : dp 与 px的转化
+ * Describe : dp sp px 之间的转化
+ * <p>
+ * dp2px：dp转px
+ * px2dp：px转dp
+ * sp2px：sp转px
+ * px2sp：px2sp
  */
 public class LSizeX {
 
-    public static int   WIDTH          = 0;
-    public static int   HEIGHT         = 0;
-    public static float DENSITY        = 0;
-    public static float SCALED_DENSITY = 0;
-
-    public static void init() {
-        DisplayMetrics metrics = getDisplayMetrics();
-        WIDTH = metrics.widthPixels;
-        HEIGHT = metrics.heightPixels;
-        DENSITY = metrics.density;
-        SCALED_DENSITY = metrics.scaledDensity;
-    }
+    public static  int   WIDTH          = getDisplayMetrics().widthPixels;
+    public static  int   HEIGHT         = getDisplayMetrics().heightPixels;
+    private static float DENSITY        = getDisplayMetrics().density;
+    private static float SCALED_DENSITY = getDisplayMetrics().scaledDensity;
 
     private static DisplayMetrics getDisplayMetrics() {
         return LCommon.getApp().getResources().getDisplayMetrics();
@@ -54,10 +51,6 @@ public class LSizeX {
         return pxVal / DENSITY;
     }
 
-    public static float px2dp(float pxVal, Context context) {
-        return pxVal / context.getResources().getDisplayMetrics().density;
-    }
-
     /**
      * sp转px
      *
@@ -66,10 +59,6 @@ public class LSizeX {
      */
     public static int sp2px(float spVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, getDisplayMetrics());
-    }
-
-    public static int sp2px(float spVal, Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.getResources().getDisplayMetrics());
     }
 
     /**
@@ -82,7 +71,4 @@ public class LSizeX {
         return pxVal / SCALED_DENSITY;
     }
 
-    public static float px2sp(float pxVal, Context context) {
-        return pxVal / context.getResources().getDisplayMetrics().scaledDensity;
-    }
 }

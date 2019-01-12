@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.liang.lcommon.utils.LSizeUtils;
 import com.liang.lcommon.utils.LSizeX;
 
 import java.lang.annotation.Retention;
@@ -420,13 +421,13 @@ public class QMUIStatusBarHelper {
             }
         }
         if (QMUIDeviceHelper.isTablet(context)
-                && sStatusbarHeight > LSizeX.dp2px(STATUS_BAR_DEFAULT_HEIGHT_DP, context)) {
+                && sStatusbarHeight > LSizeUtils.dp2px(STATUS_BAR_DEFAULT_HEIGHT_DP, context)) {
             //状态栏高度大于25dp的平板，状态栏通常在下方
             sStatusbarHeight = 0;
         } else {
             if (sStatusbarHeight <= 0) {
                 if (sVirtualDensity == -1) {
-                    sStatusbarHeight = LSizeX.dp2px(STATUS_BAR_DEFAULT_HEIGHT_DP, context);
+                    sStatusbarHeight = LSizeUtils.dp2px(STATUS_BAR_DEFAULT_HEIGHT_DP, context);
                 } else {
                     sStatusbarHeight = (int) (STATUS_BAR_DEFAULT_HEIGHT_DP * sVirtualDensity + 0.5f);
                 }
