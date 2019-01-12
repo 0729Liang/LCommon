@@ -12,7 +12,7 @@ import java.util.Locale;
  * <p>
  * 格式化数字
  */
-public class LFormatUtils {
+public class LFormatX {
 
     private final static ThreadLocal<SimpleDateFormat> sYyyyMmDdSdf = new ThreadLocal<SimpleDateFormat>() {
         @Override
