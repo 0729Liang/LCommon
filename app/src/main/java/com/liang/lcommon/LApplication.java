@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.blankj.utilcode.util.Utils;
 import com.liang.lcommon.init.LCommon;
+import com.liang.lcommon.utils.LLogX;
 import com.liang.lcommon.view.LCircleSeekBar;
 
 /**

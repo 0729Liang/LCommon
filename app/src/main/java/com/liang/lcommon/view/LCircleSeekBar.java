@@ -84,13 +84,15 @@ public class LCircleSeekBar extends View {
 
     private Context mContext;
 
-    private Paint  mBasePaint;
-    private Paint  mProPaint;
-    private Paint  mScdProPaint;
-    private Paint  mThumbPaint;
-    private RectF  mArcRectF;
-    private Bitmap mThumBbitmap;
+    private Paint mBasePaint;
+    private Paint mProPaint;
+    private Paint mScdProPaint;
+    private Paint mThumbPaint;
+    private RectF mArcRectF;
+
+    private int    mThumb;
     private Matrix mMatrix;
+    private Bitmap mThumBbitmap;
 
     private int   mSize;
     private int   mWidth;
@@ -115,26 +117,25 @@ public class LCircleSeekBar extends View {
     private float    mMinProgress;
     private float    mLineWidth;
     private float    mThumbSize;
-    private int      mThumb;
     private Drawable mThumDrawable;
     private int      mBaseLineColor;
     private int      mProgressColor;
     private int      mSecondProgressColor;
 
-    private onLSeekBarStartListener     mStartListener; // 触摸开始监听
-    private onLSeekBarStopListener      mStopListener; // 触摸结束监听
-    private onLSeekBarChangeListener    mChangeListener; // 进度改变监听
-    private OnLSeekBarScdChangeListener mScdChangeListener; // 二级进度条改变监听
+    private onLSeekBarStartTouchListener mStartListener; // 触摸开始监听
+    private onLSeekBarStopTouchListener  mStopListener; // 触摸结束监听
+    private onLSeekBarChangeListener     mChangeListener; // 进度改变监听
+    private OnLSeekBarScdChangeListener  mScdChangeListener; // 二级进度条改变监听
 
     // 私有字段
     private float   mTempX;
     private boolean mThumbIsColor; // 锚点是否是颜色
 
-    public interface onLSeekBarStartListener {
+    public interface onLSeekBarStartTouchListener {
         void onLSeekBarStart(LCircleSeekBar view);
     }
 
-    public interface onLSeekBarStopListener {
+    public interface onLSeekBarStopTouchListener {
         void onLSeekBarStop(LCircleSeekBar view);
     }
 
@@ -338,22 +339,28 @@ public class LCircleSeekBar extends View {
 
         typedArray.recycle();
 
-        // thumb 是图片
-        if (!judgeThumbStatus(mThumDrawable)) {
-            mThumBbitmap = BitmapFactory.decodeResource(getResources(), mThumb);
-        } else {
-            mThumBbitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
-            if (mThumDrawable == null) {
-                mThumBbitmap.eraseColor(ContextCompat.getColor(mContext, R.color.lseekbar_thumb_color));
-            } else {
-                mThumBbitmap.eraseColor(((ColorDrawable) mThumDrawable).getColor());
-            }
-        }
-
-        mThumBbitmap = LBitmapX.RoundBitmap.toRoundBitmapByXfermode(mThumBbitmap, (int) mThumbSize);
-
+        mThumBbitmap = intiRoundThumb(mThumDrawable);
         setProgressAngle(360 * mProgress / mMaxProgress);
         setSecondProgressAngle(360 * mSecondProgress / mMaxProgress);
+    }
+
+    // 加工
+    private Bitmap intiRoundThumb(Drawable drawable) {
+        Bitmap bitmap;
+        if (!judgeThumbStatus(drawable)) {
+            // 图片
+            bitmap = BitmapFactory.decodeResource(getResources(), mThumb);
+        } else {
+            // 颜色
+            bitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
+            if (drawable == null) {
+                bitmap.eraseColor(ContextCompat.getColor(mContext, R.color.lseekbar_thumb_color));
+            } else {
+                bitmap.eraseColor(((ColorDrawable) drawable).getColor());
+            }
+        }
+        bitmap = LBitmapX.RoundBitmap.toRoundBitmapByXfermode(bitmap, (int) mThumbSize);
+        return bitmap;
     }
 
 
@@ -474,19 +481,19 @@ public class LCircleSeekBar extends View {
         return paint;
     }
 
-    public onLSeekBarStartListener getStartListener() {
+    public onLSeekBarStartTouchListener getStartTouchListener() {
         return mStartListener;
     }
 
-    public void setStartListener(onLSeekBarStartListener startListener) {
+    public void setStartTouchListener(onLSeekBarStartTouchListener startListener) {
         mStartListener = startListener;
     }
 
-    public onLSeekBarStopListener getStopListener() {
+    public onLSeekBarStopTouchListener getStopTouchListener() {
         return mStopListener;
     }
 
-    public void setStopListener(onLSeekBarStopListener stopListener) {
+    public void setStopTouchListener(onLSeekBarStopTouchListener stopListener) {
         mStopListener = stopListener;
     }
 
@@ -498,6 +505,13 @@ public class LCircleSeekBar extends View {
         mChangeListener = changeListener;
     }
 
+    public OnLSeekBarScdChangeListener getScdChangeListener() {
+        return mScdChangeListener;
+    }
+
+    public void setScdChangeListener(OnLSeekBarScdChangeListener scdChangeListener) {
+        mScdChangeListener = scdChangeListener;
+    }
 
     public float getProgressAngle() {
         return mProgressAngle;
@@ -544,6 +558,23 @@ public class LCircleSeekBar extends View {
         }
     }
 
+    public Drawable getThumDrawable() {
+        return mThumDrawable;
+    }
+
+    public void setThumDrawable(Drawable thumDrawable) {
+        mThumDrawable = thumDrawable;
+        mThumBbitmap = intiRoundThumb(mThumDrawable);
+    }
+
+    public LThumbPosition getThumbPosition() {
+        return mThumbPosition;
+    }
+
+    public void setThumbPosition(LThumbPosition thumbPosition) {
+        mThumbPosition = thumbPosition;
+        refreshPointY(mThumbPosition);
+    }
 
     public LShape getShape() {
         return mShape;
@@ -559,15 +590,6 @@ public class LCircleSeekBar extends View {
 
     public void setLineCap(LCap lineCap) {
         mLineCap = lineCap;
-    }
-
-    public LThumbPosition getThumbPosition() {
-        return mThumbPosition;
-    }
-
-    public void setThumbPosition(LThumbPosition thumbPosition) {
-        mThumbPosition = thumbPosition;
-        refreshPointY(mThumbPosition);
     }
 
     public boolean isHideThumb() {
@@ -602,14 +624,6 @@ public class LCircleSeekBar extends View {
         mThumbSize = thumbSize;
     }
 
-    public int getThumb() {
-        return mThumb;
-    }
-
-    public void setThumb(int thumb) {
-        mThumb = thumb;
-    }
-
     public int getBaseLineColor() {
         return mBaseLineColor;
     }
@@ -632,13 +646,5 @@ public class LCircleSeekBar extends View {
 
     public void setSecondProgressColor(int secondProgressColor) {
         mSecondProgressColor = secondProgressColor;
-    }
-
-    public OnLSeekBarScdChangeListener getScdChangeListener() {
-        return mScdChangeListener;
-    }
-
-    public void setScdChangeListener(OnLSeekBarScdChangeListener scdChangeListener) {
-        mScdChangeListener = scdChangeListener;
     }
 }

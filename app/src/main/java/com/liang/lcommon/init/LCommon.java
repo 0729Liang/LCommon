@@ -14,25 +14,22 @@ import com.liang.lcommon.utils.LSizeX;
 public class LCommon {
     private static Exports exports = new Exports();
 
-    public static Context app()
-    {
-        return exports.app;
-    }
 
-    public static LAppBuildConfig appConfig()
-    {
+    public static LAppBuildConfig appConfig() {
         return exports.appConfig;
     }
 
-    public static void init(Application application, Class paramClass)
-    {
+    public static void init(Application application, Class paramClass) {
         exports.init = true;
         exports.app = application;
         LSizeX.init();
     }
 
-    public Context getContext()
-    {
+    public Context getContext() {
+        return exports.app;
+    }
+
+    public static Context getApp() {
         return exports.app;
     }
 }

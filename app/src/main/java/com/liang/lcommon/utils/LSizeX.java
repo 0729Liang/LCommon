@@ -27,7 +27,7 @@ public class LSizeX {
     }
 
     private static DisplayMetrics getDisplayMetrics() {
-        return LCommon.app().getResources().getDisplayMetrics();
+        return LCommon.getApp().getResources().getDisplayMetrics();
     }
 
     /**
