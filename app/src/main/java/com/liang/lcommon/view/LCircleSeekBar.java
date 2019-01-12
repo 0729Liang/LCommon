@@ -13,13 +13,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.utils.LBitmapX;
+import com.liang.lcommon.utils.LResourceX;
 import com.liang.lcommon.utils.LSizeX;
 
 /**
@@ -333,9 +333,9 @@ public class LCircleSeekBar extends View {
 
         mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lseekbar_thumb, R.drawable.icon_lseekbar_point);
         mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lseekbar_thumb);
-        mBaseLineColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_baseLineColor, ContextCompat.getColor(mContext, R.color.lseekbar_baseline_color));
-        mProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_progressColor, ContextCompat.getColor(mContext, R.color.lseekbar_progress_color));
-        mSecondProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_secondProgressColor, ContextCompat.getColor(mContext, R.color.lseekbar_scdprogress_color));
+        mBaseLineColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_baseLineColor, LResourceX.getColor(mContext, R.color.lseekbar_baseline_color));
+        mProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_progressColor, LResourceX.getColor(mContext, R.color.lseekbar_progress_color));
+        mSecondProgressColor = typedArray.getColor(R.styleable.LCircleSeekBar_lseekbar_secondProgressColor, LResourceX.getColor(mContext, R.color.lseekbar_scdprogress_color));
 
         typedArray.recycle();
 
@@ -354,7 +354,7 @@ public class LCircleSeekBar extends View {
             // 颜色
             bitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
             if (drawable == null) {
-                bitmap.eraseColor(ContextCompat.getColor(mContext, R.color.lseekbar_thumb_color));
+                bitmap.eraseColor(LResourceX.getColor(mContext, R.color.lseekbar_thumb_color));
             } else {
                 bitmap.eraseColor(((ColorDrawable) drawable).getColor());
             }

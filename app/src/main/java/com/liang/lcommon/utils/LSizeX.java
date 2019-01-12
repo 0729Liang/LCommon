@@ -9,7 +9,7 @@ import com.liang.lcommon.init.LCommon;
 /**
  * @author : Amarao
  * CreateAt : 15:32 2019/1/10
- * Describe :
+ * Describe : dp 与 px的转化
  */
 public class LSizeX {
 
@@ -37,35 +37,11 @@ public class LSizeX {
      * @return px值
      */
     public static int dp2px(float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, getDisplayMetrics());
     }
 
-    /**
-     * dp转px
-     *
-     * @param dpVal dp值
-     * @return px值
-     */
-    public static int dp2px(float dpVal,Context context) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getResources().getDisplayMetrics());
-    }
-
-    public static int dp2px(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getResources().getDisplayMetrics());
-    }
-
-    /**
-     * sp转px
-     *
-     * @param spVal sp 值
-     * @return px 值
-     */
-    public static int sp2px(float spVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                spVal, getDisplayMetrics());
+    public static int dp2px(float dpVal, Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.getResources().getDisplayMetrics());
     }
 
     /**
@@ -78,6 +54,24 @@ public class LSizeX {
         return pxVal / DENSITY;
     }
 
+    public static float px2dp(float pxVal, Context context) {
+        return pxVal / context.getResources().getDisplayMetrics().density;
+    }
+
+    /**
+     * sp转px
+     *
+     * @param spVal sp 值
+     * @return px 值
+     */
+    public static int sp2px(float spVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, getDisplayMetrics());
+    }
+
+    public static int sp2px(float spVal, Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.getResources().getDisplayMetrics());
+    }
+
     /**
      * px转sp
      *
@@ -88,4 +82,7 @@ public class LSizeX {
         return pxVal / SCALED_DENSITY;
     }
 
+    public static float px2sp(float pxVal, Context context) {
+        return pxVal / context.getResources().getDisplayMetrics().scaledDensity;
+    }
 }
