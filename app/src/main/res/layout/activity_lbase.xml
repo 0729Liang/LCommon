@@ -12,8 +12,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:lseekbar_lineCap="round"
         app:lseekbar_progress="20"
-        app:lseekbar_secondProgress="30"
-        />
+        app:lseekbar_secondProgress="30" />
 
     <TextView
         android:id="@+id/progressTv"

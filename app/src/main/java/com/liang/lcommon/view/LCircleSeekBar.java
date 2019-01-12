@@ -327,8 +327,8 @@ public class LCircleSeekBar extends View {
         mMaxProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_maxProgress, 100);
         mMinProgress = typedArray.getFloat(R.styleable.LCircleSeekBar_lseekbar_minProgress, 0);
 
-        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_lineWidth, LSizeX.dp2px(15,mContext));
-        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_thumb_size, LSizeX.dp2px(15,mContext));
+        mLineWidth = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_lineWidth, LSizeX.dp2px(15, mContext));
+        mThumbSize = typedArray.getDimension(R.styleable.LCircleSeekBar_lseekbar_thumb_size, LSizeX.dp2px(16, mContext));
 
         mThumb = typedArray.getResourceId(R.styleable.LCircleSeekBar_lseekbar_thumb, R.drawable.icon_lseekbar_point);
         mThumDrawable = typedArray.getDrawable(R.styleable.LCircleSeekBar_lseekbar_thumb);
@@ -341,7 +341,6 @@ public class LCircleSeekBar extends View {
         // thumb 是图片
         if (!judgeThumbStatus(mThumDrawable)) {
             mThumBbitmap = BitmapFactory.decodeResource(getResources(), mThumb);
-            mThumBbitmap = reSizeBitmap(mThumBbitmap, mThumbSize, mThumbSize);
         } else {
             mThumBbitmap = Bitmap.createBitmap((int) mThumbSize, (int) mThumbSize, Bitmap.Config.ARGB_8888);
             if (mThumDrawable == null) {
@@ -351,7 +350,7 @@ public class LCircleSeekBar extends View {
             }
         }
 
-        mThumBbitmap = LBitmapX.toRoundBitmap(mThumBbitmap); // 转化为圆形
+        mThumBbitmap = LBitmapX.RoundBitmap.toRoundBitmapByXfermode(mThumBbitmap, (int) mThumbSize);
 
         setProgressAngle(360 * mProgress / mMaxProgress);
         setSecondProgressAngle(360 * mSecondProgress / mMaxProgress);
@@ -397,29 +396,6 @@ public class LCircleSeekBar extends View {
                 break;
             default:
         }
-    }
-
-
-    /**
-     * 重新确定锚点大小
-     *
-     * @param bm        原图
-     * @param newWidth  新图片宽度sp
-     * @param newHeight 新图片宽度
-     * @return 新图片
-     */
-    public Bitmap reSizeBitmap(Bitmap bm, float newWidth, float newHeight) {
-        // 获得图片的宽高
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        // 计算缩放比例
-        float scaleWidth = newWidth / width;
-        float scaleHeight = newHeight / height;
-        // 取得想要缩放的matrix参数
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        // 得到新的图片
-        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
     }
 
     /**
