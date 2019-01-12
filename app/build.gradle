@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from:'../scripts/dependence.gradle'
+apply from:'../scripts/config/dependence.gradle'
 
 android {
     compileSdkVersion sdkVersions.compileSdkVersion
