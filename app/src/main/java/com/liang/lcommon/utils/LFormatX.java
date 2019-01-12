@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author Amarao
- * @date 2018/9/16
- * <p>
- * 格式化数字
+ * @author : Amarao
+ * CreateAt : 19:04 2019/1/12
+ * Describe : 格式化
  */
 public class LFormatX {
 

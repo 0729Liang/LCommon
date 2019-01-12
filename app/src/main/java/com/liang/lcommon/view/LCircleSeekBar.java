@@ -25,7 +25,7 @@ import com.liang.lcommon.utils.LSizeX;
 /**
  * @author : Amarao
  * CreateAt : 14:10 2019/1/5
- * Describe :  圆形 环形 seekBar
+ * Describe :  圆形/环形 seekBar
  */
 public class LCircleSeekBar extends View {
     private static final double RADIAN      = 180 / Math.PI;// 1弧度对应的角度，180°= π弧度
