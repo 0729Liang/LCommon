@@ -56,16 +56,16 @@ public class LBitmapX {
          * 先绘制一个圆形，再绘制原图，之后通过设置图像合成模式，只显示相交的区域
          *
          * @param bitmap 原图
-         * @param radius 半径
+         * @param diameter 直径
          * @return 将Bitmap转化为圆形
          */
-        public static Bitmap toRoundBitmapByXfermode(Bitmap bitmap, int radius) {
+        public static Bitmap toRoundBitmapByXfermode(Bitmap bitmap, int diameter) {
             // 前面同上，绘制图像分别需要bitmap，canvas，paint对象
-            bitmap = Bitmap.createScaledBitmap(bitmap, radius, radius, true);
-            Bitmap output = Bitmap.createBitmap(radius, radius, Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createScaledBitmap(bitmap, diameter, diameter, true);
+            Bitmap output = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(output);
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            canvas.drawCircle(radius / 2, radius / 2, radius / 2, paint);
+            canvas.drawCircle(diameter / 2, diameter / 2, diameter / 2, paint);
             paint.reset();
             // 设置图像合成模式，只在源图像和目标图像相交的地方绘制源图像
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
@@ -77,18 +77,18 @@ public class LBitmapX {
          * 将原图设置为画笔渲染方式，之后绘制一个圆形
          *
          * @param bitmap 原图
-         * @param radius 半径
+         * @param diameter 直径
          * @return 圆形bitmap
          */
-        public static Bitmap toRoundBitmapByShaper(Bitmap bitmap, int radius) {
-            bitmap = Bitmap.createScaledBitmap(bitmap, radius, radius, true);
-            Bitmap output = Bitmap.createBitmap(radius, radius, Bitmap.Config.ARGB_8888);
+        public static Bitmap toRoundBitmapByShaper(Bitmap bitmap, int diameter) {
+            bitmap = Bitmap.createScaledBitmap(bitmap, diameter, diameter, true);
+            Bitmap output = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(output);
             Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
             // BitmapShader的作用是使用一张位图作为纹理来对某一区域进行填充。
             Shader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             paint.setShader(shader);// 设置画笔的渲染方式
-            canvas.drawCircle(radius / 2, radius / 2, radius / 2, paint);
+            canvas.drawCircle(diameter / 2, diameter / 2, diameter / 2, paint);
             return output;
         }
 

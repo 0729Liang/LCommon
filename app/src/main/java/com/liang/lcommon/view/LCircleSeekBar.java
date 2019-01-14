@@ -256,7 +256,7 @@ public class LCircleSeekBar extends View {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                // 控制最大转一圈
+                // 控制最大转一圈，暂时没想到更好的处理方法
                 if (mTempX > mSize / 2 && event.getX() < mSize / 2 && y < mSize / 2) {
                     setProgress(0);
                     break;
