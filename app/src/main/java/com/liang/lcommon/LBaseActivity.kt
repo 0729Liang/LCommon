@@ -16,8 +16,8 @@ class LBaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lbase)
-        lseekbar.setStartTouchListener { view: LCircleSeekBar? -> LLogX.e("开始")  }
-        lseekbar.setStopTouchListener { view: LCircleSeekBar? -> LLogX.e("结束")  }
+        lseekbar.setStartTouchListener { view: LCircleSeekBar? -> LLogX.e("开始") }
+        lseekbar.setStopTouchListener { view: LCircleSeekBar? -> LLogX.e("结束") }
         lseekbar.setChangeListener { view, pro ->
             progressTv.text = "进度" + pro.toInt()
 
@@ -50,18 +50,19 @@ class LBaseActivity : AppCompatActivity() {
                 lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_RING
             }
         }
-//        Handler().postDelayed({ lseekbar.isHideThumb = true }, 3000L)
-//        Handler().postDelayed({
-//            lseekbar.isHideThumb = false
-//            lseekbar.progress = 35F
-//            lseekbar.secondProgress = 15F
-//        }, 6000L)
-//        Handler().postDelayed({
-//            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_MIDDLE
-//        }, 9000L)
-//        Handler().postDelayed({
-//            lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_BELOW
-//        }, 12000L)
+
+        fadeInToOutBtn0.setOnClickListener({ TestActivity.startTextActivity(this, 0) })
+        translateleftInLeftOutBtn1.setOnClickListener() { TestActivity.startTextActivity(this, 1) };
+        translateleftInRightOutBtn2.setOnClickListener() { TestActivity.startTextActivity(this, 2) }
+        translateRightInRightOutBtn3.setOnClickListener() { TestActivity.startTextActivity(this, 3) }
+        translateRightInLeftOutBtn4.setOnClickListener() { TestActivity.startTextActivity(this, 4) }
+        translateBottomInBottomOutBtn5.setOnClickListener() { TestActivity.startTextActivity(this, 5) }
+        translateBottomInTopOutBtn6.setOnClickListener() { TestActivity.startTextActivity(this, 6) }
+        translateTopInTopOutBtn7.setOnClickListener() { TestActivity.startTextActivity(this, 7) }
+        translateTopInBottomOutBtn8.setOnClickListener() { TestActivity.startTextActivity(this, 8) }
+        scaleInScaleOutBtn9.setOnClickListener() { TestActivity.startTextActivity(this, 9) }
+        rotatePositiveInOutBtn10.setOnClickListener() { TestActivity.startTextActivity(this, 10) }
+        rotateReverseInOutBtn11.setOnClickListener() { TestActivity.startTextActivity(this, 11) }
     }
 
 }

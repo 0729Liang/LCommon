@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--activity 启动动画的效果时间-->
+    <!--注意：
+    进入动画的时间(t1) <= 退出动画的时间(t2),不然会有黑色空区出现(t1-t2) -->
+    <integer name="no_anim_time">3000</integer> <!--没有动画的时间，要进入的活动的动画的时间，-->
+    <integer name="fade_in_time">3000</integer>
+    <integer name="fade_out_time">3000</integer>
+
+    <integer name="left_in_time">3000</integer>
+    <integer name="left_out_time">3000</integer>
+    <integer name="right_in_time">3000</integer>
+    <integer name="right_out_time">3000</integer>
+
+    <integer name="bottom_in_time">3000</integer>
+    <integer name="bottom_out_time">3000</integer>
+    <integer name="top_in_time">3000</integer>
+    <integer name="top_out_time">3000</integer>
+
+    <integer name="scale_in_time">3000</integer>
+    <integer name="scale_out_time">3000</integer>
+
+
+    <integer name="rotate_positive_in_time">3000</integer>
+    <integer name="rotate_positive_out_time">3000</integer>
+    <integer name="rotate_reverse_in_time">3000</integer>
+    <integer name="rotate_reverse_out_time">3000</integer>
+    <integer name="rotate_positive_start_degrees">0</integer>
+    <integer name="rotate_positive_end_degrees">360</integer>
+    <integer name="rotate_reverse_start_degrees">0</integer>
+    <integer name="rotate_reverse_end_degrees">-360</integer>
+</resources>

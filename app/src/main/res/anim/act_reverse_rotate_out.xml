@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <rotate
+        android:duration="@integer/rotate_positive_in_time"
+        android:fromDegrees="@integer/rotate_reverse_end_degrees"
+        android:pivotX="50%p"
+        android:pivotY="50%p"
+        android:toDegrees="@integer/rotate_reverse_start_degrees" />
+
+    <alpha
+        android:duration="@integer/rotate_positive_in_time"
+        android:fromAlpha="0"
+        android:toAlpha="1" />
+</set>

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<alpha xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="300"
-    android:fromAlpha="1.0"
-    android:toAlpha="0.0" />
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        参考：http://www.360doc.com/content/11/0505/12/2113138_114523286.shtml#
+        fromAlpha 属性为动画起始时透明度
+        toAlpha   属性为动画结束时透明度
+        0.0（00）表示完全透明
+        1.0（FF）表示完全不透明
+        duration：动画持续时间，单位毫秒 -->
+    <alpha
+        android:duration="@integer/fade_out_time"
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0" />
+</set>
