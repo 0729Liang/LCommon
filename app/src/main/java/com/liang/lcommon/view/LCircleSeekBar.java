@@ -26,12 +26,18 @@ import com.liang.lcommon.utils.LSizeUtils;
  * @author : Amarao
  * CreateAt : 14:10 2019/1/5
  * Describe :  圆形/环形 seekBar
+ * <p>
+ * 锚点支持颜色/图片
+ * 锚点位置可控（上中下）
+ * 外形可变随时切换为圆形和环形
+ * 可监控一二级进度条改变事件
+ * 背景、一二级进度条颜色可控
+ * 暴露一二级进度值和一二级进度的角（0-360）
  */
 public class LCircleSeekBar extends View {
     private static final double RADIAN      = 180 / Math.PI;// 1弧度对应的角度，180°= π弧度
     private static final int    START_ANGLE = -90;// 起始角度
     private static final int    CIRCLE_ANLE = 360; // 一圈的角度
-    private final        String TAG         = getClass().getSimpleName();
 
     /**
      * xml 属性对应值
@@ -94,16 +100,16 @@ public class LCircleSeekBar extends View {
     private Matrix mMatrix;
     private Bitmap mThumBbitmap;
 
-    private int   mSize;
+    private int   mSize; // this尺寸
     private int   mWidth;
     private int   mHeight;
-    private float mCircleX;
-    private float mCircleY;
-    private float mCircleRadius;
-    private float mPointOfftX;
-    private float mPointOfftY;
-    private float mProgressAngle;
-    private float mSecondProgressAngle;
+    private float mCircleX; // 圆心X坐标
+    private float mCircleY; // 圆心Y坐标
+    private float mCircleRadius; // 圆半径
+    private float mPointOfftX; // 锚点X偏移量
+    private float mPointOfftY; // 锚点Y偏移量
+    private float mProgressAngle; // 一级进度角
+    private float mSecondProgressAngle; // 二级进度角
 
     /*暴露属性*/
     private LShape         mShape; // bar形状
@@ -111,16 +117,16 @@ public class LCircleSeekBar extends View {
     private LThumbPosition mThumbPosition; // 锚点偏移位置
 
     private boolean  mHideThumb; // 隐藏锚点
-    private float    mProgress;
-    private float    mSecondProgress;
-    private float    mMaxProgress;
-    private float    mMinProgress;
-    private float    mLineWidth;
-    private float    mThumbSize;
-    private Drawable mThumDrawable;
-    private int      mBaseLineColor;
-    private int      mProgressColor;
-    private int      mSecondProgressColor;
+    private float    mProgress; // 一级进度值
+    private float    mSecondProgress; // 二级进度值
+    private float    mMaxProgress; // 最大进度值 default 100
+    private float    mMinProgress; // 最小进度值 default 0
+    private float    mLineWidth; // 圆环的线宽
+    private float    mThumbSize; // 锚点大小
+    private Drawable mThumDrawable; // 锚点颜色/图片
+    private int      mBaseLineColor; // 底线颜色
+    private int      mProgressColor; // 一级进度颜色
+    private int      mSecondProgressColor; // 二级进度颜色
 
     private onLSeekBarStartTouchListener mStartListener; // 触摸开始监听
     private onLSeekBarStopTouchListener  mStopListener; // 触摸结束监听
@@ -249,11 +255,13 @@ public class LCircleSeekBar extends View {
                 if (mStartListener != null) {
                     mStartListener.onLSeekBarStart(this);
                 }
+                updateProgress(event, x, y);
                 break;
             case MotionEvent.ACTION_UP:
                 if (mStopListener != null) {
                     mStopListener.onLSeekBarStop(this);
                 }
+                updateProgress(event, x, y);
                 break;
             case MotionEvent.ACTION_MOVE:
                 // 控制最大转一圈，暂时没想到更好的处理方法
@@ -265,24 +273,34 @@ public class LCircleSeekBar extends View {
                     setProgress(100);
                     break;
                 }
-                mTempX = event.getX();
-                // 通过当前触摸点搞到cos角度值
-                float cos = computeCos(mCircleX, mCircleY, x, y);
-                // 通过反三角函数获得角度值
-                double angle;
-                if (x < mWidth / 2) {
-                    // 滑动超过180度
-                    angle = Math.PI * RADIAN + Math.acos(cos) * RADIAN;
-                } else {
-                    // 没有超过180度
-                    angle = Math.PI * RADIAN - Math.acos(cos) * RADIAN;
-                }
-                setProgressAngle((float) angle + 1);
-                setProgress(angleToProgress(getProgressAngle()));
+                updateProgress(event, x, y);
                 break;
             default:
         }
         return true;//super.onTouchEvent(event);
+    }
+
+    /**
+     * 响应触摸事件，更新进度
+     * @param event 触摸事件
+     * @param x 坐标
+     * @param y 坐标
+     */
+    private void updateProgress(MotionEvent event, float x, float y) {
+        mTempX = event.getX();
+        // 通过当前触摸点搞到cos角度值
+        float cos = computeCos(mCircleX, mCircleY, x, y);
+        // 通过反三角函数获得角度值
+        double angle;
+        if (x < mWidth / 2) {
+            // 滑动超过180度
+            angle = Math.PI * RADIAN + Math.acos(cos) * RADIAN;
+        } else {
+            // 没有超过180度
+            angle = Math.PI * RADIAN - Math.acos(cos) * RADIAN;
+        }
+        setProgressAngle((float) angle + 1);
+        setProgress(angleToProgress(getProgressAngle()));
     }
 
     /*初始化配置*/
@@ -537,7 +555,6 @@ public class LCircleSeekBar extends View {
         progress = Math.min(progress, mMaxProgress);
         progress = Math.max(progress, mMinProgress);
         setProgressAngle(progressToAngle(progress));
-        //setSecondProgress(progress * 2);
         mProgress = progress;
         if (mChangeListener != null) {
             mChangeListener.onLSeekBarChange(this, mProgress);
