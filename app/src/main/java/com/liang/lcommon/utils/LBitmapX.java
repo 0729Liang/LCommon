@@ -14,7 +14,7 @@ import android.graphics.Shader;
 /**
  * @author : Amarao
  * CreateAt : 10:52 2019/1/11
- * Describe :
+ * Describe : bitmap处理操作
  * <p>
  * resizeBitmap 重置bitmap大小
  * toRoundBitmapByXfermode 将bitmap设置为圆形（不剪裁）
