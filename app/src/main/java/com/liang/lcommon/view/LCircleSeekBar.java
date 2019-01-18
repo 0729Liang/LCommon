@@ -252,13 +252,13 @@ public class LCircleSeekBar extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                //updateProgress(event, x, y);
+                updateProgress(event, x, y);
                 if (mStartListener != null) {
                     mStartListener.onLSeekBarStart(this);
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                updateProgress(event, x, y);
+                //updateProgress(event, x, y);
                 if (mStopListener != null) {
                     mStopListener.onLSeekBarStop(this);
                 }

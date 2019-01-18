@@ -2,7 +2,9 @@ package com.liang.lcommon.init;
 
 import android.app.Application;
 
+import com.liang.lcommon.adapter.LJsonAdapter;
 import com.liang.lcommon.config.LAppBuildConfig;
+import com.liang.lcommon.mgrs.LKVMgr;
 
 /**
  * @author : Amarao
@@ -12,5 +14,8 @@ import com.liang.lcommon.config.LAppBuildConfig;
 public class Exports {
     public Application     app;
     public LAppBuildConfig appConfig;
+    public LJsonAdapter    jsonParser;
     public boolean         init;
+
+    public LKVMgr.LKVMgrParams kvStrategy;
 }

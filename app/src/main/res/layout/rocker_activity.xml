@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rocker="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RockerActivity">
+
+    <!--数据显示-->
+    <LinearLayout
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="XY轴数据"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/directionXY_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前方向：" />
+
+        <TextView
+            android:id="@+id/angleXY_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前角度：" />
+
+        <TextView
+            android:id="@+id/levelXY_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前偏移级别：" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Z轴数据"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/directionZ_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前方向：" />
+
+        <TextView
+            android:id="@+id/angleZ_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前角度：" />
+
+        <TextView
+            android:id="@+id/levelZ_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前偏移级别：" />
+    </LinearLayout>
+
+    <!--摇杆-->
+    <com.liang.lcommon.view.remoteview.RemoteControlView
+        android:id="@+id/remoteControlView"
+        android:layout_width="@dimen/dp200"
+        android:layout_height="@dimen/dp200" />
+
+    <com.liang.lcommon.view.MyRockerView
+        android:id="@+id/rockerXY_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25dp"
+        rocker:areaBackground="@drawable/rocker_base"
+        rocker:rockerBackground="@drawable/rocker"
+        rocker:rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
+        rocker:rockerScale="0.5"
+        rocker:rockerSpeedLevel="10" />
+
+    <com.liang.lcommon.view.MyRockerView
+        android:id="@+id/rockerZ_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        rocker:areaBackground="@drawable/rocker_base"
+        rocker:rockerBackground="@drawable/rocker"
+        rocker:rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
+        rocker:rockerScale="0.5"
+        rocker:rockerSpeedLevel="10" />
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.liang.lcommon.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -41,12 +42,20 @@ public class LResourceX {
         return ContextCompat.getDrawable(context, drawableRes);
     }
 
+    public static Drawable getDrawable(Activity activity, int drawableRes) {
+        return ContextCompat.getDrawable(activity, drawableRes);
+    }
+
     /**
      * @param colorRes 得到颜色
      * @return color
      */
     public static int getColor(Context context, int colorRes) {
         return ContextCompat.getColor(context, colorRes);
+    }
+
+    public static int getColor(Activity activity, int colorRes) {
+        return ContextCompat.getColor(activity, colorRes);
     }
 
     /**

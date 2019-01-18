@@ -30,4 +30,45 @@
         <attr name="lseekbar_progressColor" format="color" /><!--进度条颜色-->
         <attr name="lseekbar_secondProgressColor" format="color" /><!--缓冲条颜色-->
     </declare-styleable>
+
+    <!--个人中心-->
+    <declare-styleable name="PersonalBodyView">
+        <!--文本-->
+        <attr name="mText" format="string" />
+        <!--图片-->
+        <attr name="mSrc" format="color|reference" />
+        <!--数量-->
+        <attr name="mNumber" format="string" />
+        <!--进入图标-->
+        <attr name="mArrow" format="color|reference" />
+    </declare-styleable>
+
+    <!--
+areaBackground 设置区域背景
+rockerBackground 设置摇杆的样式
+rockerScale 设置摇杆的相对于背景的比例
+rockerSpeedLevel 设置当前位置相对于中心点的距离的比例  如：10  则中心点到边缘的距离分为 10 分 越靠外数值越大 0-10
+rockerCallBackMode 有变化就回调，或者是方向改变才会回调-->
+    <declare-styleable name="RockerView">
+        <attr name="areaBackground" format="color|reference" />
+        <attr name="rockerBackground" format="color|reference" />
+        <attr name="rockerScale" format="float" />
+        <attr name="rockerSpeedLevel" format="integer" />
+        <attr name="rockerCallBackMode">
+            <flag name="CALL_BACK_MODE_MOVE" value="0" />
+            <flag name="CALL_BACK_MODE_STATE_CHANGE" value="1" />
+        </attr>
+    </declare-styleable>
+    <!--1.设计需要的属性-->
+    <!--自定义属性-->
+    <declare-styleable name="MySwitch">
+        <!--大背景-->
+        <attr name="bigBackground" format="reference|color"/>
+        <!--左边图片-->
+        <attr name="leftPicture" format="color|reference"/>
+        <!--switch开关-->
+        <attr name="switchThum" format="reference|color"/>
+        <attr name="switchText" format="string"/>
+        <attr name="switchChecked" format="boolean"/>
+    </declare-styleable>
 </resources>

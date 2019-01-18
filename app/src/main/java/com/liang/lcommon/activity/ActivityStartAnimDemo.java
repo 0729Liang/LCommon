@@ -1,19 +1,19 @@
-package com.liang.lcommon;
+package com.liang.lcommon.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 
+import com.liang.lcommon.R;
 import com.liang.lcommon.utils.LActivityAnimX;
 
-public class TestActivity extends AppCompatActivity {
+public class ActivityStartAnimDemo extends AppCompatActivity {
 
     public static final String ANIM_TYPE = "ANIM_TYPE";
 
     public static void startTextActivity(Activity activity, int type) {
-        Intent intent = new Intent(activity, TestActivity.class);
+        Intent intent = new Intent(activity, ActivityStartAnimDemo.class);
         intent.putExtra(ANIM_TYPE, type);
         activity.startActivity(intent);
         activityAnim(type, true, activity);

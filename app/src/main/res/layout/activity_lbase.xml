@@ -1,122 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/dp20"
+    android:paddingTop="@dimen/dp20"
+    app:layout_constraintBottom_toBottomOf="parent">
 
-    <com.liang.lcommon.view.LCircleSeekBar
-        android:id="@+id/lseekbar"
-        android:layout_width="@dimen/dp150"
-        android:layout_height="@dimen/dp150"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:lseekbar_lineCap="round"
-        app:lseekbar_progress="20"
-        app:lseekbar_secondProgress="30" />
-
-    <TextView
-        android:id="@+id/progressTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@id/lseekbar"
-        app:layout_constraintRight_toRightOf="@id/lseekbar"
-        app:layout_constraintTop_toBottomOf="@id/lseekbar" />
-
-    <android.support.v4.widget.NestedScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/text_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressTv"
-        android:paddingTop="@dimen/dp20"
-        android:paddingBottom="@dimen/dp20">
+        android:layout_height="wrap_content">
 
-        <android.support.constraint.ConstraintLayout
+        <com.liang.lcommon.view.LCircleSeekBar
+            android:id="@+id/lseekbar"
+            android:layout_width="@dimen/dp150"
+            android:layout_height="@dimen/dp150"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:lseekbar_lineCap="round"
+            app:lseekbar_progress="20"
+            app:lseekbar_secondProgress="30" />
+
+        <TextView
+            android:id="@+id/progressTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/lseekbar"
+            app:layout_constraintRight_toRightOf="@id/lseekbar"
+            app:layout_constraintTop_toBottomOf="@id/lseekbar" />
+
+
+        <Button
+            android:id="@+id/fadeInToOutBtn0"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/dp50"
+            android:text="淡入淡出"
+            app:layout_constraintTop_toBottomOf="@id/progressTv" />
 
-            <Button
-                android:id="@+id/fadeInToOutBtn0"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="淡入淡出" />
+        <Button
+            android:id="@+id/translateleftInLeftOutBtn1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="左进左出"
+            app:layout_constraintTop_toBottomOf="@id/fadeInToOutBtn0" />
 
-            <Button
-                android:id="@+id/translateleftInLeftOutBtn1"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="左进左出"
-                app:layout_constraintTop_toBottomOf="@id/fadeInToOutBtn0" />
+        <Button
+            android:id="@+id/translateleftInRightOutBtn2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="左进右出"
+            app:layout_constraintTop_toBottomOf="@id/translateleftInLeftOutBtn1" />
 
-            <Button
-                android:id="@+id/translateleftInRightOutBtn2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="左进右出"
-                app:layout_constraintTop_toBottomOf="@id/translateleftInLeftOutBtn1" />
+        <Button
+            android:id="@+id/translateRightInRightOutBtn3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="右进右出"
+            app:layout_constraintTop_toBottomOf="@id/translateleftInRightOutBtn2" />
 
-            <Button
-                android:id="@+id/translateRightInRightOutBtn3"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="右进右出"
-                app:layout_constraintTop_toBottomOf="@id/translateleftInRightOutBtn2" />
+        <Button
+            android:id="@+id/translateRightInLeftOutBtn4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="右进左出"
+            app:layout_constraintTop_toBottomOf="@id/translateRightInRightOutBtn3" />
 
-            <Button
-                android:id="@+id/translateRightInLeftOutBtn4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="右进左出"
-                app:layout_constraintTop_toBottomOf="@id/translateRightInRightOutBtn3" />
+        <Button
+            android:id="@+id/translateBottomInBottomOutBtn5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="低进低出"
+            app:layout_constraintTop_toBottomOf="@id/translateRightInLeftOutBtn4" />
 
-            <Button
-                android:id="@+id/translateBottomInBottomOutBtn5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="低进低出"
-                app:layout_constraintTop_toBottomOf="@id/translateRightInLeftOutBtn4" />
+        <Button
+            android:id="@+id/translateBottomInTopOutBtn6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="低进上出"
+            app:layout_constraintTop_toBottomOf="@id/translateBottomInBottomOutBtn5" />
 
-            <Button
-                android:id="@+id/translateBottomInTopOutBtn6"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="低进上出"
-                app:layout_constraintTop_toBottomOf="@id/translateBottomInBottomOutBtn5" />
+        <Button
+            android:id="@+id/translateTopInTopOutBtn7"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="上进上出"
+            app:layout_constraintTop_toBottomOf="@id/translateBottomInTopOutBtn6" />
 
-            <Button
-                android:id="@+id/translateTopInTopOutBtn7"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="上进上出"
-                app:layout_constraintTop_toBottomOf="@id/translateBottomInTopOutBtn6" />
+        <Button
+            android:id="@+id/translateTopInBottomOutBtn8"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="上进低出"
+            app:layout_constraintTop_toBottomOf="@id/translateTopInTopOutBtn7" />
 
-            <Button
-                android:id="@+id/translateTopInBottomOutBtn8"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="上进低出"
-                app:layout_constraintTop_toBottomOf="@id/translateTopInTopOutBtn7" />
+        <Button
+            android:id="@+id/scaleInScaleOutBtn9"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="缩放"
+            app:layout_constraintTop_toBottomOf="@id/translateTopInBottomOutBtn8" />
 
-            <Button
-                android:id="@+id/scaleInScaleOutBtn9"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="缩放"
-                app:layout_constraintTop_toBottomOf="@id/translateTopInBottomOutBtn8" />
+        <Button
+            android:id="@+id/rotatePositiveInOutBtn10"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="顺时针"
+            app:layout_constraintTop_toBottomOf="@id/scaleInScaleOutBtn9" />
 
-            <Button
-                android:id="@+id/rotatePositiveInOutBtn10"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="顺时针"
-                app:layout_constraintTop_toBottomOf="@id/scaleInScaleOutBtn9" />
+        <Button
+            android:id="@+id/rotateReverseInOutBtn11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="逆时针"
+            app:layout_constraintTop_toBottomOf="@id/rotatePositiveInOutBtn10" />
 
-            <Button
-                android:id="@+id/rotateReverseInOutBtn11"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-                android:text="逆时针"
-                app:layout_constraintTop_toBottomOf="@id/rotatePositiveInOutBtn10" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
-</android.support.constraint.ConstraintLayout>
+        <com.liang.lcommon.view.RoundImageView
+            android:id="@+id/roundImageView"
+            android:layout_width="@dimen/dp200"
+            android:layout_height="@dimen/dp200"
+            android:layout_marginTop="@dimen/dp10"
+            android:src="@drawable/test1_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rotateReverseInOutBtn11" />
+
+        <Button
+            android:id="@+id/rockerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="摇杆"
+            app:layout_constraintTop_toBottomOf="@id/roundImageView" />
+
+        <Button
+            android:id="@+id/settingView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="设置相关按钮"
+            app:layout_constraintTop_toBottomOf="@id/rockerView"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,17 +1,15 @@
-package com.liang.lcommon
+package com.liang.lcommon.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.content.ContextCompat
-import android.widget.TextView
-import com.liang.lcommon.init.LCommon
+import com.liang.lcommon.R
+import com.liang.lcommon.exts.LRouter
 import com.liang.lcommon.utils.LLogX
 import com.liang.lcommon.view.LCircleSeekBar
 import kotlinx.android.synthetic.main.activity_lbase.*
 
 class LBaseActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,18 +49,21 @@ class LBaseActivity : AppCompatActivity() {
             }
         }
 
-        fadeInToOutBtn0.setOnClickListener({ TestActivity.startTextActivity(this, 0) })
-        translateleftInLeftOutBtn1.setOnClickListener() { TestActivity.startTextActivity(this, 1) };
-        translateleftInRightOutBtn2.setOnClickListener() { TestActivity.startTextActivity(this, 2) }
-        translateRightInRightOutBtn3.setOnClickListener() { TestActivity.startTextActivity(this, 3) }
-        translateRightInLeftOutBtn4.setOnClickListener() { TestActivity.startTextActivity(this, 4) }
-        translateBottomInBottomOutBtn5.setOnClickListener() { TestActivity.startTextActivity(this, 5) }
-        translateBottomInTopOutBtn6.setOnClickListener() { TestActivity.startTextActivity(this, 6) }
-        translateTopInTopOutBtn7.setOnClickListener() { TestActivity.startTextActivity(this, 7) }
-        translateTopInBottomOutBtn8.setOnClickListener() { TestActivity.startTextActivity(this, 8) }
-        scaleInScaleOutBtn9.setOnClickListener() { TestActivity.startTextActivity(this, 9) }
-        rotatePositiveInOutBtn10.setOnClickListener() { TestActivity.startTextActivity(this, 10) }
-        rotateReverseInOutBtn11.setOnClickListener() { TestActivity.startTextActivity(this, 11) }
+        fadeInToOutBtn0.setOnClickListener({ ActivityStartAnimDemo.startTextActivity(this, 0) })
+        translateleftInLeftOutBtn1.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 1) };
+        translateleftInRightOutBtn2.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 2) }
+        translateRightInRightOutBtn3.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 3) }
+        translateRightInLeftOutBtn4.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 4) }
+        translateBottomInBottomOutBtn5.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 5) }
+        translateBottomInTopOutBtn6.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 6) }
+        translateTopInTopOutBtn7.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 7) }
+        translateTopInBottomOutBtn8.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 8) }
+        scaleInScaleOutBtn9.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 9) }
+        rotatePositiveInOutBtn10.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 10) }
+        rotateReverseInOutBtn11.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 11) }
+
+        rockerView.setOnClickListener() { LRouter.startRockerActivity(this) }
+        settingView.setOnClickListener(){LRouter.startSettingViewActivity(this)}
     }
 
 }

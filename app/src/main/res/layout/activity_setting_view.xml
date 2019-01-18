@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SettingViewActivity"
+    android:orientation="vertical">
+
+    <com.liang.lcommon.view.LSettingSwitch
+        android:id="@+id/gravity_switch"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        app:bigBackground="@drawable/gravity_2"
+        app:leftPicture="@drawable/gravity_1"
+        app:switchText="重力辅助(On)"
+        app:switchChecked="true"
+        app:switchThum="@drawable/gravity_1" />
+
+    <!--蓝牙-->
+    <com.liang.lcommon.view.LSettingSwitch
+        android:id="@+id/bluetooth_switch"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/gravity_switch"
+        app:bigBackground="@drawable/bluetooth_2"
+        app:leftPicture="@drawable/bluetooth_1"
+        app:switchText="蓝牙控制(On)"
+        app:switchChecked="true"
+        app:switchThum="@drawable/bluetooth_1"/>
+
+    <!--wifi-->
+    <com.liang.lcommon.view.LSettingSwitch
+        android:id="@+id/wifi_switch"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/bluetooth_switch"
+        app:bigBackground="@drawable/wifi_2"
+        app:leftPicture="@drawable/wifi_1"
+        app:switchText="Wifi控制(Off)"
+        app:switchThum="@drawable/wifi_off"/>
+
+</LinearLayout>

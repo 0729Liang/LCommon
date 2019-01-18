@@ -19,4 +19,16 @@
         <item name="android:textColor">#00000000</item>
     </style>
 
+
+    <!--点击效果-->
+    <style name="RippleWhite">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:colorControlHighlight">@color/colorRipple</item>
+        <item name="android:radius">50dp</item>
+    </style>
+
+    <style name="RippleWhiteRect">
+        <item name="android:radius">25dp</item>
+        <item name="android:background">@drawable/comm_click_bg_rect</item>
+    </style>
 </resources>
