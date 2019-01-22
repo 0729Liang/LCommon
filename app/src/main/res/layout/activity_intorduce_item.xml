@@ -12,15 +12,18 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cardContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/RippleWhiteRect">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.liang.lcommon.view.LDarkableRoundImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp100"
             android:scaleType="centerCrop"
             app:riv_corner_radius="@dimen/dp6"
-            tools:src="@drawable/test1_bg" />
+            tools:src="@drawable/test1_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/dp5"/>
 
         <TextView
             android:id="@+id/item_intro"

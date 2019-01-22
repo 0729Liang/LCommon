@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
 import com.liang.lcommon.utils.LResourceX;
+import com.liang.lcommon.view.LSettingArrow;
 import com.liang.lcommon.view.LSettingSwitch;
 import com.liang.lcommon.view.LTitleView;
 
@@ -30,24 +32,11 @@ public class SettingViewDemo extends LAppActivity {
         return LRouter::startSettingViewActivity;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_setting_view);
-
-        initMyView();
-        //初始化数据
-        initSettingData();
-        //得到本地设置
-        initSetting();
-    }
-
-
-
     //自定义switch
     private LSettingSwitch gravitySwitch;
     private LSettingSwitch bluetoothSwitch;
     private LSettingSwitch wifiSwitch;
+    private LSettingArrow  mLSettingArrow;
     private LTitleView     mTitleView;
 
     //按钮选中开关
@@ -60,6 +49,19 @@ public class SettingViewDemo extends LAppActivity {
     //设置界面的本地数据
     SharedPreferences        sharedPreferences;
     SharedPreferences.Editor settingDataEditor;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.demo_setting_view);
+
+        initMyView();
+        //初始化数据
+        initSettingData();
+        //得到本地设置
+        initSetting();
+    }
+
 
     //设置界面的初始化数据
     private void initSettingData() {
@@ -118,9 +120,14 @@ public class SettingViewDemo extends LAppActivity {
         gravitySwitch = findViewById(R.id.demo_gravity_switch);
         bluetoothSwitch = findViewById(R.id.demo_bluetooth_switch);
         wifiSwitch = findViewById(R.id.demo_wifi_switch);
+        mLSettingArrow = findViewById(R.id.demo_lsettinh_arrow);
         mTitleView = findViewById(R.id.demo_setting_title);
         mTitleView.setTitle("设置按钮展示");
         mTitleView.setClickLeftFinish(this);
+
+//        mLSettingArrow.setOnClickListener(v -> {
+//            ToastUtils.showShort("箭头按钮");
+//        });
 
         gravitySwitch.setListener(v -> {
             if (isGravityOpen) {

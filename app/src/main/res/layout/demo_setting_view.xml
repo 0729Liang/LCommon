@@ -15,10 +15,10 @@
         android:layout_marginTop="@dimen/dp10"/>
 
     <com.liang.lcommon.view.LSettingArrow
+        android:id="@+id/demo_lsettinh_arrow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:theme="@style/RippleWhiteRect"
         app:lsetting_arrow_intro="这是箭头按钮"
         app:lsetting_arrow_number="30"
         app:lsetting_arrow_title_icon="@drawable/test3_head" />

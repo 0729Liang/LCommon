@@ -16,7 +16,7 @@ class LBaseActivity : LAppActivity() {
 
     private var clickMap = SparseArray<LBaseItemBean.ClickEvent>()
     private val mList = ArrayList<LBaseItemBean>()
-    private var mAdapter: LBaseAdapter = LBaseAdapter(R.layout.activity_intorduce_item, mList)
+    private var mAdapter: LBaseAdapter = LBaseAdapter( mList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
