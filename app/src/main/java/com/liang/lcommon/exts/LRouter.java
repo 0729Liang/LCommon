@@ -1,10 +1,12 @@
 package com.liang.lcommon.exts;
 
 import android.app.Activity;
+import android.content.Intent;
 
-import com.liang.lcommon.activity.ActivityStartAnimDemo;
-import com.liang.lcommon.activity.RockerActivity;
-import com.liang.lcommon.activity.SettingViewActivity;
+import com.liang.lcommon.activity.item.ActivityStartAnimDemo;
+import com.liang.lcommon.activity.item.CircleSeekBarDemo;
+import com.liang.lcommon.activity.item.RockerActivity;
+import com.liang.lcommon.activity.item.SettingViewDemo;
 
 /**
  * @author : Amarao
@@ -13,15 +15,23 @@ import com.liang.lcommon.activity.SettingViewActivity;
  */
 public class LRouter {
 
-    public static void startActivityAnimDemo(Activity activity, int type) {
-        ActivityStartAnimDemo.startTextActivity(activity, type);
+    public static void startActivityAnimDemo(Activity activity, ActivityStartAnimDemo.Anim type) {
+        ActivityStartAnimDemo.Companion.startActivity(activity, type);
+    }
+
+    public static void startActivityAnimDemo(Activity activity) {
+        activity.startActivity(new Intent(activity, ActivityStartAnimDemo.class));
+    }
+
+    public static void startCircleSeekBarDemo(Activity activity) {
+        CircleSeekBarDemo.startActivity(activity);
     }
 
     public static void startRockerActivity(Activity activity) {
         RockerActivity.startActivity(activity);
     }
 
-    public static void startSettingViewActivity(Activity activity){
-        SettingViewActivity.startActivity(activity);
+    public static void startSettingViewActivity(Activity activity) {
+        SettingViewDemo.startActivity(activity);
     }
 }

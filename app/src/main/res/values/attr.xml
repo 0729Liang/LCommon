@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--自定义CircleSeekBar-->
     <declare-styleable name="LCircleSeekBar">
         <!--特殊-->
         <attr name="lseekbar_shape" format="integer">
@@ -31,16 +32,29 @@
         <attr name="lseekbar_secondProgressColor" format="color" /><!--缓冲条颜色-->
     </declare-styleable>
 
+    <!--1.设计需要的属性-->
+    <!--自定义属性-->
+    <declare-styleable name="LSettingSwitch">
+        <!--大背景-->
+        <attr name="bigBackground" format="reference|color" />
+        <!--左边图片-->
+        <attr name="leftPicture" format="color|reference" />
+        <!--switch开关-->
+        <attr name="switchThum" format="reference|color" />
+        <attr name="switchText" format="string" />
+        <attr name="switchChecked" format="boolean" />
+    </declare-styleable>
+
     <!--个人中心-->
-    <declare-styleable name="PersonalBodyView">
+    <declare-styleable name="LSettingArrow">
         <!--文本-->
-        <attr name="mText" format="string" />
+        <attr name="lsetting_arrow_intro" format="string" />
         <!--图片-->
-        <attr name="mSrc" format="color|reference" />
+        <attr name="lsetting_arrow_title_icon" format="color|reference" />
         <!--数量-->
-        <attr name="mNumber" format="string" />
+        <attr name="lsetting_arrow_number" format="string" />
         <!--进入图标-->
-        <attr name="mArrow" format="color|reference" />
+        <attr name="lsetting_arrow_icon" format="color|reference" />
     </declare-styleable>
 
     <!--
@@ -59,16 +73,5 @@ rockerCallBackMode 有变化就回调，或者是方向改变才会回调-->
             <flag name="CALL_BACK_MODE_STATE_CHANGE" value="1" />
         </attr>
     </declare-styleable>
-    <!--1.设计需要的属性-->
-    <!--自定义属性-->
-    <declare-styleable name="MySwitch">
-        <!--大背景-->
-        <attr name="bigBackground" format="reference|color"/>
-        <!--左边图片-->
-        <attr name="leftPicture" format="color|reference"/>
-        <!--switch开关-->
-        <attr name="switchThum" format="reference|color"/>
-        <attr name="switchText" format="string"/>
-        <attr name="switchChecked" format="boolean"/>
-    </declare-styleable>
+
 </resources>

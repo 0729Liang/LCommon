@@ -1,69 +1,58 @@
 package com.liang.lcommon.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.util.SparseArray
+import android.widget.Toast
 import com.liang.lcommon.R
-import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.utils.LLogX
-import com.liang.lcommon.view.LCircleSeekBar
+import com.liang.lcommon.activity.item.ActivityStartAnimDemo
+import com.liang.lcommon.activity.item.CircleSeekBarDemo
+import com.liang.lcommon.activity.item.SettingViewDemo
+import com.liang.lcommon.app.LAppActivity
 import kotlinx.android.synthetic.main.activity_lbase.*
+import java.util.ArrayList
 
-class LBaseActivity : AppCompatActivity() {
+class LBaseActivity : LAppActivity() {
+
+    private var clickMap = SparseArray<LBaseItemBean.ClickEvent>()
+    private val mList = ArrayList<LBaseItemBean>()
+    private var mAdapter: LBaseAdapter = LBaseAdapter(R.layout.activity_intorduce_item, mList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lbase)
-        lseekbar.setStartTouchListener { view: LCircleSeekBar? -> LLogX.e("开始") }
-        lseekbar.setStopTouchListener { view: LCircleSeekBar? -> LLogX.e("结束") }
-        lseekbar.setChangeListener { view, pro ->
-            progressTv.text = "进度" + pro.toInt()
 
-            if (pro > 20) {
-                lseekbar.lineCap = LCircleSeekBar.LCap.LSEEKBAR_LINE_CAP_ROUND
-            } else {
-                lseekbar.lineCap = LCircleSeekBar.LCap.LSEEKBAR_LINE_CAP_SQUARE
-            }
-            if (pro > 40) {
-                lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_MIDDLE
-            } else {
-                lseekbar.thumbPosition = LCircleSeekBar.LThumbPosition.LSEEKBAR_THUMB_POSITION_BELOW
-            }
-            if (pro > 60) {
-                lseekbar.thumDrawable = ContextCompat.getDrawable(this, R.drawable.icon_lseekbar_point)
-            } else {
-                lseekbar.thumDrawable = ContextCompat.getDrawable(this, R.color.white)
-            }
+        initView();
 
-            if (pro > 80) {
-                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_CIRCLE
-            } else {
-                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_RING
-            }
-        }
-        lseekbar.setScdChangeListener { view, pro ->
-            if (pro > 80) {
-                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_CIRCLE
-            } else {
-                lseekbar.shape = LCircleSeekBar.LShape.LSEEKBAR_SHAPE_RING
-            }
-        }
+        addItem(ActivityStartAnimDemo.getItem(), ActivityStartAnimDemo.getClickEvent())
 
-        fadeInToOutBtn0.setOnClickListener({ ActivityStartAnimDemo.startTextActivity(this, 0) })
-        translateleftInLeftOutBtn1.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 1) };
-        translateleftInRightOutBtn2.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 2) }
-        translateRightInRightOutBtn3.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 3) }
-        translateRightInLeftOutBtn4.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 4) }
-        translateBottomInBottomOutBtn5.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 5) }
-        translateBottomInTopOutBtn6.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 6) }
-        translateTopInTopOutBtn7.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 7) }
-        translateTopInBottomOutBtn8.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 8) }
-        scaleInScaleOutBtn9.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 9) }
-        rotatePositiveInOutBtn10.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 10) }
-        rotateReverseInOutBtn11.setOnClickListener() { ActivityStartAnimDemo.startTextActivity(this, 11) }
+        addItem(CircleSeekBarDemo.getItem(), CircleSeekBarDemo.getClickEvent())
 
-        rockerView.setOnClickListener() { LRouter.startRockerActivity(this) }
-        settingView.setOnClickListener(){LRouter.startSettingViewActivity(this)}
+        addItem(SettingViewDemo.getItem(), SettingViewDemo.getClickEvent())
     }
 
+    private fun initView() {
+        val layout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = layout
+        recyclerView.adapter = mAdapter
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            // ?. == if not null ?: == else
+            clickMap.get(position).onClick(mActivity)
+        }
+    }
+
+    private fun addItem(bean: LBaseItemBean, click: LBaseItemBean.ClickEvent) {
+        val index = mList.size
+        mList.add(bean)
+        mAdapter.notifyItemInserted(index)
+        clickMap.put(index, click)
+    }
+
+    private fun addItem(intro: String, src: Int, click: LBaseItemBean.ClickEvent) {
+        val index = mList.size
+        val bean = LBaseItemBean(intro, src)
+        mList.add(bean)
+        mAdapter.notifyItemInserted(index)
+        clickMap.put(index, click)
+    }
 }

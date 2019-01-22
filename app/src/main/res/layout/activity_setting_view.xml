@@ -4,43 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SettingViewActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ececec"
+    tools:context=".activity.item.SettingViewDemo">
+
+    <com.liang.lcommon.view.LTitleView
+        android:id="@+id/demo_setting_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"/>
+
+    <com.liang.lcommon.view.LSettingArrow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:theme="@style/RippleWhiteRect"
+        app:lsetting_arrow_intro="这是箭头按钮"
+        app:lsetting_arrow_number="30"
+        app:lsetting_arrow_title_icon="@drawable/test3_head" />
 
     <com.liang.lcommon.view.LSettingSwitch
-        android:id="@+id/gravity_switch"
+        android:id="@+id/demo_gravity_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         app:bigBackground="@drawable/gravity_2"
         app:leftPicture="@drawable/gravity_1"
-        app:switchText="重力辅助(On)"
         app:switchChecked="true"
+        app:switchText="重力辅助(On)"
         app:switchThum="@drawable/gravity_1" />
 
     <!--蓝牙-->
     <com.liang.lcommon.view.LSettingSwitch
-        android:id="@+id/bluetooth_switch"
+        android:id="@+id/demo_bluetooth_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_below="@id/demo_gravity_switch"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/gravity_switch"
         app:bigBackground="@drawable/bluetooth_2"
         app:leftPicture="@drawable/bluetooth_1"
-        app:switchText="蓝牙控制(On)"
         app:switchChecked="true"
-        app:switchThum="@drawable/bluetooth_1"/>
+        app:switchText="蓝牙控制(On)"
+        app:switchThum="@drawable/bluetooth_1" />
 
     <!--wifi-->
     <com.liang.lcommon.view.LSettingSwitch
-        android:id="@+id/wifi_switch"
+        android:id="@+id/demo_wifi_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_below="@id/demo_bluetooth_switch"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/bluetooth_switch"
         app:bigBackground="@drawable/wifi_2"
         app:leftPicture="@drawable/wifi_1"
         app:switchText="Wifi控制(Off)"
-        app:switchThum="@drawable/wifi_off"/>
+        app:switchThum="@drawable/wifi_off" />
+
+
 
 </LinearLayout>

@@ -13,23 +13,22 @@ import android.widget.TextView;
 import com.liang.lcommon.R;
 
 /**
- * CreateAt : 2018/11/7
- * Describe :
- *
- * @author hubery
+ * @author : Amarao
+ * CreateAt : 8:13 2019/1/20
+ * Describe : 个人中心的箭头组件
  */
 public class LSettingArrow extends ConstraintLayout {
 
-    private ImageView mCoverIv;
-    private TextView  mTitleTv;
-    private TextView  mContentTv;
+    private ImageView mTitleIconIv;
+    private TextView  mTitleIntroTv;
+    private TextView  mNumberTv;
     private ImageView mArrowIv;
+    private View mLineView;
 
-    private String   mText;
     private Drawable mSrc;
+    private String   mText;
     private String   mNumber;
     private Drawable mArrow;
-
 
     public LSettingArrow(Context context) {
         this(context, null);
@@ -37,72 +36,80 @@ public class LSettingArrow extends ConstraintLayout {
 
     public LSettingArrow(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initViews();
         initAttr(context, attrs);
     }
 
     public LSettingArrow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //initAttr(context, attrs);
     }
 
-    private void initAttr(Context context, AttributeSet attrs) {
-        initViews(context);
+    private void initViews() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.lsetting_arrow_layout, this);
+        mTitleIconIv = view.findViewById(R.id.larrow_title_icon);
+        mTitleIntroTv = view.findViewById(R.id.larrow_title_intro);
+        mNumberTv = view.findViewById(R.id.larrow_number);
+        mArrowIv = view.findViewById(R.id.larrow_icon);
+    }
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PersonalBodyView);
-        mSrc = typedArray.getDrawable(R.styleable.PersonalBodyView_mSrc);
-        mText = typedArray.getString(R.styleable.PersonalBodyView_mText);
-        mNumber = typedArray.getString(R.styleable.PersonalBodyView_mNumber);
-        mArrow = typedArray.getDrawable(R.styleable.PersonalBodyView_mArrow);
+
+    private void initAttr(Context context, AttributeSet attrs) {
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LSettingArrow);
+        mSrc = typedArray.getDrawable(R.styleable.LSettingArrow_lsetting_arrow_title_icon);
+        mText = typedArray.getString(R.styleable.LSettingArrow_lsetting_arrow_intro);
+        mNumber = typedArray.getString(R.styleable.LSettingArrow_lsetting_arrow_number);
+        mArrow = typedArray.getDrawable(R.styleable.LSettingArrow_lsetting_arrow_icon);
         typedArray.recycle();
 
-//        if (isInEditMode()) {
-//            return;
-//        }
-
         if (mSrc != null) {
-            mCoverIv.setImageDrawable(mSrc);
+            mTitleIconIv.setImageDrawable(mSrc);
         }
         if (mText != null) {
-            mTitleTv.setText(mText);
+            mTitleIntroTv.setText(mText);
         }
         if (mNumber != null) {
-            mContentTv.setText(mNumber);
+            mNumberTv.setText(mNumber);
         }
         if (mArrow != null) {
             mArrowIv.setImageDrawable(mArrow);
         }
     }
 
-    private void initViews(Context context) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.lsetting_arrow_layout, this);
-        //inflate(context, R.layout.personal_body_item, this);
-        mCoverIv = view.findViewById(R.id.personal_icon);
-        mTitleTv = view.findViewById(R.id.personal_title_tv);
-        mContentTv = view.findViewById(R.id.personal_content_tv);
-        mArrowIv = view.findViewById(R.id.personal_end_tv);
+    public ImageView getTitleIconIv() {
+        return mTitleIconIv;
     }
 
-    public void setCoverIv(int resId) {
-        mCoverIv.setImageResource(resId);
+    public TextView getTitleIntroTv() {
+        return mTitleIntroTv;
+    }
+
+    public TextView getNumberTv() {
+        return mNumberTv;
+    }
+
+    public ImageView getArrowIv() {
+        return mArrowIv;
+    }
+
+    public View getLineView() {
+        return mLineView;
+    }
+
+
+    public void setTitleIcon(int resId) {
+        mTitleIconIv.setImageResource(resId);
     }
 
     public void setTitle(String text) {
-        mTitleTv.setText(text);
+        mTitleIntroTv.setText(text);
     }
 
-    public void setContent(String text) {
-        mContentTv.setText(text);
+    public void setNumber(String text) {
+        mNumberTv.setText(text);
     }
 
-    public void hideArrow() {
-        mArrowIv.setVisibility(View.GONE);
-    }
-
-    public void hideCount() {
-        mContentTv.setVisibility(View.GONE);
-    }
-
-    public void hideCover() {
-        mContentTv.setVisibility(View.GONE);
+    public void setArrow(int resId) {
+        mArrowIv.setImageResource(resId);
     }
 }

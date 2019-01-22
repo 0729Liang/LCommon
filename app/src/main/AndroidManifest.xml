@@ -19,9 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ActivityStartAnimDemo" />
-        <activity android:name=".activity.RockerActivity" />
-        <activity android:name=".activity.SettingViewActivity"></activity>
+        <activity android:name=".activity.item.ActivityStartAnimDemo" />
+        <activity android:name=".activity.item.RockerActivity" />
+        <activity android:name=".activity.item.SettingViewDemo" />
+        <activity android:name=".activity.item.CircleSeekBarDemo"></activity>
     </application>
 
 </manifest>

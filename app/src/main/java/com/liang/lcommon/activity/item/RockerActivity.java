@@ -1,10 +1,9 @@
-package com.liang.lcommon.activity;
+package com.liang.lcommon.activity.item;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.liang.lcommon.R;
