@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.item;
+package com.liang.lcommon.activity.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,31 +7,44 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.liang.lcommon.R;
+import com.liang.lcommon.activity.LBaseItemBean;
+import com.liang.lcommon.app.LAppActivity;
+import com.liang.lcommon.exts.LRouter;
 import com.liang.lcommon.utils.LLogX;
-import com.liang.lcommon.view.MyRockerView;
+import com.liang.lcommon.view.LRockerViewV2;
 
-public class RockerActivity extends AppCompatActivity {
+public class RockerActivityDemo extends LAppActivity {
 
     public static void startActivity(Activity activity) {
-        activity.startActivity(new Intent(activity, RockerActivity.class));
+        activity.startActivity(new Intent(activity, RockerActivityDemo.class));
+    }
+
+    public static LBaseItemBean getItem() {
+        String intro = "虚拟摇杆\n1.仿王者荣耀摇杆\n2.自定义虚拟摇杆 摇杆方向可设置为二四八个方向，锚点偏移级别 0-9，可监听角度变化";
+        int src = R.mipmap.demo_rocker_view;
+        return new LBaseItemBean(intro, src);
+    }
+
+    public static LBaseItemBean.ClickEvent getClickEvent() {
+        return LRouter::startRockerActivity;
     }
 
     //虚拟摇杆
-    private MyRockerView mRockerViewXY;
-    private MyRockerView mRockerViewZ;
-    private String       directionXY;
-    private String       angleXY;
-    private String       levelXY;
-    private String       directionZ;
-    private String       angleZ;
-    private String       levelZ;
+    private LRockerViewV2 mRockerViewXY;
+    private LRockerViewV2 mRockerViewZ;
+    private String        directionXY;
+    private String        angleXY;
+    private String        levelXY;
+    private String        directionZ;
+    private String        angleZ;
+    private String        levelZ;
     //文本
-    private TextView     directionXY_Text;
-    private TextView     angleXY_Text;
-    private TextView     levelXY_Text;
-    private TextView     directionZ_Text;
-    private TextView     angleZ_Text;
-    private TextView     levelZ_Text;
+    private TextView      directionXY_Text;
+    private TextView      angleXY_Text;
+    private TextView      levelXY_Text;
+    private TextView      directionZ_Text;
+    private TextView      angleZ_Text;
+    private TextView      levelZ_Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +73,8 @@ public class RockerActivity extends AppCompatActivity {
     //摇杆初始化
     private void initMyView() {
         //方向有改变时回调
-        mRockerViewXY = (MyRockerView) findViewById(R.id.rockerXY_View);//8方向
-        mRockerViewZ = (MyRockerView) findViewById(R.id.rockerZ_View);//2方向
+        mRockerViewXY = (LRockerViewV2) findViewById(R.id.rockerXY_View);//8方向
+        mRockerViewZ = (LRockerViewV2) findViewById(R.id.rockerZ_View);//2方向
     }
 
     //摇杆点击事件
@@ -69,31 +82,31 @@ public class RockerActivity extends AppCompatActivity {
 
         //xy轴
         //方向
-        mRockerViewXY.setOnShakeListener(MyRockerView.DirectionMode.DIRECTION_8, new MyRockerView.OnShakeListener() {
+        mRockerViewXY.setOnShakeListener(LRockerViewV2.DirectionMode.DIRECTION_8, new LRockerViewV2.OnShakeListener() {
             @Override
             public void onStart() {
 
             }
 
             @Override
-            public void direction(MyRockerView.Direction direction) {
-                if (direction == MyRockerView.Direction.DIRECTION_CENTER) {
+            public void direction(LRockerViewV2.Direction direction) {
+                if (direction == LRockerViewV2.Direction.DIRECTION_CENTER) {
                     directionXY = ("当前方向：中心");
-                } else if (direction == MyRockerView.Direction.DIRECTION_DOWN) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN) {
                     directionXY = ("当前方向：下");
-                } else if (direction == MyRockerView.Direction.DIRECTION_LEFT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_LEFT) {
                     directionXY = ("当前方向：左");
-                } else if (direction == MyRockerView.Direction.DIRECTION_UP) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_UP) {
                     directionXY = ("当前方向：上");
-                } else if (direction == MyRockerView.Direction.DIRECTION_RIGHT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_RIGHT) {
                     directionXY = ("当前方向：右");
-                } else if (direction == MyRockerView.Direction.DIRECTION_DOWN_LEFT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN_LEFT) {
                     directionXY = ("当前方向：左下");
-                } else if (direction == MyRockerView.Direction.DIRECTION_DOWN_RIGHT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN_RIGHT) {
                     directionXY = ("当前方向：右下");
-                } else if (direction == MyRockerView.Direction.DIRECTION_UP_LEFT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_UP_LEFT) {
                     directionXY = ("当前方向：左上");
-                } else if (direction == MyRockerView.Direction.DIRECTION_UP_RIGHT) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_UP_RIGHT) {
                     directionXY = ("当前方向：右上");
                 }
 
@@ -108,7 +121,7 @@ public class RockerActivity extends AppCompatActivity {
             }
         });
         //角度
-        mRockerViewXY.setOnAngleChangeListener(new MyRockerView.OnAngleChangeListener() {
+        mRockerViewXY.setOnAngleChangeListener(new LRockerViewV2.OnAngleChangeListener() {
             @Override
             public void onStart() {
 
@@ -127,7 +140,7 @@ public class RockerActivity extends AppCompatActivity {
             }
         });
         //级别
-        mRockerViewXY.setOnDistanceLevelListener(new MyRockerView.OnDistanceLevelListener() {
+        mRockerViewXY.setOnDistanceLevelListener(new LRockerViewV2.OnDistanceLevelListener() {
             @Override
             public void onDistanceLevel(int level) {
                 levelXY = ("当前距离级别：" + level);
@@ -136,17 +149,17 @@ public class RockerActivity extends AppCompatActivity {
             }
         });
         //z轴
-        mRockerViewZ.setOnShakeListener(MyRockerView.DirectionMode.DIRECTION_2_VERTICAL, new MyRockerView.OnShakeListener() {
+        mRockerViewZ.setOnShakeListener(LRockerViewV2.DirectionMode.DIRECTION_2_VERTICAL, new LRockerViewV2.OnShakeListener() {
             @Override
             public void onStart() {
 
             }
 
             @Override
-            public void direction(MyRockerView.Direction direction) {
-                if (direction == MyRockerView.Direction.DIRECTION_UP) {
+            public void direction(LRockerViewV2.Direction direction) {
+                if (direction == LRockerViewV2.Direction.DIRECTION_UP) {
                     directionZ = ("当前方向：上");
-                } else if (direction == MyRockerView.Direction.DIRECTION_DOWN) {
+                } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN) {
                     directionZ = ("当前方向：下");
                 }
                 LLogX.e("Z轴" + directionZ);
@@ -159,7 +172,7 @@ public class RockerActivity extends AppCompatActivity {
 
             }
         });
-        mRockerViewZ.setOnAngleChangeListener(new MyRockerView.OnAngleChangeListener() {
+        mRockerViewZ.setOnAngleChangeListener(new LRockerViewV2.OnAngleChangeListener() {
             @Override
             public void onStart() {
 
@@ -177,7 +190,7 @@ public class RockerActivity extends AppCompatActivity {
 
             }
         });
-        mRockerViewZ.setOnDistanceLevelListener(new MyRockerView.OnDistanceLevelListener() {
+        mRockerViewZ.setOnDistanceLevelListener(new LRockerViewV2.OnDistanceLevelListener() {
             @Override
             public void onDistanceLevel(int level) {
                 levelZ = ("当前距离级别：" + level);

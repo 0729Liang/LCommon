@@ -1,5 +1,6 @@
 package com.liang.lcommon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -14,20 +15,23 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.liang.lcommon.R;
 
 /**
- * Created by Amarao on 2018/3/20.
+ * @author : Amarao
+ * CreateAt : 11:34 2019/1/11
+ * Describe :  虚拟摇杆
+ * <p>
+ * 摇杆方向可设置为二四八个方向
+ * 锚点偏移级别 0-9
+ * 可监听角度变化
  */
+public class LRockerViewV2 extends View {
 
-public class MyRockerView extends View {
-    private static final String TAG = "RockerView";
-
-    private static final int DEFAULT_SIZE = 400;
+    private static final int   DEFAULT_SIZE         = 400;
     private static final float DEFAULT_ROCKER_SCALE = 0.5f;//默认半径为背景的1/2
 
     private Paint mAreaBackgroundPaint;
@@ -36,44 +40,44 @@ public class MyRockerView extends View {
     private Point mRockerPosition;
     private Point mCenterPoint;
 
-    private int mAreaRadius;
+    private int   mAreaRadius;
     private float mRockerScale;
 
     private int mRockerRadius;
 
     private CallBackMode mCallBackMode = CallBackMode.CALL_BACK_MODE_MOVE;
-    private OnAngleChangeListener mOnAngleChangeListener;
-    private OnShakeListener mOnShakeListener;
+    private OnAngleChangeListener   mOnAngleChangeListener;
+    private OnShakeListener         mOnShakeListener;
     private OnDistanceLevelListener mOnDistanceLevelListener;
 
     private DirectionMode mDirectionMode;
     private Direction tempDirection = Direction.DIRECTION_CENTER;
 
-    private float lastDistance = 0;
-    private boolean hasCall = false;
-    private float baseDistance = 0;
-    private int mDistanceLevel = 10;//分成10分
+    private float   lastDistance   = 0;
+    private boolean hasCall        = false;
+    private float   baseDistance   = 0;
+    private int     mDistanceLevel = 10;//分成10分
 
 
     // 角度
-    private static final double ANGLE_0 = 0;
-    private static final double ANGLE_360 = 360;
+    private static final double ANGLE_0                   = 0;
+    private static final double ANGLE_360                 = 360;
     // 360°水平方向平分2份的边缘角度
     private static final double ANGLE_HORIZONTAL_2D_OF_0P = 90;
     private static final double ANGLE_HORIZONTAL_2D_OF_1P = 270;
     // 360°垂直方向平分2份的边缘角度
-    private static final double ANGLE_VERTICAL_2D_OF_0P = 0;
-    private static final double ANGLE_VERTICAL_2D_OF_1P = 180;
+    private static final double ANGLE_VERTICAL_2D_OF_0P   = 0;
+    private static final double ANGLE_VERTICAL_2D_OF_1P   = 180;
     // 360°平分4份的边缘角度
-    private static final double ANGLE_4D_OF_0P = 0;
-    private static final double ANGLE_4D_OF_1P = 90;
-    private static final double ANGLE_4D_OF_2P = 180;
-    private static final double ANGLE_4D_OF_3P = 270;
+    private static final double ANGLE_4D_OF_0P            = 0;
+    private static final double ANGLE_4D_OF_1P            = 90;
+    private static final double ANGLE_4D_OF_2P            = 180;
+    private static final double ANGLE_4D_OF_3P            = 270;
     // 360°平分4份的边缘角度(旋转45度)
-    private static final double ANGLE_ROTATE45_4D_OF_0P = 45;
-    private static final double ANGLE_ROTATE45_4D_OF_1P = 135;
-    private static final double ANGLE_ROTATE45_4D_OF_2P = 225;
-    private static final double ANGLE_ROTATE45_4D_OF_3P = 315;
+    private static final double ANGLE_ROTATE45_4D_OF_0P   = 45;
+    private static final double ANGLE_ROTATE45_4D_OF_1P   = 135;
+    private static final double ANGLE_ROTATE45_4D_OF_2P   = 225;
+    private static final double ANGLE_ROTATE45_4D_OF_3P   = 315;
 
     // 360°平分8份的边缘角度
     private static final double ANGLE_8D_OF_0P = 22.5;
@@ -86,31 +90,30 @@ public class MyRockerView extends View {
     private static final double ANGLE_8D_OF_7P = 337.5;
 
     // 摇杆可移动区域背景
-    private static final int AREA_BACKGROUND_MODE_PIC = 0;
-    private static final int AREA_BACKGROUND_MODE_COLOR = 1;
-    private static final int AREA_BACKGROUND_MODE_XML = 2;
+    private static final int AREA_BACKGROUND_MODE_PIC     = 0;
+    private static final int AREA_BACKGROUND_MODE_COLOR   = 1;
+    private static final int AREA_BACKGROUND_MODE_XML     = 2;
     private static final int AREA_BACKGROUND_MODE_DEFAULT = 3;
-    private int mAreaBackgroundMode = AREA_BACKGROUND_MODE_DEFAULT;
+    private              int mAreaBackgroundMode          = AREA_BACKGROUND_MODE_DEFAULT;
     private Bitmap mAreaBitmap;
     private int    mAreaColor;
     // 摇杆背景
-    private static final int ROCKER_BACKGROUND_MODE_PIC = 4;
-    private static final int ROCKER_BACKGROUND_MODE_COLOR = 5;
-    private static final int ROCKER_BACKGROUND_MODE_XML = 6;
+    private static final int ROCKER_BACKGROUND_MODE_PIC     = 4;
+    private static final int ROCKER_BACKGROUND_MODE_COLOR   = 5;
+    private static final int ROCKER_BACKGROUND_MODE_XML     = 6;
     private static final int ROCKER_BACKGROUND_MODE_DEFAULT = 7;
-    private int mRockerBackgroundMode = ROCKER_BACKGROUND_MODE_DEFAULT;
+    private              int mRockerBackgroundMode          = ROCKER_BACKGROUND_MODE_DEFAULT;
     private Bitmap mRockerBitmap;
     private int    mRockerColor;
 
 
-    public MyRockerView(Context context, AttributeSet attrs) {
+    public LRockerViewV2(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         // 获取自定义属性
         initAttribute(context, attrs);
 
-        if (isInEditMode()) {
-        }
+        //isInEditMode();
 
         // 移动区域画笔
         mAreaBackgroundPaint = new Paint();
@@ -133,10 +136,10 @@ public class MyRockerView extends View {
      * @param attrs   attrs
      */
     private void initAttribute(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RockerView);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LRockerViewV2);
 
         // 可移动区域背景
-        Drawable areaBackground = typedArray.getDrawable(R.styleable.RockerView_areaBackground);
+        Drawable areaBackground = typedArray.getDrawable(R.styleable.LRockerViewV2_lrocker_areaBackground);
         if (null != areaBackground) {
             // 设置了背景
             if (areaBackground instanceof BitmapDrawable) {
@@ -160,7 +163,7 @@ public class MyRockerView extends View {
             mAreaBackgroundMode = AREA_BACKGROUND_MODE_DEFAULT;
         }
         // 摇杆背景
-        Drawable rockerBackground = typedArray.getDrawable(R.styleable.RockerView_rockerBackground);
+        Drawable rockerBackground = typedArray.getDrawable(R.styleable.LRockerViewV2_lrocker_rockerBackground);
         if (null != rockerBackground) {
             // 设置了摇杆背景
             if (rockerBackground instanceof BitmapDrawable) {
@@ -185,11 +188,11 @@ public class MyRockerView extends View {
         }
 
         // 摇杆半径
-        mRockerScale = typedArray.getFloat(R.styleable.RockerView_rockerScale, DEFAULT_ROCKER_SCALE);
+        mRockerScale = typedArray.getFloat(R.styleable.LRockerViewV2_lrocker_rockerScale, DEFAULT_ROCKER_SCALE);
         //距离级别
-        mDistanceLevel = typedArray.getInt(R.styleable.RockerView_rockerSpeedLevel, 10);
+        mDistanceLevel = typedArray.getInt(R.styleable.LRockerViewV2_lrocker_rockerSpeedLevel, 10);
         //回调模式
-        mCallBackMode = getCallBackMode(typedArray.getInt(R.styleable.RockerView_rockerCallBackMode, 0));
+        mCallBackMode = getCallBackMode(typedArray.getInt(R.styleable.LRockerViewV2_lrocker_rockerCallBackMode, 0));
         typedArray.recycle();
     }
 
@@ -270,6 +273,7 @@ public class MyRockerView extends View {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -279,8 +283,8 @@ public class MyRockerView extends View {
             case MotionEvent.ACTION_MOVE:// 移动
                 float moveX = event.getX();
                 float moveY = event.getY();
-                baseDistance = mAreaRadius+2;
-                Log.e("baseDistance",baseDistance+"");
+                baseDistance = mAreaRadius + 2;
+                //Log.e("baseDistance", baseDistance + "");
                 mRockerPosition = getRockerPositionPoint(mCenterPoint, new Point((int) moveX, (int) moveY), mAreaRadius + mRockerRadius, mRockerRadius);
                 moveRocker(mRockerPosition.x, mRockerPosition.y);
                 break;
@@ -295,6 +299,7 @@ public class MyRockerView extends View {
                 float upY = event.getY();
                 moveRocker(mCenterPoint.x, mCenterPoint.y);
                 break;
+            default:
         }
         return true;
     }
@@ -397,11 +402,11 @@ public class MyRockerView extends View {
      * @param angle 摇动角度
      */
     private void callBack(double angle, float distance) {
-        Log.e("distance",distance+"");
+        //Log.e("distance", distance + "");
         if (Math.abs(distance - lastDistance) >= (baseDistance / mDistanceLevel)) {
             lastDistance = distance;
             if (null != mOnDistanceLevelListener) {
-                int level = (int) (distance/(baseDistance/mDistanceLevel));
+                int level = (int) (distance / (baseDistance / mDistanceLevel));
                 mOnDistanceLevelListener.onDistanceLevel(level);
             }
         }
@@ -594,8 +599,7 @@ public class MyRockerView extends View {
     }
 
     /**
-     * 回调
-     * 结束
+     * 回调结束
      */
     private void callBackFinish() {
         tempDirection = Direction.DIRECTION_CENTER;
@@ -731,6 +735,7 @@ public class MyRockerView extends View {
                 return CallBackMode.CALL_BACK_MODE_MOVE;
             case 1:
                 return CallBackMode.CALL_BACK_MODE_STATE_CHANGE;
+            default:
         }
         return mCallBackMode;
     }

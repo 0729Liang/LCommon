@@ -3,11 +3,11 @@ package com.liang.lcommon.activity
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.SparseArray
-import android.widget.Toast
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.item.ActivityStartAnimDemo
-import com.liang.lcommon.activity.item.CircleSeekBarDemo
-import com.liang.lcommon.activity.item.SettingViewDemo
+import com.liang.lcommon.activity.demo.ActivityStartAnimDemo
+import com.liang.lcommon.activity.demo.CircleSeekBarDemo
+import com.liang.lcommon.activity.demo.RockerActivityDemo
+import com.liang.lcommon.activity.demo.SettingViewDemo
 import com.liang.lcommon.app.LAppActivity
 import kotlinx.android.synthetic.main.activity_lbase.*
 import java.util.ArrayList
@@ -29,6 +29,8 @@ class LBaseActivity : LAppActivity() {
         addItem(CircleSeekBarDemo.getItem(), CircleSeekBarDemo.getClickEvent())
 
         addItem(SettingViewDemo.getItem(), SettingViewDemo.getClickEvent())
+
+        addItem(RockerActivityDemo.getItem(), RockerActivityDemo.getClickEvent())
     }
 
     private fun initView() {

@@ -1,5 +1,6 @@
-package com.liang.lcommon.view.remoteview;
+package com.liang.lcommon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,10 +16,13 @@ import android.view.View;
 import com.liang.lcommon.R;
 
 /**
- * Created by leeby on 2017/7/19.
+ * @author : Amarao
+ * CreateAt : 11:10 2019/1/11
+ * Describe :  摇杆
+ *
+ * 仿王者荣耀摇杆
  */
-
-public class RemoteControlView extends View {
+public class LRockerView extends View {
 
     private float scale = this.getResources().getDisplayMetrics().density;
     private Paint mPaint;
@@ -46,7 +50,7 @@ public class RemoteControlView extends View {
     //外侧边缘指针图片的高度和宽度
     private int nBitmapWidth;
     private int nBitmapHeight;
-    //
+
     private int RockerCircleX;
     private int RockerCircleY;
 
@@ -58,11 +62,11 @@ public class RemoteControlView extends View {
 
     private boolean isStart = false;
 
-    public RemoteControlView(Context context) {
+    public LRockerView(Context context) {
         super(context);
     }
 
-    public RemoteControlView(Context context, @Nullable AttributeSet attrs) {
+    public LRockerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
@@ -94,7 +98,7 @@ public class RemoteControlView extends View {
         matrix = new Matrix();
     }
 
-    public RemoteControlView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LRockerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -150,6 +154,7 @@ public class RemoteControlView extends View {
         matrix.reset();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -181,13 +186,13 @@ public class RemoteControlView extends View {
         return (float) (getRad(RockerCircleX, RockerCircleY, xTouch, yTouch) * 180f / Math.PI);
     }
 
-    public void getXY(float x, float y, float R, double rad) {
+    public void getXY(float x, float y, float r, double rad) {
         //获取圆周运动的X坐标
-//        posX = (float) (R * Math.cos(rad)) + x;
-        posX = (float) (R * Math.cos(rad)) + x;
+//        posX = (float) (r * Math.cos(rad)) + x;
+        posX = (float) (r * Math.cos(rad)) + x;
         //获取圆周运动的Y坐标
-//        posY = (float) (R * Math.sin(rad)) + y;
-        posY = (float) (R * Math.sin(rad)) + y;
+//        posY = (float) (r * Math.sin(rad)) + y;
+        posY = (float) (r * Math.sin(rad)) + y;
     }
 
     //得到两点之间的弧度
@@ -208,6 +213,20 @@ public class RemoteControlView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+    }
+
+    // 背景绘制类
+    public static class RemoteViewBg {
+        private Bitmap bitmapBg;
+
+        RemoteViewBg(Bitmap bitmap) {
+            bitmapBg = bitmap;
+        }
+
+        //游戏背景的绘图函数
+        void draw(Canvas canvas, Paint paint, Rect src0, Rect dst0) {
+            canvas.drawBitmap(bitmapBg, src0, dst0, paint);
+        }
     }
 }
 

@@ -3,10 +3,10 @@ package com.liang.lcommon.exts;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.liang.lcommon.activity.item.ActivityStartAnimDemo;
-import com.liang.lcommon.activity.item.CircleSeekBarDemo;
-import com.liang.lcommon.activity.item.RockerActivity;
-import com.liang.lcommon.activity.item.SettingViewDemo;
+import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
+import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
+import com.liang.lcommon.activity.demo.RockerActivityDemo;
+import com.liang.lcommon.activity.demo.SettingViewDemo;
 
 /**
  * @author : Amarao
@@ -28,7 +28,7 @@ public class LRouter {
     }
 
     public static void startRockerActivity(Activity activity) {
-        RockerActivity.startActivity(activity);
+        RockerActivityDemo.startActivity(activity);
     }
 
     public static void startSettingViewActivity(Activity activity) {

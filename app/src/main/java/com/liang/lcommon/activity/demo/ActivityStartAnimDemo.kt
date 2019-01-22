@@ -1,13 +1,10 @@
-package com.liang.lcommon.activity.item
+package com.liang.lcommon.activity.demo
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseActivity
 import com.liang.lcommon.activity.LBaseItemBean
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter

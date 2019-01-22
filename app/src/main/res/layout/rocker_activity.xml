@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.item.RockerActivity">
+    tools:context=".activity.demo.RockerActivityDemo">
 
     <!--数据显示-->
     <LinearLayout
         android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp180"
         android:layout_alignParentRight="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_above="@id/rockerXY_View">
 
         <TextView
             android:layout_width="match_parent"
@@ -64,34 +65,35 @@
     </LinearLayout>
 
     <!--摇杆-->
-    <com.liang.lcommon.view.remoteview.RemoteControlView
+    <com.liang.lcommon.view.LRockerView
         android:id="@+id/remoteControlView"
         android:layout_width="@dimen/dp200"
-        android:layout_height="@dimen/dp200" />
+        android:layout_height="@dimen/dp200"
+        android:layout_above="@id/rockerXY_View" />
 
-    <com.liang.lcommon.view.MyRockerView
+    <com.liang.lcommon.view.LRockerViewV2
         android:id="@+id/rockerXY_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="25dp"
-        rocker:areaBackground="@drawable/rocker_base"
-        rocker:rockerBackground="@drawable/rocker"
-        rocker:rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
-        rocker:rockerScale="0.5"
-        rocker:rockerSpeedLevel="10" />
+        rocker:lrocker_areaBackground="@drawable/rocker_base"
+        rocker:lrocker_rockerBackground="@drawable/rocker"
+        rocker:lrocker_rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
+        rocker:lrocker_rockerScale="0.5"
+        rocker:lrocker_rockerSpeedLevel="10" />
 
-    <com.liang.lcommon.view.MyRockerView
+    <com.liang.lcommon.view.LRockerViewV2
         android:id="@+id/rockerZ_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="25dp"
-        rocker:areaBackground="@drawable/rocker_base"
-        rocker:rockerBackground="@drawable/rocker"
-        rocker:rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
-        rocker:rockerScale="0.5"
-        rocker:rockerSpeedLevel="10" />
+        rocker:lrocker_areaBackground="@drawable/rocker_base"
+        rocker:lrocker_rockerBackground="@drawable/rocker"
+        rocker:lrocker_rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
+        rocker:lrocker_rockerScale="0.5"
+        rocker:lrocker_rockerSpeedLevel="10" />
 
 </RelativeLayout>
