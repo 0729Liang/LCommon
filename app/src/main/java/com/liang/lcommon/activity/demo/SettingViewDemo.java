@@ -33,7 +33,7 @@ public class SettingViewDemo extends LAppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting_view);
+        setContentView(R.layout.demo_setting_view);
 
         initMyView();
         //初始化数据

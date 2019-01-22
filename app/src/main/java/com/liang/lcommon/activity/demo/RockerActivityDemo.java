@@ -2,7 +2,6 @@ package com.liang.lcommon.activity.demo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -49,7 +48,7 @@ public class RockerActivityDemo extends LAppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rocker_activity);
+        setContentView(R.layout.demo_rocker_activity);
         //界面初始化
         initView();
         //摇杆初始化

@@ -10,7 +10,7 @@ import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.lcommon.utils.LActivityAnimX
 import com.liang.lcommon.utils.LResourceX
-import kotlinx.android.synthetic.main.activity_start_anim.*
+import kotlinx.android.synthetic.main.demo_activity_start_anim.*
 
 class ActivityStartAnimDemo : LAppActivity() {
 
@@ -106,7 +106,7 @@ class ActivityStartAnimDemo : LAppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start_anim)
+        setContentView(R.layout.demo_activity_start_anim)
         mType = intent.getIntExtra(ANIM_TYPE, -1)
         if (mType != -1) {
             contentPanel.setBackgroundColor(LResourceX.getColor(this, R.color.redPrimary))

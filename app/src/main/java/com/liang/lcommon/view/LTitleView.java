@@ -34,7 +34,7 @@ public class LTitleView extends LinearLayout {
 
     public LTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.comm_widget_title, this);
+        inflate(context, R.layout.lsetting_title, this);
         if (isInEditMode()) {
             return;
         }
