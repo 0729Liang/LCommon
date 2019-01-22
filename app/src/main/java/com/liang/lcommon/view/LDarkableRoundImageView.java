@@ -10,7 +10,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 /**
  * CreateAt : 2019/1/4
- * Describe :
+ * Describe : 点击效果，按压图片变灰色
  *
  * @author chendong
  */
