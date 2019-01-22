@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.demo.LKvMgrDemo">
+
+    <RadioGroup
+        android:id="@+id/radioGroupSaveType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp10"
+        android:background="@color/gray_bg"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/lkvmgr_memory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="写入内存" />
+
+        <RadioButton
+            android:id="@+id/lkvmgr_mmkv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="通过mmkv写入本地" />
+
+        <RadioButton
+            android:id="@+id/lkvmgr_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="通过SharePerfence写入本地" />
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/radioGroupWriterType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp10"
+        android:background="@color/gray_bg"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupSaveType">
+
+        <RadioButton
+            android:id="@+id/lkvmgr_string"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="字符" />
+
+        <RadioButton
+            android:id="@+id/lkvmgr_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="数字" />
+
+        <RadioButton
+            android:id="@+id/lkvmgr_boolean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="布尔true" />
+
+        <RadioGroup
+            android:id="@+id/lkvmgr_boolean_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <RadioButton
+                android:id="@+id/lkvmgr_boolean_type_true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="true"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/lkvmgr_boolean_type_false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="false" />
+        </RadioGroup>
+
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:hint="请输入要保存的内容"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupWriterType" />
+
+
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        app:layout_constraintTop_toBottomOf="@id/contentEditText" />
+
+    <Button
+        android:id="@+id/readBtn"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:text="读取"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/clearBtn"
+        app:layout_constraintTop_toBottomOf="@id/confirmBtn" />
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="@dimen/dp0"
+        android:layout_height="wrap_content"
+        android:text="清楚"
+        app:layout_constraintLeft_toRightOf="@id/readBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirmBtn" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="读取内容:"
+        app:layout_constraintTop_toBottomOf="@id/clearBtn" />
+
+    <TextView
+        android:id="@+id/contentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@color/color5DCFF9"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/readBtn"
+        tools:text="true" />
+
+
+</android.support.constraint.ConstraintLayout>

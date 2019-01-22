@@ -6,7 +6,6 @@ import android.util.SparseArray;
 
 import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.utils.LJsonX;
-import com.liang.lcommon.utils.LLogX;
 import com.tencent.mmkv.MMKV;
 
 import java.util.HashMap;
@@ -148,7 +147,6 @@ public class LKVMgr implements LIMgr {
      */
     public static IKV getInstance(LKVMgrParams params) {
         int strategy = params.getStrategy();
-        LLogX.e(strategy);
         IKV ikv = sIKVSparseArray.get(strategy);
         if (ikv != null) {
             return ikv;
@@ -169,12 +167,34 @@ public class LKVMgr implements LIMgr {
         return ikv;
     }
 
+
+    /**
+     * @return 获取 mmkv key-value 操作
+     */
+    public static LKVMgr.IKV mmkv() {
+        return getInstance(LKVMgrParams.STRATEGY_MMKV);
+    }
+
+    /**
+     * @return 获取 SharePreference key-value 操作
+     */
+    public static LKVMgr.IKV sp() {
+        return getInstance(LKVMgrParams.STRATEGY_SP);
+    }
+
+    /**
+     * @return 获取内存 key-value 操作
+     */
+    public static LKVMgr.IKV memory() {
+        return getInstance(LKVMgrParams.STRATEGY_MEMORY);
+    }
+
     // 基于 Tencent MMKV 的实现
     static class MMKVImpl implements IKV {
 
         MMKVImpl(Context context) {
             String initialize = MMKV.initialize(context);
-            LLogX.e("path = " + initialize);
+            //LLogX.e("path = " + initialize);
         }
 
         private MMKV kv() {
