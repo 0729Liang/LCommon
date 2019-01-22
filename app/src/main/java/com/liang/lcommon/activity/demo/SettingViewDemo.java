@@ -21,7 +21,7 @@ public class SettingViewDemo extends LAppActivity {
     }
 
     public static LBaseItemBean getItem() {
-        String intro = "设置界面常用的按钮\n标题按钮(Title)\n箭头按钮(Arrow)\n选择按钮(Switch)";
+        String intro = "设置界面按钮\n标题按钮(Title)\n箭头按钮(Arrow)\n选择按钮(Switch)";
         int src = R.mipmap.demo_setting_view;
         return new LBaseItemBean(intro, src);
     }

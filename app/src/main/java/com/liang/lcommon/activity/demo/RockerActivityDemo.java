@@ -19,7 +19,7 @@ public class RockerActivityDemo extends LAppActivity {
     }
 
     public static LBaseItemBean getItem() {
-        String intro = "虚拟摇杆\n1.仿王者荣耀摇杆\n2.自定义虚拟摇杆 摇杆方向可设置为二四八个方向，锚点偏移级别 0-9，可监听角度变化";
+        String intro = "虚拟摇杆\n1.仿王者荣耀摇杆\n2.自定义虚拟摇杆\n  锚点偏移级别 0-9\n  可监听角度变化\n摇杆方向可设置为二四八个方向";
         int src = R.mipmap.demo_rocker_view;
         return new LBaseItemBean(intro, src);
     }

@@ -22,7 +22,7 @@ class CircleSeekBarDemo : LAppActivity() {
 
         @JvmStatic
         fun getItem(): LBaseItemBean {
-            val intro = "自定义SeekBar，支持环形，圆形;\n锚点可隐藏，可修改位置;\n可以监听缓冲进度"
+            val intro = "自定义SeekBar\n支持环形，圆形;\n锚点可隐藏，可修改位置;\n可以监听缓冲进度"
             val src = R.mipmap.demo_circle_seek_bar
             return LBaseItemBean(intro, src)
         }
