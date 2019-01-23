@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
 /**
  * @author : Amarao
  * CreateAt : 10:44 2019/1/22
- * Describe :
+ * Describe : 基类
  */
 public class LAppActivity extends AppCompatActivity {
 

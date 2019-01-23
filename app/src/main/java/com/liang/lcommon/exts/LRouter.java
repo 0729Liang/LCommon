@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
 import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
-import com.liang.lcommon.activity.demo.LKvMgrDemo;
+import com.liang.lcommon.activity.demo.LKVMgrDemo;
 import com.liang.lcommon.activity.demo.RockerActivityDemo;
 import com.liang.lcommon.activity.demo.SettingViewDemo;
 
@@ -37,6 +37,6 @@ public class LRouter {
     }
 
     public static void startLKVMgrDemoActivity(Activity activity) {
-        LKvMgrDemo.startActivity(activity);
+        LKVMgrDemo.startActivity(activity);
     }
 }

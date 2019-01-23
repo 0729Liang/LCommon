@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
-import android.widget.EditText
 import com.blankj.utilcode.util.ToastUtils
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
@@ -16,13 +15,13 @@ import com.liang.lcommon.utils.LEmptyX
 import com.liang.lcommon.utils.LLogX
 import kotlinx.android.synthetic.main.demo_lkv_mgr.*
 
-class LKvMgrDemo : LAppActivity() {
+class LKVMgrDemo : LAppActivity() {
 
     companion object {
 
         @JvmStatic
         fun startActivity(activity: Activity) {
-            activity.startActivity(Intent(activity, LKvMgrDemo::class.java))
+            activity.startActivity(Intent(activity, LKVMgrDemo::class.java))
         }
 
         @JvmStatic
@@ -37,16 +36,18 @@ class LKvMgrDemo : LAppActivity() {
             return LBaseItemBean.ClickEvent { LRouter.startLKVMgrDemoActivity(it) }
         }
 
-        val LKVMGR_SAVE_TYPE = "LKVMGR_SAVE_TYPE";// 0  1 2
-        val LKVMGR_WRITER_TYPE = "LKVMGR_WRITER_TYPE"; // 0 1 2
-        val LKVMGR_CONTENT = "LKVMGR_CONTENT";
+        val LKVMGR_SAVE_TYPE = "LKVMGR_SAVE_TYPE";// 保存方式
+        val LKVMGR_WRITER_TYPE = "LKVMGR_WRITER_TYPE"; // 保存类型
+        val LKVMGR_CONTENT = "LKVMGR_CONTENT"; // 保存内容
 
+        // 保存方式：内存、mmkv、shareperfence
         enum class LKVMgrSaveType constructor(val value: Int) {
             SAVE_ON_MEMORY(0),
             SAVE_ON_MMKV(1),
             SAVE_ON_SP(2),
         }
 
+        // 保存内容：字符，数字，boolean
         enum class LKVMgrWriteType constructor(val value: Int) {
             WRITE_STRING(0),
             WRITE_NUMBER(1),
@@ -78,7 +79,6 @@ class LKvMgrDemo : LAppActivity() {
             radioGroupWriterType.check(R.id.lkvmgr_string)
             ToastUtils.showShort("清除成功")
         }
-
     }
 
     private fun restoryState() {
@@ -107,24 +107,23 @@ class LKvMgrDemo : LAppActivity() {
         }
     }
 
+    // 保存类型监听
     fun onSaveTypeListener() {
-        LLogX.e("onSaveTypeListener1")
-        var type = 0;
+        var type = LKVMgrSaveType.SAVE_ON_MEMORY.value;
         radioGroupSaveType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.lkvmgr_memory -> type = LKVMgrSaveType.SAVE_ON_MEMORY.value
                 R.id.lkvmgr_mmkv -> type = LKVMgrSaveType.SAVE_ON_MMKV.value
                 R.id.lkvmgr_sp -> type = LKVMgrSaveType.SAVE_ON_SP.value
             }
-            LLogX.e("onSaveTypeListener2")
             LKVMgr.getInstance().putInt(LKVMGR_SAVE_TYPE, type)
         }
-
+        LKVMgr.getInstance().putInt(LKVMGR_SAVE_TYPE, type)
     }
 
+    // 写入类型监听
     fun onWriterTypeListener() {
-        var type = 0;
-
+        var type = LKVMgrWriteType.WRITE_STRING.value;
         radioGroupWriterType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.lkvmgr_string -> {
@@ -149,10 +148,11 @@ class LKvMgrDemo : LAppActivity() {
                 }
             }
             LKVMgr.getInstance().putInt(LKVMGR_WRITER_TYPE, type)
-
         }
+        LKVMgr.getInstance().putInt(LKVMGR_WRITER_TYPE, type)
     }
 
+    // 布尔值监听
     fun onBooleanListener() {
         lkvmgr_boolean_type.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -163,10 +163,12 @@ class LKvMgrDemo : LAppActivity() {
         }
     }
 
+    // 判断布尔值
     fun getWriterBooleanVaule(): Boolean {
         return lkvmgr_boolean_type.checkedRadioButtonId.equals(R.id.lkvmgr_boolean_type_true)
     }
 
+    // 写入
     fun writeContent() {
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, 0)
@@ -210,6 +212,7 @@ class LKvMgrDemo : LAppActivity() {
         ToastUtils.showShort("保存成功")
     } // onSaveType
 
+    // 读取
     fun readContent() {
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, 0)
@@ -252,6 +255,5 @@ class LKvMgrDemo : LAppActivity() {
         }
 
     } // readContent
-
 
 }

@@ -24,10 +24,8 @@ import java.util.Set;
  * SparseArray：https://www.cnblogs.com/RGogoing/p/5095168.html
  */
 public class LKVMgr implements LIMgr {
-    private static final int              STRATEGY_MMKV   = 0; // tencent mmvk 实现 （保存到本地）
-    private static final int              STRATEGY_SP     = 1; // sharePerfence 实现 （保存到本地）
-    private static final int              STRATEGY_MEMORY = 2; // hasmap实现（保存到内存）
-    private static       SparseArray<IKV> sIKVSparseArray = new SparseArray<>();
+
+    private static SparseArray<IKV> sIKVSparseArray = new SparseArray<>();
 
     private LKVMgr() {
     }
@@ -192,14 +190,19 @@ public class LKVMgr implements LIMgr {
     // 基于 Tencent MMKV 的实现
     static class MMKVImpl implements IKV {
 
+        private final String mInitialize;
+
         MMKVImpl(Context context) {
-            String initialize = MMKV.initialize(context);
-            //LLogX.e("path = " + initialize);
+            mInitialize = MMKV.initialize(context);
         }
 
         private MMKV kv() {
             //MMKV 提供一个全局的实例，可以直接使用
             return MMKV.defaultMMKV();
+        }
+
+        public String getMmkvPath() {
+            return mInitialize;
         }
 
         @Override

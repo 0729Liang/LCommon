@@ -29,7 +29,7 @@ class LBaseActivity : LAppActivity() {
 
         addItem(RockerActivityDemo.getItem(), RockerActivityDemo.getClickEvent())
 
-        addItem(LKvMgrDemo.getItem(), LKvMgrDemo.getClickEvent())
+        addItem(LKVMgrDemo.getItem(), LKVMgrDemo.getClickEvent())
     }
 
     private fun initView() {
