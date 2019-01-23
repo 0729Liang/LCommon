@@ -12,6 +12,12 @@ import com.liang.lcommon.exts.LRouter;
 import com.liang.lcommon.utils.LLogX;
 import com.liang.lcommon.view.LRockerViewV2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 public class RockerActivityDemo extends LAppActivity {
 
     public static void startActivity(Activity activity) {
@@ -55,6 +61,8 @@ public class RockerActivityDemo extends LAppActivity {
         initMyView();
         //摇杆点击事件
         initMyClick();
+        //创建列表并添加数据
+
     }
 
     //界面初始化
