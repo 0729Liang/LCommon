@@ -4,11 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.liang.lcommon.adapter.LJsonAdapter;
-import com.liang.lcommon.config.JsonAdapterImpl;
 import com.liang.lcommon.config.LAppBuildConfig;
 import com.liang.lcommon.mgrs.LKVMgr;
-import com.liang.lcommon.utils.LSizeUtils;
-import com.liang.lcommon.utils.LSizeX;
 
 /**
  * @author : Amarao
@@ -28,7 +25,7 @@ public class LCommon {
         exports.app = application;
         exports.appConfig = new LAppBuildConfig(buildClazz);
         exports.kvStrategy = LKVMgr.LKVMgrParams.STRATEGY_MMKV;
-        exports.jsonParser = new JsonAdapterImpl();
+        exports.jsonParser = LJsonAdapter.getAdapter();
     }
 
     public static Exports getExports() {

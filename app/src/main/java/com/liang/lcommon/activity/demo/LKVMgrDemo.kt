@@ -81,9 +81,10 @@ class LKVMgrDemo : LAppActivity() {
         }
     }
 
+    // 还原状态
     private fun restoryState() {
-        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
-        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, 0)
+        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, LKVMgrSaveType.SAVE_ON_MEMORY.value)
+        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, LKVMgrWriteType.WRITE_STRING.value)
 
         when (mSaveType) {
             LKVMgrSaveType.SAVE_ON_MEMORY.value -> radioGroupSaveType.check(R.id.lkvmgr_memory)
@@ -118,7 +119,6 @@ class LKVMgrDemo : LAppActivity() {
             }
             LKVMgr.getInstance().putInt(LKVMGR_SAVE_TYPE, type)
         }
-        LKVMgr.getInstance().putInt(LKVMGR_SAVE_TYPE, type)
     }
 
     // 写入类型监听
@@ -129,7 +129,7 @@ class LKVMgrDemo : LAppActivity() {
                 R.id.lkvmgr_string -> {
                     type = LKVMgrWriteType.WRITE_STRING.value
                     lkvmgr_boolean_type.visibility = View.GONE
-                    contentEditText.inputType = InputType.TYPE_NULL
+                    contentEditText.inputType = InputType.TYPE_CLASS_TEXT
                     contentEditText.visibility = View.VISIBLE
                     contentEditText.setText("")
                 }
@@ -149,7 +149,6 @@ class LKVMgrDemo : LAppActivity() {
             }
             LKVMgr.getInstance().putInt(LKVMGR_WRITER_TYPE, type)
         }
-        LKVMgr.getInstance().putInt(LKVMGR_WRITER_TYPE, type)
     }
 
     // 布尔值监听
@@ -214,14 +213,16 @@ class LKVMgrDemo : LAppActivity() {
 
     // 读取
     fun readContent() {
-        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
-        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, 0)
+        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, LKVMgrSaveType.SAVE_ON_MEMORY.value)
+        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, LKVMgrWriteType.WRITE_STRING.value)
+
+
 
         when (mSaveType) {
             LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 when (mWriteType) {
                     LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.memory().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.memory().getFloat(LKVMGR_CONTENT, mContentText.toFloat()).toString()
+                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.memory().getFloat(LKVMGR_CONTENT, 0f).toString()
                     LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         mContentText = LKVMgr.memory().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
@@ -230,7 +231,7 @@ class LKVMgrDemo : LAppActivity() {
             LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 when (mWriteType) {
                     LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.mmkv().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.mmkv().getFloat(LKVMGR_CONTENT, mContentText.toFloat()).toString()
+                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.mmkv().getFloat(LKVMGR_CONTENT, 0f).toString()
                     LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         mContentText = LKVMgr.mmkv().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
@@ -239,9 +240,10 @@ class LKVMgrDemo : LAppActivity() {
             LKVMgrSaveType.SAVE_ON_SP.value -> {
                 when (mWriteType) {
                     LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.sp().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.sp().getFloat(LKVMGR_CONTENT, mContentText.toFloat()).toString()
+                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.sp().getFloat(LKVMGR_CONTENT, 0f).toString()
                     LKVMgrWriteType.WRITE_BOOLEAN.value -> {
-                        mContentText = LKVMgr.sp().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
+                        LKVMgr.sp().getBool(LKVMGR_CONTENT, getWriterBooleanVaule())
+                        //mContentText = LKVMgr.sp().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
                 }
             }
