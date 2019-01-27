@@ -11,7 +11,6 @@ import com.liang.lcommon.adapter.LJsonAdapter;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
 import com.liang.lcommon.mgrs.LKVMgr;
-import com.liang.lcommon.utils.LLogX;
 import com.liang.lcommon.view.LRockerViewV2;
 import com.march.common.exts.LogX;
 
@@ -70,9 +69,9 @@ public class RockerActivityDemo extends LAppActivity {
 //        for (Map.Entry<String,Personal> entry:map.entrySet()){
 //            //Personal value = entry.getValue();
 //            String value = entry.getValue().toString();
-//            LLogX.e("name1 = "+ value);
+//            LogX.e("name1 = "+ value);
 //            Personal personal = LJsonAdapter.getAdapter().toObj(value, Personal.class);
-//            LLogX.e("name = "+ personal.getName());
+//            LogX.e("name = "+ personal.getName());
 //        }
         String f1 = "QQQ";
         String f2 = "AAA";
@@ -80,14 +79,15 @@ public class RockerActivityDemo extends LAppActivity {
         Personal bb = new Personal("bb", 22);
         Personal cc = new Personal("cc", 33);
         List<Personal> list = new ArrayList<>();
-        Map<String, Personal> map1 = new HashMap<>();
+        Map<String, Personal> m1 = new HashMap<>();
         Map<Integer, Personal> m2 = new HashMap<>();
-        map1.put("B1", aa);
-        map1.put("B2", bb);
-        map1.put("B3", cc);
+        m1.put("B1", aa);
+        m1.put("B2", bb);
+        m1.put("B3", cc);
         m2.put(1, aa);
         m2.put(2, bb);
         m2.put(3, cc);
+
         list.add(aa);
         list.add(bb);
         list.add(cc);
@@ -98,64 +98,49 @@ public class RockerActivityDemo extends LAppActivity {
 // {age=22.0, name=bb}
 // {"B2":{"age":22,"name":"bb"},"B3":{"age":33,"name":"cc"},"B1":{"age":11,"name":"aa"}}
 
-        LLogX.e("存入 map");
+        LogX.e("存入 map");
+        LKVMgr.mmkv().putStringKeyMap(f2, m1,Personal.class);
         LKVMgr.mmkv().putMap(f1, m2,Integer.class,Personal.class);
-        //foreachMap(map1);
-        printMap(m2);
 
         String string = LKVMgr.mmkv().getString(f1);
-        LLogX.e("读取 map = " + string);
+        LogX.e("读取 map = " + string);
 
-        Map<String, Personal> map2 = LJsonAdapter.getAdapter().toStringKeyMap(string, Personal.class);
+        Map<String, Personal> map2 = LKVMgr.mmkv().getStingKeyMap(f2,Personal.class);
+        printMap(map2);
+
         Map<Integer, Personal> map3 = LKVMgr.mmkv().getMap(f1,Integer.class,Personal.class);
-
         printMap(map3);
 
     }
 
     private <K, V> void printMap(Map<K, V> map) {
         if (map == null) {
-            LLogX.e("空的啊");
+            LogX.e("空的啊");
             return;
         }
 
         for (Map.Entry<K, V> entry : map.entrySet()) {
             K entryKey = entry.getKey();
             V value = entry.getValue();
-            LogX.e(" key = " + entryKey + " value = " + value);
+
             if (value instanceof Personal) {
-                LogX.e(" value2 : {"
+                LogX.e(" key = " + entryKey +" value2 : {"
                         + " name = " + ((Personal) value).age
                         + " age = " + ((Personal) value).name + " }");
+            }else {
+                LogX.e(" key = " + entryKey + " value = " + value);
             }
         }
     }
 
     private void foreachMap(Map<String, Personal> map2) {
         if (map2 == null) {
-            LLogX.e("空的");
+            LogX.e("空的");
             return;
         }
-        //LinkedTreeMap tm = (LinkedTreeMap) map2;
-//        Iterator it = map2.keySet().iterator();
-//        while (it.hasNext()) {
-//            String key = (String) it.next();
-//            Object o = map2.get(key);
-//            LKVMgr.mmkv().putObj("YML", o);
-//            Personal value = LKVMgr.mmkv().getObj("YML", Personal.class);
-//            LLogX.e("ttt key = " + key + " value : name = " + value.name + " age = " + value.age);
-//        }
 
         for (Map.Entry<String, Personal> entry : map2.entrySet()) {
-            //String s = String.valueOf(entry.getValue());
-            //LLogX.e(" test = " + entry.getValue() + " t2= " + s);
-//            if (personal != null){
-//                LLogX.e("t3 = name = "+personal.name+" age = "+personal.age);
-//            }else {
-//                LLogX.e("空的11");
-//            }
-
-            LLogX.e(" key = " + entry.getKey() + " value : {"
+            LogX.e(" key = " + entry.getKey() + " value : {"
                     + " name = " + entry.getValue().name
                     + " age = " + entry.getValue().age + " }");
         }
@@ -240,8 +225,8 @@ public class RockerActivityDemo extends LAppActivity {
                     directionXY = ("当前方向：右上");
                 }
 
-                LLogX.e("XY轴" + directionXY);
-                LLogX.e("-----------------------------------------------");
+                LogX.e("XY轴" + directionXY);
+                LogX.e("-----------------------------------------------");
                 directionXY_Text.setText(directionXY);
             }
 
@@ -260,7 +245,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void angle(double angle) {
                 angleXY = ("当前角度：" + angle);
-                LLogX.e("XY轴" + angleXY);
+                LogX.e("XY轴" + angleXY);
                 angleXY_Text.setText(angleXY);
             }
 
@@ -274,7 +259,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void onDistanceLevel(int level) {
                 levelXY = ("当前距离级别：" + level);
-                LLogX.e("XY轴" + levelXY);
+                LogX.e("XY轴" + levelXY);
                 levelXY_Text.setText(levelXY);
             }
         });
@@ -292,8 +277,8 @@ public class RockerActivityDemo extends LAppActivity {
                 } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN) {
                     directionZ = ("当前方向：下");
                 }
-                LLogX.e("Z轴" + directionZ);
-                LLogX.e("-----------------------------------------------");
+                LogX.e("Z轴" + directionZ);
+                LogX.e("-----------------------------------------------");
                 directionZ_Text.setText(directionZ);
             }
 
@@ -311,7 +296,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void angle(double angle) {
                 angleZ = ("当前角度：" + angle);
-                LLogX.e("Z轴" + angleZ);
+                LogX.e("Z轴" + angleZ);
                 angleZ_Text.setText(angleZ);
             }
 
@@ -324,7 +309,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void onDistanceLevel(int level) {
                 levelZ = ("当前距离级别：" + level);
-                LLogX.e("Z轴" + levelZ);
+                LogX.e("Z轴" + levelZ);
                 levelZ_Text.setText(levelZ);
             }
         });

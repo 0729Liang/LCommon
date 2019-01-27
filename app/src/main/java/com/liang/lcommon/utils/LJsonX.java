@@ -97,7 +97,7 @@ public class LJsonX {
         if (jsonAdapter == null) {
             return null;
         }
-        return jsonAdapter.toMap2(kJson, vJson, kClazz, vClazz);
+        return jsonAdapter.toMap(kJson, vJson, kClazz, vClazz);
     }
 
 

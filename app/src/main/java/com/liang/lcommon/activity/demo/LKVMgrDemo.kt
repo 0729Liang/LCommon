@@ -16,7 +16,7 @@ import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.lcommon.mgrs.LKVMgr
 import com.liang.lcommon.utils.LEmptyX
-import com.liang.lcommon.utils.LLogX
+import com.march.common.exts.LogX
 import kotlinx.android.synthetic.main.demo_lkv_mgr.*
 import java.util.HashMap
 
@@ -298,18 +298,7 @@ class LKVMgrDemo : LAppActivity() {
                         mContentText = listToString(LKVMgr.mmkv().getList(LKVMGR_CONTENT, Personal::class.java))
                     }
                     LKVMgrWriteType.WRITE_MAP.value -> {
-                        val map = LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java)
-                        val s = LKVMgr.mmkv().getString(LKVMGR_CONTENT)
-                        LLogX.e(s)
-                        val toMap: MutableMap<String, Personal> = LJsonAdapter.getAdapter().toStringKeyMap(s, Personal::class.java)
-                        val g = Gson()
-                        val m: MutableMap<String, Personal> = g.fromJson(s, object : TypeToken<MutableMap<String, Personal>>() {}.type)
-                        val map1 = LJsonAdapter.getAdapter().toStringKeyMap(s,  Personal::class.java)
-                        map1.forEach() {
-                            LLogX.e("name =" + it.value.name)
-                        }
-                       // mContentText = mapToString(map1)
-//                        mContentText = mapToString(LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
+                        mContentText = mapToString(LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
                     }
                 }
             }
@@ -344,22 +333,15 @@ class LKVMgrDemo : LAppActivity() {
 
     } // readContent
 
-    fun <K, V> toMap(json: String, kClazz: Class<K>, vClazz: Class<V>): LinkedTreeMap<K, V> {
-        val sGson = Gson()
-        val fromJson: LinkedTreeMap<K, V> = sGson.fromJson<MutableMap<K, V>>(json, object : TypeToken<LinkedTreeMap<K, V>>() {
 
-        }.type) as LinkedTreeMap<K, V>
-        return fromJson
-    }
-
-    private fun mapToString(map: MutableMap<String, Personal>): String {
+    private fun mapToString(map: Map<String, Personal>?): String {
         if (LEmptyX.isEmpty(map)) {
+            LogX.e("空的")
             return "";
         }
         val build: StringBuilder = StringBuilder()
-        map.forEach { key, value ->
+        map?.forEach { key, value ->
             build.append(key + "-")
-            LLogX.e(value)
             build.append(value.name + "-" + value.age)
             build.append(" ")
         }
@@ -439,13 +421,13 @@ class LKVMgrDemo : LAppActivity() {
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
             LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
-                LKVMgr.memory().putObj(LKVMGR_CONTENT, map)
+                LKVMgr.memory().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
             }
             LKVMgrSaveType.SAVE_ON_MMKV.value -> {
-                LKVMgr.mmkv().putObj(LKVMGR_CONTENT, map)
+                LKVMgr.mmkv().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
             }
             LKVMgrSaveType.SAVE_ON_SP.value -> {
-                LKVMgr.sp().putObj(LKVMGR_CONTENT, map)
+                LKVMgr.sp().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
             }
         }//  when (mSaveType)
         ToastUtils.showShort("保存成功")

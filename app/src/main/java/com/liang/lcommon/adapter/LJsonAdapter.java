@@ -56,13 +56,8 @@ public class LJsonAdapter {
     private Gson sGson = new Gson();
 
     public String toJson(Object object) {
-        String s = sGson.toJson(object);
-        LLogX.e(s);
-        return s;
+        return sGson.toJson(object);
     }
-
-
-
 
     public <T> T toObj(String json, Class<T> cls) {
         return sGson.fromJson(json, cls);
@@ -83,27 +78,21 @@ public class LJsonAdapter {
 
     // TODO: 2019/1/24   map 类型，泛型被擦出，待处理
     // TODO: 2019/1/24   LOG：com.google.gson.internal.LinkedTreeMap cannot be cast to com.liang.lcommon.activity.demo.LKVMgrDemo$Personal
-    public <K, V> Map<K, V> toMap(String json, Class<K> kClazz, Class<V> vClazz) {
+    public <K, V> Map<K, V> toMap2(String json, Class<K> kClazz, Class<V> vClazz) {
         return sGson.fromJson(json, new TypeToken<Map<K, V>>() {
         }.getType());
     }
 
-    public <K, V> LinkedTreeMap<K, V> toLMap(String json, Class<K> kClazz, Class<V> vClazz) {
-        return sGson.fromJson(json, new TypeToken<LinkedTreeMap<K, V>>() {
-        }.getType());
-    }
 
-
-    public <V> Map<String, V> parseMap(String json, Class<V> vClass) {
-        Map<String, V> map = new HashMap<>();
+    public <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
+        Map<K, V> map = new HashMap<>();
         try {
-            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-            Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
-            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                String entryKey = entry.getKey();
-                JsonObject value = (JsonObject) entry.getValue();
-                V value1 = sGson.fromJson(value, vClass);
-                map.put(entryKey, value1);
+            List<K> kList = toList(kJson, kClazz);
+            List<V> vList = toList(vJson, vClazz);
+            for (int i = 0; i < kList.size(); i++) {
+                K k = kList.get(i);
+                V v = vList.get(i);
+                map.put(k, v);
             }
         } catch (Exception e) {
             return null;
@@ -139,15 +128,17 @@ public class LJsonAdapter {
     }
 
 
-    public <K, V> Map<K, V> toMap2(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
-        Map<K, V> map = new HashMap<>();
+
+    public <V> Map<String, V> parseMap(String json, Class<V> vClass) {
+        Map<String, V> map = new HashMap<>();
         try {
-            List<K> kList = toList(kJson, kClazz);
-            List<V> vList = toList(vJson, vClazz);
-            for (int i = 0; i < kList.size(); i++) {
-                K k = kList.get(i);
-                V v = vList.get(i);
-                map.put(k, v);
+            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+            Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
+            for (Map.Entry<String, JsonElement> entry : entrySet) {
+                String entryKey = entry.getKey();
+                JsonObject value = (JsonObject) entry.getValue();
+                V value1 = sGson.fromJson(value, vClass);
+                map.put(entryKey, value1);
             }
         } catch (Exception e) {
             return null;

@@ -669,13 +669,22 @@ public class LKVMgr implements LIMgr {
             return this;
         }
 
+//        @Override
+//        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+//            Object o = mObjectMap.get(key);
+//            if (o != null && o instanceof Map) {
+//                return (Map<K, V>) o;
+//            }
+//            return null;
+//        }
+
         @Override
         public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            Object o = mObjectMap.get(key);
-            if (o != null && o instanceof Map) {
-                return (Map<K, V>) o;
-            }
-            return null;
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            String kJson = getString(mapKey);
+            String vJson = getString(mapValue);
+            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
         }
     }
 }
