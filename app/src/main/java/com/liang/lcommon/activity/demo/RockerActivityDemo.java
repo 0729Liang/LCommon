@@ -7,14 +7,16 @@ import android.widget.TextView;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
+import com.liang.lcommon.adapter.LJsonAdapter;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
+import com.liang.lcommon.mgrs.LKVMgr;
 import com.liang.lcommon.utils.LLogX;
 import com.liang.lcommon.view.LRockerViewV2;
+import com.march.common.exts.LogX;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +65,127 @@ public class RockerActivityDemo extends LAppActivity {
         initMyClick();
         //创建列表并添加数据
 
+        String lkvmgrContent = LKVMgrDemo.Companion.getLKVMGR_CONTENT();
+//        Map<String, Personal> map = LKVMgr.mmkv().getMap(lkvmgrContent, String.class, Personal.class);
+//        for (Map.Entry<String,Personal> entry:map.entrySet()){
+//            //Personal value = entry.getValue();
+//            String value = entry.getValue().toString();
+//            LLogX.e("name1 = "+ value);
+//            Personal personal = LJsonAdapter.getAdapter().toObj(value, Personal.class);
+//            LLogX.e("name = "+ personal.getName());
+//        }
+        String f1 = "QQQ";
+        String f2 = "AAA";
+        Personal aa = new Personal("aa", 11);
+        Personal bb = new Personal("bb", 22);
+        Personal cc = new Personal("cc", 33);
+        List<Personal> list = new ArrayList<>();
+        Map<String, Personal> map1 = new HashMap<>();
+        Map<Integer, Personal> m2 = new HashMap<>();
+        map1.put("B1", aa);
+        map1.put("B2", bb);
+        map1.put("B3", cc);
+        m2.put(1, aa);
+        m2.put(2, bb);
+        m2.put(3, cc);
+        list.add(aa);
+        list.add(bb);
+        list.add(cc);
+
+// {"age":"11","name":"aa"}
+// {age=11, name=aa}
+//{"age":11,"name":"aa"}
+// {age=22.0, name=bb}
+// {"B2":{"age":22,"name":"bb"},"B3":{"age":33,"name":"cc"},"B1":{"age":11,"name":"aa"}}
+
+        LLogX.e("存入 map");
+        LKVMgr.mmkv().putMap(f1, m2,Integer.class,Personal.class);
+        //foreachMap(map1);
+        printMap(m2);
+
+        String string = LKVMgr.mmkv().getString(f1);
+        LLogX.e("读取 map = " + string);
+
+        Map<String, Personal> map2 = LJsonAdapter.getAdapter().toStringKeyMap(string, Personal.class);
+        Map<Integer, Personal> map3 = LKVMgr.mmkv().getMap(f1,Integer.class,Personal.class);
+
+        printMap(map3);
+
+    }
+
+    private <K, V> void printMap(Map<K, V> map) {
+        if (map == null) {
+            LLogX.e("空的啊");
+            return;
+        }
+
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            K entryKey = entry.getKey();
+            V value = entry.getValue();
+            LogX.e(" key = " + entryKey + " value = " + value);
+            if (value instanceof Personal) {
+                LogX.e(" value2 : {"
+                        + " name = " + ((Personal) value).age
+                        + " age = " + ((Personal) value).name + " }");
+            }
+        }
+    }
+
+    private void foreachMap(Map<String, Personal> map2) {
+        if (map2 == null) {
+            LLogX.e("空的");
+            return;
+        }
+        //LinkedTreeMap tm = (LinkedTreeMap) map2;
+//        Iterator it = map2.keySet().iterator();
+//        while (it.hasNext()) {
+//            String key = (String) it.next();
+//            Object o = map2.get(key);
+//            LKVMgr.mmkv().putObj("YML", o);
+//            Personal value = LKVMgr.mmkv().getObj("YML", Personal.class);
+//            LLogX.e("ttt key = " + key + " value : name = " + value.name + " age = " + value.age);
+//        }
+
+        for (Map.Entry<String, Personal> entry : map2.entrySet()) {
+            //String s = String.valueOf(entry.getValue());
+            //LLogX.e(" test = " + entry.getValue() + " t2= " + s);
+//            if (personal != null){
+//                LLogX.e("t3 = name = "+personal.name+" age = "+personal.age);
+//            }else {
+//                LLogX.e("空的11");
+//            }
+
+            LLogX.e(" key = " + entry.getKey() + " value : {"
+                    + " name = " + entry.getValue().name
+                    + " age = " + entry.getValue().age + " }");
+        }
+    }
+
+    class Personal {
+        String name;
+        int    age;
+
+        public Personal(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
     }
 
     //界面初始化

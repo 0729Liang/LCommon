@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
+import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
+import com.google.gson.reflect.TypeToken
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
+import com.liang.lcommon.adapter.LJsonAdapter
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.lcommon.mgrs.LKVMgr
 import com.liang.lcommon.utils.LEmptyX
-import com.liang.lcommon.utils.LJsonX
 import com.liang.lcommon.utils.LLogX
 import kotlinx.android.synthetic.main.demo_lkv_mgr.*
 import java.util.HashMap
@@ -295,7 +298,18 @@ class LKVMgrDemo : LAppActivity() {
                         mContentText = listToString(LKVMgr.mmkv().getList(LKVMGR_CONTENT, Personal::class.java))
                     }
                     LKVMgrWriteType.WRITE_MAP.value -> {
-                        mContentText = mapToString(LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
+                        val map = LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java)
+                        val s = LKVMgr.mmkv().getString(LKVMGR_CONTENT)
+                        LLogX.e(s)
+                        val toMap: MutableMap<String, Personal> = LJsonAdapter.getAdapter().toStringKeyMap(s, Personal::class.java)
+                        val g = Gson()
+                        val m: MutableMap<String, Personal> = g.fromJson(s, object : TypeToken<MutableMap<String, Personal>>() {}.type)
+                        val map1 = LJsonAdapter.getAdapter().toStringKeyMap(s,  Personal::class.java)
+                        map1.forEach() {
+                            LLogX.e("name =" + it.value.name)
+                        }
+                       // mContentText = mapToString(map1)
+//                        mContentText = mapToString(LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
                     }
                 }
             }
@@ -330,14 +344,23 @@ class LKVMgrDemo : LAppActivity() {
 
     } // readContent
 
-    private fun mapToString(map: MutableMap<String, Personal>?): String {
+    fun <K, V> toMap(json: String, kClazz: Class<K>, vClazz: Class<V>): LinkedTreeMap<K, V> {
+        val sGson = Gson()
+        val fromJson: LinkedTreeMap<K, V> = sGson.fromJson<MutableMap<K, V>>(json, object : TypeToken<LinkedTreeMap<K, V>>() {
+
+        }.type) as LinkedTreeMap<K, V>
+        return fromJson
+    }
+
+    private fun mapToString(map: MutableMap<String, Personal>): String {
         if (LEmptyX.isEmpty(map)) {
             return "";
         }
         val build: StringBuilder = StringBuilder()
-        map?.forEach() {
-            build.append(it.key + "-")
-            build.append(it.value.name + "-" + it.value.age)
+        map.forEach { key, value ->
+            build.append(key + "-")
+            LLogX.e(value)
+            build.append(value.name + "-" + value.age)
             build.append(" ")
         }
         return build.toString()
@@ -347,7 +370,7 @@ class LKVMgrDemo : LAppActivity() {
         if (LEmptyX.isEmpty(list)) {
             return "";
         }
-        if (list == null){
+        if (list == null) {
             return ""
         }
         val build: StringBuilder = StringBuilder()

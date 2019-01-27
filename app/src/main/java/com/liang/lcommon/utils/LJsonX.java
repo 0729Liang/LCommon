@@ -2,6 +2,7 @@ package com.liang.lcommon.utils;
 
 import android.text.TextUtils;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.liang.lcommon.adapter.LJsonAdapter;
 import com.liang.lcommon.init.LCommon;
 
@@ -53,16 +54,52 @@ public class LJsonX {
         return jsonAdapter.toList(json, clazz);
     }
 
-    public static <K, V> Map<K, V> toMap(String json, Class<K> kClazz, Class<V> vClazz) {
-        if (TextUtils.isEmpty(json) || kClazz == null || vClazz == null) {
+    public static <V> Map<String, V> toStringKeyMap(String json, Class<V> vClazz) {
+        if (TextUtils.isEmpty(json) || vClazz == null) {
             return null;
         }
         LJsonAdapter jsonAdapter = LCommon.getJsonAdapter();
         if (jsonAdapter == null) {
             return null;
         }
-        return jsonAdapter.toMap(json, kClazz, vClazz);
+        return jsonAdapter.toStringKeyMap(json, vClazz);
     }
+
+
+    public static <K, V> String mapKeyToJson(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
+        if (map == null || kClazz == null || vClazz == null) {
+            return null;
+        }
+        LJsonAdapter jsonAdapter = LCommon.getJsonAdapter();
+        if (jsonAdapter == null) {
+            return null;
+        }
+        return jsonAdapter.mapKeyToJson(map,kClazz,vClazz);
+    }
+
+    public static <K, V> String mapValueToJson(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
+        if (map == null || kClazz == null || vClazz == null) {
+            return null;
+        }
+        LJsonAdapter jsonAdapter = LCommon.getJsonAdapter();
+        if (jsonAdapter == null) {
+            return null;
+        }
+        return jsonAdapter.mapValueToJson(map,kClazz,vClazz);
+    }
+
+    public static <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
+        if (TextUtils.isEmpty(kJson) || TextUtils.isEmpty(vJson)
+                || kClazz == null || vClazz == null) {
+            return null;
+        }
+        LJsonAdapter jsonAdapter = LCommon.getJsonAdapter();
+        if (jsonAdapter == null) {
+            return null;
+        }
+        return jsonAdapter.toMap2(kJson, vJson, kClazz, vClazz);
+    }
+
 
     public static String toJsonString(String json, String def) {
         try {

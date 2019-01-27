@@ -8,6 +8,7 @@ import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.utils.LJsonX;
 import com.tencent.mmkv.MMKV;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,8 @@ import java.util.Set;
 public class LKVMgr implements LIMgr {
 
     private static SparseArray<IKV> sIKVSparseArray = new SparseArray<>();
+    private static String           MAP_KEY         = "_MAP_KEY";
+    private static String           MAP_VALUE       = "_MAP_VALUE";
 
     private LKVMgr() {
     }
@@ -122,9 +125,16 @@ public class LKVMgr implements LIMgr {
 
         <T> List<T> getList(String key, Class<T> clazz);
 
-        <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz);
-
         IKV putObj(String key, Object value);
+
+        // map
+        <V> IKV putStringKeyMap(String key, Map<String, V> map, Class<V> vClass);
+
+        <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz);
+
+        <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz);
+
+        <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz);
     }
 
     /**
@@ -272,11 +282,6 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            return LJsonX.toMap(getString(key), kClazz, vClazz);
-        }
-
-        @Override
         public IKV putInt(String key, int value) {
             kv().putInt(key, value);
             return this;
@@ -316,6 +321,36 @@ public class LKVMgr implements LIMgr {
         public IKV putObj(String key, Object value) {
             kv().putString(key, LJsonX.toJson(value));
             return this;
+        }
+
+
+        @Override
+        public <V> IKV putStringKeyMap(String key, Map<String, V> value, Class<V> vClass) {
+            kv().putString(key, LJsonX.toJson(value));
+            return this;
+        }
+
+        @Override
+        public <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz) {
+            return LJsonX.toStringKeyMap(getString(key), vClazz);
+        }
+
+        @Override
+        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            kv().putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            kv().putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            return this;
+        }
+
+        @Override
+        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            String kJson = getString(mapKey);
+            String vJson = getString(mapValue);
+            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
         }
 
     }
@@ -436,9 +471,34 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            return LJsonX.toMap(getString(key), kClazz, vClazz);
+        public <V> IKV putStringKeyMap(String key, Map<String, V> value, Class<V> vClass) {
+            putString(key, LJsonX.toJson(value));
+            return this;
         }
+
+        @Override
+        public <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz) {
+            return LJsonX.toStringKeyMap(getString(key), vClazz);
+        }
+
+        @Override
+        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            return this;
+        }
+
+        @Override
+        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            String kJson = getString(mapKey);
+            String vJson = getString(mapValue);
+            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
+        }
+
     }
 
     // 基于内存实现
@@ -587,6 +647,26 @@ public class LKVMgr implements LIMgr {
                 return (List<T>) o;
             }
             return null;
+        }
+
+        @Override
+        public <V> IKV putStringKeyMap(String key, Map<String, V> value, Class<V> vClass) {
+            putString(key, LJsonX.toJson(value));
+            return this;
+        }
+
+        @Override
+        public <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz) {
+            return LJsonX.toStringKeyMap(getString(key), vClazz);
+        }
+
+        @Override
+        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
+            String mapKey = key + MAP_KEY;
+            String mapValue = key + MAP_VALUE;
+            putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            return this;
         }
 
         @Override

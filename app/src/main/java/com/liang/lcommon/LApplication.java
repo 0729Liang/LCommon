@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.Utils;
 import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.utils.LLogX;
 import com.liang.lcommon.view.LCircleSeekBar;
+import com.march.common.Common;
 
 /**
  * @author : Amarao
@@ -18,5 +19,6 @@ public class LApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LCommon.init(this, BuildConfig.class);
+        Common.init(this,BuildConfig.class);
     }
 }
