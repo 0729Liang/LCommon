@@ -14,6 +14,7 @@ import java.util.Map;
  * <p>
  * getMapKeyList 得到由Map的 k 组成的 list
  * getMapValueList 得到由Map的 v 组成的list
+ * getMapValueListByKey 通过指定顺序的keyList得到valueList
  * printMap 打印Map的 k v
  */
 public class LMapX {
@@ -34,7 +35,18 @@ public class LMapX {
         return valueList;
     }
 
-    private <K, V> void printMap(Map<K, V> map) {
+    public static <K, V> List<V> getMapValueListByKey(Map<K, V> map, List<K> keyList, Class<K> kClazz, Class<V> vClazz) {
+        List<V> valueList = new ArrayList<>();
+
+        for (K k : keyList) {
+            V v = map.get(k);
+            valueList.add(v);
+        }
+
+        return valueList;
+    }
+
+    public static <K, V> void printMap(Map<K, V> map) {
         if (map == null) {
             return;
         }

@@ -336,7 +336,6 @@ class LKVMgrDemo : LAppActivity() {
 
     private fun mapToString(map: Map<String, Personal>?): String {
         if (LEmptyX.isEmpty(map)) {
-            LogX.e("空的")
             return "";
         }
         val build: StringBuilder = StringBuilder()

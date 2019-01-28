@@ -6,6 +6,7 @@ import android.util.SparseArray;
 
 import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.utils.LJsonX;
+import com.liang.lcommon.utils.LMapX;
 import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
@@ -339,8 +340,12 @@ public class LKVMgr implements LIMgr {
         public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
             String mapKey = key + MAP_KEY;
             String mapValue = key + MAP_VALUE;
-            kv().putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            kv().putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
+            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
+            kv().putString(mapKey, LJsonX.toJson(keyList));
+            kv().putString(mapValue, LJsonX.toJson(valueList));
+            //kv().putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            //kv().putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 
@@ -485,8 +490,12 @@ public class LKVMgr implements LIMgr {
         public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
             String mapKey = key + MAP_KEY;
             String mapValue = key + MAP_VALUE;
-            putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
+            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
+            putString(mapKey, LJsonX.toJson(keyList));
+            putString(mapValue, LJsonX.toJson(valueList));
+            //putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            //putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 
@@ -664,8 +673,12 @@ public class LKVMgr implements LIMgr {
         public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
             String mapKey = key + MAP_KEY;
             String mapValue = key + MAP_VALUE;
-            putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
+            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
+            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
+            putString(mapKey, LJsonX.toJson(keyList));
+            putString(mapValue, LJsonX.toJson(valueList));
+            //putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
+            //putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 

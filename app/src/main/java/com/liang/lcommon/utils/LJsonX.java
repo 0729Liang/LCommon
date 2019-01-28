@@ -74,7 +74,7 @@ public class LJsonX {
         if (jsonAdapter == null) {
             return null;
         }
-        return jsonAdapter.mapKeyToJson(map,kClazz,vClazz);
+        return jsonAdapter.mapKeyToJson(map, kClazz, vClazz);
     }
 
     public static <K, V> String mapValueToJson(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
@@ -85,7 +85,18 @@ public class LJsonX {
         if (jsonAdapter == null) {
             return null;
         }
-        return jsonAdapter.mapValueToJson(map,kClazz,vClazz);
+        return jsonAdapter.mapValueToJson(map, kClazz, vClazz);
+    }
+
+    public static <K, V> String mapValueToJson(Map<K, V> map, List<K> kList, Class<K> kClazz, Class<V> vClazz) {
+        if (map == null || kList == null || kClazz == null || vClazz == null) {
+            return null;
+        }
+        LJsonAdapter jsonAdapter = LCommon.getJsonAdapter();
+        if (jsonAdapter == null) {
+            return null;
+        }
+        return jsonAdapter.mapValueToJson(map, kList, kClazz, vClazz);
     }
 
     public static <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {

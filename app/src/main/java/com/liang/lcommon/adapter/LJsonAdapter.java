@@ -76,14 +76,6 @@ public class LJsonAdapter {
         return list;
     }
 
-    // TODO: 2019/1/24   map 类型，泛型被擦出，待处理
-    // TODO: 2019/1/24   LOG：com.google.gson.internal.LinkedTreeMap cannot be cast to com.liang.lcommon.activity.demo.LKVMgrDemo$Personal
-    public <K, V> Map<K, V> toMap2(String json, Class<K> kClazz, Class<V> vClazz) {
-        return sGson.fromJson(json, new TypeToken<Map<K, V>>() {
-        }.getType());
-    }
-
-
     public <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
         Map<K, V> map = new HashMap<>();
         try {
@@ -127,7 +119,11 @@ public class LJsonAdapter {
         return toJson(valueList);
     }
 
-
+    public <K, V> String mapValueToJson(Map<K, V> map, List<K> kList, Class<K> kClazz, Class<V> vClazz) {
+        //List<V> valueList = LMapX.getMapValueList(map, kClazz, vClazz);
+        List<V> vList = LMapX.getMapValueListByKey(map, kList, kClazz, vClazz);
+        return toJson(vList);
+    }
 
     public <V> Map<String, V> parseMap(String json, Class<V> vClass) {
         Map<String, V> map = new HashMap<>();
@@ -144,5 +140,12 @@ public class LJsonAdapter {
             return null;
         }
         return map;
+    }
+
+    // TODO: 2019/1/24   map 类型，泛型被擦出，待处理
+    // TODO: 2019/1/24   LOG：com.google.gson.internal.LinkedTreeMap cannot be cast to com.liang.lcommon.activity.demo.LKVMgrDemo$Personal
+    public <K, V> Map<K, V> toMap2(String json, Class<K> kClazz, Class<V> vClazz) {
+        return sGson.fromJson(json, new TypeToken<Map<K, V>>() {
+        }.getType());
     }
 }
