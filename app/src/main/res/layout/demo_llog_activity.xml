@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.demo.LLogDemo">
+
+    <ToggleButton
+        android:id="@+id/demoLogChangeLogUtilBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="自己的日志工具（Off）"
+        android:textOn="自己的日志工具（On）" />
+
+    <Button
+        android:id="@+id/demoLogOneLogbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打印一句" />
+
+    <Button
+        android:id="@+id/demoLogTwoLogbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打印两句" />
+
+    <Button
+        android:id="@+id/demoLogThreeLogbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打印三句" />
+</LinearLayout>

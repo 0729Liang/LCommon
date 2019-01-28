@@ -13,7 +13,7 @@ class LBaseActivity : LAppActivity() {
 
     private var clickMap = SparseArray<LBaseItemBean.ClickEvent>()
     private val mList = ArrayList<LBaseItemBean>()
-    private var mAdapter: LBaseAdapter = LBaseAdapter( mList)
+    private var mAdapter: LBaseAdapter = LBaseAdapter(mList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,8 @@ class LBaseActivity : LAppActivity() {
         addItem(RockerActivityDemo.getItem(), RockerActivityDemo.getClickEvent())
 
         addItem(LKVMgrDemo.getItem(), LKVMgrDemo.getClickEvent())
+
+        addItem(LLogDemo.getItem(), LLogDemo.getClickEvent())
     }
 
     private fun initView() {

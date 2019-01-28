@@ -23,7 +23,8 @@
         <activity android:name=".activity.demo.RockerActivityDemo" />
         <activity android:name=".activity.demo.SettingViewDemo" />
         <activity android:name=".activity.demo.CircleSeekBarDemo" />
-        <activity android:name=".activity.demo.LKVMgrDemo"></activity>
+        <activity android:name=".activity.demo.LKVMgrDemo" />
+        <activity android:name=".activity.demo.LLogDemo"></activity>
     </application>
 
 </manifest>
