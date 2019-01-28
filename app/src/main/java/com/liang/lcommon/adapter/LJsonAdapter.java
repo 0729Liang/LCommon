@@ -21,11 +21,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
- * CreateAt : 2018/4/3
- * Describe :
- *
- * @author chendong
+ * @author : Amarao & chendong
+ * CreateAt : 15:27 2018/6/17
+ * Describe : json相关操作(枚举实现单例模式)
+ * <p>
+ * getAdapter 得到LJsonAdapter对象
+ * toJson 转化为json
+ * toObj json转化为object
+ * toList json转化为List
+ * toStringKeyMap json转化为Map<String,V>
+ * toMap json 转化为Map
  */
 public class LJsonAdapter {
 
@@ -63,6 +70,11 @@ public class LJsonAdapter {
         return sGson.fromJson(json, cls);
     }
 
+    /**
+     * @param json list的序列化字符串
+     * @param <T>  T类型
+     * @return List<T>
+     */
     public <T> List<T> toList(String json, Class<T> clazz) {
         List<T> list = new ArrayList<>();
         try {
@@ -76,6 +88,13 @@ public class LJsonAdapter {
         return list;
     }
 
+    /**
+     * @param kJson keyList的序列化结果
+     * @param vJson valueList的序列化结果
+     * @param <K>   k类型
+     * @param <V>   v类型
+     * @return Map<K       ,       V>
+     */
     public <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
         Map<K, V> map = new HashMap<>();
         try {
@@ -99,15 +118,16 @@ public class LJsonAdapter {
             Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
             for (Map.Entry<String, JsonElement> entry : entrySet) {
                 String entryKey = entry.getKey();
-                JsonObject value = (JsonObject) entry.getValue();
-                V value1 = sGson.fromJson(value, vClazz);
-                map.put(entryKey, value1);
+                JsonObject object = (JsonObject) entry.getValue();
+                V value = sGson.fromJson(object, vClazz);
+                map.put(entryKey, value);
             }
         } catch (Exception e) {
             return null;
         }
         return map;
     }
+
 
     public <K, V> String mapKeyToJson(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
         List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
@@ -120,32 +140,8 @@ public class LJsonAdapter {
     }
 
     public <K, V> String mapValueToJson(Map<K, V> map, List<K> kList, Class<K> kClazz, Class<V> vClazz) {
-        //List<V> valueList = LMapX.getMapValueList(map, kClazz, vClazz);
         List<V> vList = LMapX.getMapValueListByKey(map, kList, kClazz, vClazz);
         return toJson(vList);
     }
 
-    public <V> Map<String, V> parseMap(String json, Class<V> vClass) {
-        Map<String, V> map = new HashMap<>();
-        try {
-            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-            Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
-            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                String entryKey = entry.getKey();
-                JsonObject value = (JsonObject) entry.getValue();
-                V value1 = sGson.fromJson(value, vClass);
-                map.put(entryKey, value1);
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return map;
-    }
-
-    // TODO: 2019/1/24   map 类型，泛型被擦出，待处理
-    // TODO: 2019/1/24   LOG：com.google.gson.internal.LinkedTreeMap cannot be cast to com.liang.lcommon.activity.demo.LKVMgrDemo$Personal
-    public <K, V> Map<K, V> toMap2(String json, Class<K> kClazz, Class<V> vClazz) {
-        return sGson.fromJson(json, new TypeToken<Map<K, V>>() {
-        }.getType());
-    }
 }

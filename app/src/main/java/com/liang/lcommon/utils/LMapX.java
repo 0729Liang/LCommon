@@ -19,6 +19,12 @@ import java.util.Map;
  */
 public class LMapX {
 
+    /**
+     * @param map map对象
+     * @param <K> k类型
+     * @param <V> v类型
+     * @return keyList
+     */
     public static <K, V> List<K> getMapKeyList(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
         List<K> keyList = new ArrayList<>();
         for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -27,6 +33,12 @@ public class LMapX {
         return keyList;
     }
 
+    /**
+     * @param map map对象
+     * @param <K> k类型
+     * @param <V> v类型
+     * @return valueList
+     */
     public static <K, V> List<V> getMapValueList(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
         List<V> valueList = new ArrayList<>();
         for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -35,6 +47,13 @@ public class LMapX {
         return valueList;
     }
 
+    /**
+     * @param map     map对象
+     * @param keyList 由map的key组成的keyList
+     * @param <K>     k类型
+     * @param <V>     v类型
+     * @return valueList
+     */
     public static <K, V> List<V> getMapValueListByKey(Map<K, V> map, List<K> keyList, Class<K> kClazz, Class<V> vClazz) {
         List<V> valueList = new ArrayList<>();
 

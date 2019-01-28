@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author : Amarao
+ * @author : Amarao & chendong
  * CreateAt : 13:26 2019/1/17
  * Describe : key-value 管理工具
  * 参考：
@@ -344,8 +344,6 @@ public class LKVMgr implements LIMgr {
             List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
             kv().putString(mapKey, LJsonX.toJson(keyList));
             kv().putString(mapValue, LJsonX.toJson(valueList));
-            //kv().putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            //kv().putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 
@@ -494,8 +492,6 @@ public class LKVMgr implements LIMgr {
             List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
             putString(mapKey, LJsonX.toJson(keyList));
             putString(mapValue, LJsonX.toJson(valueList));
-            //putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            //putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 
@@ -677,8 +673,6 @@ public class LKVMgr implements LIMgr {
             List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
             putString(mapKey, LJsonX.toJson(keyList));
             putString(mapValue, LJsonX.toJson(valueList));
-            //putString(mapKey, LJsonX.mapKeyToJson(map, kClazz, vClazz));
-            //putString(mapValue, LJsonX.mapValueToJson(map, kClazz, vClazz));
             return this;
         }
 
