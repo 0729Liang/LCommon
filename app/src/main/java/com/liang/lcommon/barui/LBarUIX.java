@@ -1,4 +1,4 @@
-package com.liang.lcommon.utils;
+package com.liang.lcommon.barui;
 
 import android.app.Activity;
 import android.content.Context;

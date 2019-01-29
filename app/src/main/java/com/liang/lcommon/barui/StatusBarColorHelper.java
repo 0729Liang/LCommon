@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import com.liang.lcommon.utils.LBarUIX;
 import com.liang.lcommon.utils.LLogX;
 
 
