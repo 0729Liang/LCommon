@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.liang.lcommon.utils.LMapX;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +76,17 @@ public class LJsonAdapter {
     }
 
     /**
+     * 解析泛型对象中包含泛型
+     *
+     * @param json obj的序列化字符串
+     * @param type TypeToken.getParameterized
+     * @return
+     */
+    public <T> T toObj(String json, Type type) {
+        return mGson.fromJson(json, type);
+    }
+
+    /**
      * @param json list的序列化字符串
      * @param <T>  T类型
      * @return List<T>
@@ -87,7 +99,7 @@ public class LJsonAdapter {
      * @param json map的序列化结果
      * @param <K>  k类型
      * @param <V>  v类型
-     * @return Map<K                                                                                                                               ,                                                                                                                               V>
+     * @return Map<K                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               V>
      */
     public <K, V> Map<K, V> toMap(String json, Class<K> kClazz, Class<V> vClazz) {
         return mGson.fromJson(json, TypeToken.getParameterized(Map.class, kClazz, vClazz).getType());
@@ -96,7 +108,7 @@ public class LJsonAdapter {
     /**
      * @param json map的序列化字符串
      * @param <V>  value类型
-     * @return Map<String,V>
+     * @return Map<String   ,   V>
      */
     public <V> Map<String, V> toStringKeyMap(String json, Class<V> vClazz) {
         Map<String, V> map = new HashMap<>();
@@ -138,7 +150,7 @@ public class LJsonAdapter {
      * @param vJson valueList的序列化结果
      * @param <K>   k类型
      * @param <V>   v类型
-     * @return Map<K                                                               ,                                                               V>
+     * @return Map<K                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                               V>
      */
     public <K, V> Map<K, V> toMap(String kJson, String vJson, Class<K> kClazz, Class<V> vClazz) {
         Map<K, V> map = new HashMap<>();
