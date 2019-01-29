@@ -9,7 +9,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.util.Log;
 
-import com.blankj.utilcode.util.Utils;
 import com.liang.lcommon.init.LCommon;
 
 import org.json.JSONArray;
@@ -50,35 +49,41 @@ import javax.xml.transform.stream.StreamSource;
  * 代码：https://github.com/Blankj/AndroidUtilCode
  * 文章：https://blankj.com/2016/07/31/android-utils-code/
  * <p>
- * getConfig               : 获取 log 配置
- * Config.setLogSwitch     : 设置 log 总开关
- * Config.setConsoleSwitch : 设置 log 控制台开关
- * Config.setGlobalTag     : 设置 log 全局 tag
- * Config.setLogHeadSwitch : 设置 log 头部信息开关
- * Config.setLog2FileSwitch: 设置 log 文件开关
- * Config.setDir           : 设置 log 文件存储目录
- * Config.setFilePrefix    : 设置 log 文件前缀
- * Config.setBorderSwitch  : 设置 log 边框开关
- * Config.setConsoleFilter : 设置 log 控制台过滤器
- * Config.setFileFilter    : 设置 log 文件过滤器
- * Config.setStackDeep     : 设置 log 栈深度
- * v                       : tag 为类名的 Verbose 日志
- * vTag                    : 自定义 tag 的 Verbose 日志
- * d                       : tag 为类名的 Debug 日志
- * dTag                    : 自定义 tag 的 Debug 日志
- * i                       : tag 为类名的 Info 日志
- * iTag                    : 自定义 tag 的 Info 日志
- * w                       : tag 为类名的 Warn 日志
- * wTag                    : 自定义 tag 的 Warn 日志
- * e                       : tag 为类名的 Error 日志
- * eTag                    : 自定义 tag 的 Error 日志
- * a                       : tag 为类名的 Assert 日志
- * aTag                    : 自定义 tag 的 Assert 日志
- * file                    : log 到文件
- * json                    : log 字符串之 json
- * xml                     : log 字符串之 xml
+ * getConfig                : 获取 log 配置
+ * Config.setLogSwitch      : 设置 log 总开关
+ * Config.setConsoleSwitch  : 设置 log 控制台开关
+ * Config.setGlobalTag      : 设置 log 全局 tag
+ * Config.setLogHeadSwitch  : 设置 log 头部信息开关
+ * Config.setLog2FileSwitch : 设置 log 文件开关
+ * Config.setDir            : 设置 log 文件存储目录
+ * Config.setFilePrefix     : 设置 log 文件前缀
+ * Config.setBorderSwitch   : 设置 log 边框开关
+ * Config.setSingleTagSwitch: 设置 log 单一 tag 开关（为美化 AS 3.1 的 Logcat）
+ * Config.setConsoleFilter  : 设置 log 控制台过滤器
+ * Config.setFileFilter     : 设置 log 文件过滤器
+ * Config.setStackDeep      : 设置 log 栈深度
+ * Config.setStackOffset    : 设置 log 栈偏移
+ * Config.setSaveDays       : 设置 log 可保留天数
+ * Config.addFormatter      : 新增 log 格式化器
+ * log                      : 自定义 tag 的 type 日志
+ * v                        : tag 为类名的 Verbose 日志
+ * vTag                     : 自定义 tag 的 Verbose 日志
+ * d                        : tag 为类名的 Debug 日志
+ * dTag                     : 自定义 tag 的 Debug 日志
+ * i                        : tag 为类名的 Info 日志
+ * iTag                     : 自定义 tag 的 Info 日志
+ * w                        : tag 为类名的 Warn 日志
+ * wTag                     : 自定义 tag 的 Warn 日志
+ * e                        : tag 为类名的 Error 日志
+ * eTag                     : 自定义 tag 的 Error 日志
+ * a                        : tag 为类名的 Assert 日志
+ * aTag                     : 自定义 tag 的 Assert 日志
+ * file                     : log 到文件
+ * json                     : log 字符串之 json
+ * xml                      : log 字符串之 xml
  */
 public final class LLogX {
+
 
     public static final int V = Log.VERBOSE;
     public static final int D = Log.DEBUG;
@@ -98,27 +103,27 @@ public final class LLogX {
     private static final int JSON = 0x20;
     private static final int XML  = 0x30;
 
-    private static final String FILE_SEP       = System.getProperty("file.separator");
-    private static final String LINE_SEP       = System.getProperty("line.separator");
-    private static final String TOP_CORNER     = "┌";
-    private static final String MIDDLE_CORNER  = "├";
-    private static final String LEFT_BORDER    = "│ ";
-    private static final String BOTTOM_CORNER  = "└";
-    private static final String SIDE_DIVIDER   =
+    private static final String       FILE_SEP       = System.getProperty("file.separator");
+    private static final String       LINE_SEP       = System.getProperty("line.separator");
+    private static final String       TOP_CORNER     = "┌";
+    private static final String       MIDDLE_CORNER  = "├";
+    private static final String       LEFT_BORDER    = "│ ";
+    private static final String       BOTTOM_CORNER  = "└";
+    private static final String       SIDE_DIVIDER   =
             "────────────────────────────────────────────────────────";
-    private static final String MIDDLE_DIVIDER =
+    private static final String       MIDDLE_DIVIDER =
             "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
-    private static final String TOP_BORDER     = TOP_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final String MIDDLE_BORDER  = MIDDLE_CORNER + MIDDLE_DIVIDER + MIDDLE_DIVIDER;
-    private static final String          BOTTOM_BORDER = BOTTOM_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final int             MAX_LEN       = 3000;
+    private static final String       TOP_BORDER     = TOP_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
+    private static final String       MIDDLE_BORDER  = MIDDLE_CORNER + MIDDLE_DIVIDER + MIDDLE_DIVIDER;
+    private static final String       BOTTOM_BORDER  = BOTTOM_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
+    private static final int          MAX_LEN        = 3000;
     @SuppressLint("SimpleDateFormat")
-    private static final Format          FORMAT        = new SimpleDateFormat("MM-dd HH:mm:ss.SSS ");
-    private static final String          NOTHING       = "log nothing";
-    private static final String          NULL          = "null";
-    private static final String          ARGS          = "args";
-    private static final String          PLACEHOLDER   = " ";
-    private static final LLogX.Config CONFIG        = new LLogX.Config();
+    private static final Format       FORMAT         = new SimpleDateFormat("MM-dd HH:mm:ss.SSS ");
+    private static final String       NOTHING        = "log nothing";
+    private static final String       NULL           = "null";
+    private static final String       ARGS           = "args";
+    private static final String       PLACEHOLDER    = " ";
+    private static final LLogX.Config CONFIG         = new LLogX.Config();
     private static ExecutorService sExecutor;
 
     private LLogX() {
@@ -539,9 +544,9 @@ public final class LLogX {
         String versionName = "";
         int versionCode = 0;
         try {
-            PackageInfo pi = Utils.getApp()
+            PackageInfo pi = LCommon.getApp()
                     .getPackageManager()
-                    .getPackageInfo(Utils.getApp().getPackageName(), 0);
+                    .getPackageInfo(LCommon.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -622,7 +627,7 @@ public final class LLogX {
         private boolean mTagIsSpace        = true;  // The global tag is space.
         private boolean mLogHeadSwitch     = true;  // The head's switch of log.
         private boolean mLog2FileSwitch    = false; // The file's switch of log.
-        private boolean mLogBorderSwitch   = true;  // The border's switch of log.
+        private boolean mLogBorderSwitch   = false;  // The border's switch of log.
         private boolean mSingleTagSwitch   = true;  // The single tag of log.
         private int     mConsoleFilter     = V;     // The console's filter of log.
         private int     mFileFilter        = V;     // The file's filter of log.
@@ -632,10 +637,10 @@ public final class LLogX {
         private Config() {
             if (mDefaultDir != null) return;
             if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && Utils.getApp().getExternalCacheDir() != null)
-                mDefaultDir = Utils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                    && LCommon.getApp().getExternalCacheDir() != null)
+                mDefaultDir = LCommon.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
             else {
-                mDefaultDir = Utils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                mDefaultDir = LCommon.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
             }
         }
 

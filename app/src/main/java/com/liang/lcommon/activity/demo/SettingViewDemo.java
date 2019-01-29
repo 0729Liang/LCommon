@@ -11,6 +11,7 @@ import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
+import com.liang.lcommon.utils.LBarUtilsX;
 import com.liang.lcommon.utils.LResourceX;
 import com.liang.lcommon.view.LSettingArrow;
 import com.liang.lcommon.view.LSettingSwitch;
@@ -24,7 +25,7 @@ public class SettingViewDemo extends LAppActivity {
 
     public static LBaseItemBean getItem() {
         String intro = "设置界面按钮\n标题按钮(Title)\n箭头按钮(Arrow)\n选择按钮(Switch)";
-        int src = R.mipmap.demo_setting_view;
+        int src = R.drawable.demo_setting_view;
         return new LBaseItemBean(intro, src);
     }
 

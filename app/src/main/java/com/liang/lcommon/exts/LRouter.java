@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
+import com.liang.lcommon.activity.demo.BarUiDemo;
 import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
 import com.liang.lcommon.activity.demo.LKVMgrDemo;
 import com.liang.lcommon.activity.demo.LLogDemo;
@@ -43,5 +44,9 @@ public class LRouter {
 
     public static void startLLogDemoAcvtvity(Activity activity) {
         LLogDemo.startActivity(activity);
+    }
+
+    public static void startBarUiDemo(Activity activity){
+        BarUiDemo.startActivity(activity);
     }
 }

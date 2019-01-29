@@ -24,7 +24,7 @@ class LLogDemo : LAppActivity() {
         @JvmStatic
         fun getItem(): LBaseItemBean {
             val intro = "日志工具\n摘抄自blank AndroidUtils"
-            val src = R.mipmap.demo_llogx
+            val src = R.drawable.demo_llogx
             return LBaseItemBean(intro, src)
         }
 

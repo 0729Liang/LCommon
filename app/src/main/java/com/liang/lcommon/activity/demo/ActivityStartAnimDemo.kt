@@ -27,7 +27,7 @@ class ActivityStartAnimDemo : LAppActivity() {
 
         fun getItem(): LBaseItemBean {
             val intro = "这是一个Activity的启动动画"
-            val src = R.mipmap.demo_activity_start_anim
+            val src = R.drawable.demo_activity_start_anim
             return LBaseItemBean(intro, src)
         }
 

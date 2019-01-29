@@ -32,7 +32,7 @@ class LKVMgrDemo : LAppActivity() {
         @JvmStatic
         fun getItem(): LBaseItemBean {
             val intro = "文件缓存策略\n通过mmkv 和 sharePerfences实现\n可保存int float String boolean Object等类型;\n可保存到内存或本地;"
-            val src = R.mipmap.demo_lkvmgr
+            val src = R.drawable.demo_lkvmgr
             return LBaseItemBean(intro, src)
         }
 

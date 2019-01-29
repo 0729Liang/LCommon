@@ -33,7 +33,7 @@ ext {
 //    ]
 
     libs = [
-            utilcode            : 'com.blankj:utilcode:1.17.1', // blank工具类集合：https://github.com/Blankj/AndroidUtilCode
+            utilcode            : 'com.blankj:utilcode:1.23.3', // blank工具类集合：https://github.com/Blankj/AndroidUtilCode
             mmkv                : 'com.tencent:mmkv:1.0.16',// tencent key-value 组件:https://github.com/Tencent/MMKV/blob/master/readme_cn.md
             common              : 'com.zfy:common:0.0.9',
             assistant           : 'com.zfy:assistant:0.0.1',

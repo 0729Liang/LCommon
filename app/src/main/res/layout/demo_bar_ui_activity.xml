@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/demoBarRootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.demo.BarUiDemo">
+
+    <Button
+        android:id="@+id/demoBarGetStatusBarHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GetStatusBarHeight"
+        android:textAllCaps="false" />
+
+    <ToggleButton
+        android:id="@+id/demoBarSetStatusBarLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textOff="SetStatusBarLightOff"
+        android:textOn="SetStatusBarLightOn" />
+
+    <ToggleButton
+        android:id="@+id/demoBarSetStatusBarVisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:textOff="SetStatusBarVisibleOff"
+        android:textOn="SetStatusBarVisibleOn" />
+
+    <ToggleButton
+        android:id="@+id/demoBarMarginTopBarHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textOff="MarginTopBarHeightSubtract"
+        android:textOn="MarginTopBarHeightAdd" />
+
+    <ToggleButton
+        android:id="@+id/demoBarSetStatusBarColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:textOff="SetStatusBarColorOff"
+        android:textOn="SetStatusBarColorOn" />
+
+    <Button
+        android:id="@+id/demoBarGetActionBarHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GetActionBarHeight"
+        android:textAllCaps="false" />
+
+    <ToggleButton
+        android:id="@+id/demoBarSetNotificationBarVisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:textOff="SetNotificationBarVisibleOff"
+        android:textOn="SetNotificationBarVisibleOn" />
+
+    <Button
+        android:id="@+id/demoBarIsSupportNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IsSupportNavBar"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/demoBarGetNavBarHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GetNavBarHeight"
+        android:textAllCaps="false" />
+
+
+    <ToggleButton
+        android:id="@+id/demoBarSetNavBarVisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:textOff="SetNavBarVisibleOff"
+        android:textOn="SetNavBarVisibleOn" />
+
+    <ToggleButton
+        android:id="@+id/demoBarSetNavBarColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textAllCaps="false"
+        android:textOff="SetNavBarColorOff"
+        android:textOn="SetNavBarColorOn" />
+
+</LinearLayout>

@@ -11,7 +11,8 @@ import java.util.ArrayList
 
 class LBaseActivity : LAppActivity() {
 
-    private var clickMap = SparseArray<LBaseItemBean.ClickEvent>()
+    //    private var clickMap = SparseArray<LBaseItemBean.ClickEvent>()
+    private var clickMap = ArrayList<LBaseItemBean.ClickEvent>()
     private val mList = ArrayList<LBaseItemBean>()
     private var mAdapter: LBaseAdapter = LBaseAdapter(mList)
 
@@ -32,6 +33,8 @@ class LBaseActivity : LAppActivity() {
         addItem(LKVMgrDemo.getItem(), LKVMgrDemo.getClickEvent())
 
         addItem(LLogDemo.getItem(), LLogDemo.getClickEvent())
+
+        addItem(BarUiDemo.getItem(), BarUiDemo.getClickEvent())
     }
 
     private fun initView() {
@@ -45,17 +48,16 @@ class LBaseActivity : LAppActivity() {
     }
 
     private fun addItem(bean: LBaseItemBean, click: LBaseItemBean.ClickEvent) {
-        val index = mList.size
-        mList.add(bean)
-        mAdapter.notifyItemInserted(index)
-        clickMap.put(index, click)
+        mList.add(0, bean)
+        mAdapter.notifyItemInserted(0)
+        clickMap.add(0, click)
     }
 
     private fun addItem(intro: String, src: Int, click: LBaseItemBean.ClickEvent) {
         val index = mList.size
         val bean = LBaseItemBean(intro, src)
-        mList.add(bean)
-        mAdapter.notifyItemInserted(index)
-        clickMap.put(index, click)
+        mList.add(0,bean)
+        mAdapter.notifyItemInserted(0)
+        clickMap.add(0, click)
     }
 }
