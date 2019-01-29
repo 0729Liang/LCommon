@@ -49,8 +49,8 @@ import static android.Manifest.permission.EXPAND_STATUS_BAR;
  * subtractMarginTopEqualStatusBarHeight: 为 view 减少 MarginTop 为状态栏高度
  * setStatusBarColor                    : 设置状态栏颜色
  * setStatusBarAlpha                    : 设置状态栏透明度
- * setStatusBarColor4Drawer             : 为 DrawerLayout 设置状态栏颜色
- * setStatusBarAlpha4Drawer             : 为 DrawerLayout 设置状态栏透明度
+ * setStatusBarColor4Drawer             : 为 DrawerLayout(侧滑菜单) 设置状态栏颜色
+ * setStatusBarAlpha4Drawer             : 为 DrawerLayout(侧滑菜单) 设置状态栏透明度
  * <p>
  * actionBar：
  * getActionBarHeight                   : 获取 ActionBar 高度
