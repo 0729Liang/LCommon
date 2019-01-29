@@ -76,6 +76,42 @@ public class LJsonAdapter {
      * @return List<T>
      */
     public <T> List<T> toList(String json, Class<T> clazz) {
+        return sGson.fromJson(json,TypeToken.getParameterized(List.class,clazz).getType());
+    }
+
+    /**
+     * @param json valueList的序列化结果
+     * @param <K>   k类型
+     * @param <V>   v类型
+     * @return Map<K       ,       V>
+     */
+    public <K, V> Map<K, V> toMap(String json, Class<K> kClazz, Class<V> vClazz) {
+        return sGson.fromJson(json,TypeToken.getParameterized(Map.class,kClazz,vClazz).getType());
+    }
+
+    public <V> Map<String, V> toStringKeyMap(String json, Class<V> vClazz) {
+        Map<String, V> map = new HashMap<>();
+        try {
+            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
+            Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
+            for (Map.Entry<String, JsonElement> entry : entrySet) {
+                String entryKey = entry.getKey();
+                JsonObject object = (JsonObject) entry.getValue();
+                V value = sGson.fromJson(object, vClazz);
+                map.put(entryKey, value);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return map;
+    }
+
+    /**
+     * @param json list的序列化字符串
+     * @param <T>  T类型
+     * @return List<T>
+     */
+    public <T> List<T> parseList(String json, Class<T> clazz) {
         List<T> list = new ArrayList<>();
         try {
             JsonArray array = new JsonParser().parse(json).getAsJsonArray();
@@ -110,24 +146,6 @@ public class LJsonAdapter {
         }
         return map;
     }
-
-    public <V> Map<String, V> toStringKeyMap(String json, Class<V> vClazz) {
-        Map<String, V> map = new HashMap<>();
-        try {
-            JsonObject obj = new JsonParser().parse(json).getAsJsonObject();
-            Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
-            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                String entryKey = entry.getKey();
-                JsonObject object = (JsonObject) entry.getValue();
-                V value = sGson.fromJson(object, vClazz);
-                map.put(entryKey, value);
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return map;
-    }
-
 
     public <K, V> String mapKeyToJson(Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
         List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);

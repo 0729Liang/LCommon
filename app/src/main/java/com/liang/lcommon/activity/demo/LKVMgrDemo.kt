@@ -393,13 +393,13 @@ class LKVMgrDemo : LAppActivity() {
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
             LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
-                LKVMgr.memory().putObj(LKVMGR_CONTENT, list)
+                LKVMgr.memory().putList(LKVMGR_CONTENT, list)
             }
             LKVMgrSaveType.SAVE_ON_MMKV.value -> {
-                LKVMgr.mmkv().putObj(LKVMGR_CONTENT, list)
+                LKVMgr.mmkv().putList(LKVMGR_CONTENT, list)
             }
             LKVMgrSaveType.SAVE_ON_SP.value -> {
-                LKVMgr.sp().putObj(LKVMGR_CONTENT, list)
+                LKVMgr.sp().putList(LKVMGR_CONTENT, list)
             }
         }//  when (mSaveType)
         ToastUtils.showShort("保存成功")
@@ -420,13 +420,13 @@ class LKVMgrDemo : LAppActivity() {
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
             LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
-                LKVMgr.memory().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
+                LKVMgr.memory().putMap(LKVMGR_CONTENT, map)
             }
             LKVMgrSaveType.SAVE_ON_MMKV.value -> {
-                LKVMgr.mmkv().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
+                LKVMgr.mmkv().putMap(LKVMGR_CONTENT, map)
             }
             LKVMgrSaveType.SAVE_ON_SP.value -> {
-                LKVMgr.sp().putMap(LKVMGR_CONTENT, map,String::class.java,Personal::class.java)
+                LKVMgr.sp().putMap(LKVMGR_CONTENT, map)
             }
         }//  when (mSaveType)
         ToastUtils.showShort("保存成功")

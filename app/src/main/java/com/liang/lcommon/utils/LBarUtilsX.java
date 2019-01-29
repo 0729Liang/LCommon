@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.Utils;
 import com.liang.lcommon.init.LCommon;
 
 import java.lang.reflect.Method;
@@ -83,11 +86,21 @@ public final class LBarUtilsX {
      * @param activity  activity
      * @param isVisible {@code true}: 可见<br>{@code false}: 不可见
      */
-    public static void setStatusBarVisibility(final Activity activity, final boolean isVisible) {
+    public static void setStatusBarVisibility(@NonNull final Activity activity, final boolean isVisible) {
+        setStatusBarVisibility(activity.getWindow(), isVisible);
+    }
+
+    /**
+     * 设置状态栏是否可见
+     *
+     * @param window    The Window
+     * @param isVisible {@code true}: 可见<br>{@code false}: 不可见
+     */
+    public static void setStatusBarVisibility(@NonNull final Window window, final boolean isVisible) {
         if (isVisible) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }
 
@@ -98,9 +111,43 @@ public final class LBarUtilsX {
      * @param activity activity
      * @return {@code true}: 可见<br>{@code false}: 不可见
      */
-    public static boolean isStatusBarVisible(final Activity activity) {
+    public static boolean isStatusBarVisible(@NonNull final Activity activity) {
         int flags = activity.getWindow().getAttributes().flags;
         return (flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0;
+    }
+
+    /**
+     * Set the status bar's light mode.
+     *
+     * @param activity    The activity.
+     * @param isLightMode True to set status bar light mode, false otherwise.
+     */
+    public static void setStatusBarLightMode(@NonNull final Activity activity,
+                                             final boolean isLightMode) {
+        setStatusBarLightMode(activity.getWindow(), isLightMode);
+    }
+
+    /**
+     * Set the status bar's light mode.
+     *
+     * @param window      The window.
+     * @param isLightMode True to set status bar light mode, false otherwise.
+     */
+    public static void setStatusBarLightMode(@NonNull final Window window,
+                                             final boolean isLightMode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decorView = window.getDecorView();
+            if (decorView != null) {
+                int vis = decorView.getSystemUiVisibility();
+                if (isLightMode) {
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else {
+                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                }
+                decorView.setSystemUiVisibility(vis);
+            }
+        }
     }
 
     /**
@@ -109,10 +156,9 @@ public final class LBarUtilsX {
      * @param view view
      */
     public static void addMarginTopEqualStatusBarHeight(@NonNull View view) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         Object haveSetOffset = view.getTag(TAG_OFFSET);
-        if (haveSetOffset != null && (Boolean) haveSetOffset) {
-            return;
-        }
+        if (haveSetOffset != null && (Boolean) haveSetOffset) return;
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         layoutParams.setMargins(layoutParams.leftMargin,
                 layoutParams.topMargin + getStatusBarHeight(),
@@ -121,16 +167,16 @@ public final class LBarUtilsX {
         view.setTag(TAG_OFFSET, true);
     }
 
+
     /**
      * 为 view 减少 MarginTop 为状态栏高度
      *
      * @param view view
      */
     public static void subtractMarginTopEqualStatusBarHeight(@NonNull View view) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         Object haveSetOffset = view.getTag(TAG_OFFSET);
-        if (haveSetOffset == null || !(Boolean) haveSetOffset) {
-            return;
-        }
+        if (haveSetOffset == null || !(Boolean) haveSetOffset) return;
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         layoutParams.setMargins(layoutParams.leftMargin,
                 layoutParams.topMargin - getStatusBarHeight(),
@@ -176,12 +222,40 @@ public final class LBarUtilsX {
                                          @ColorInt final int color,
                                          @IntRange(from = 0, to = 255) final int alpha,
                                          final boolean isDecor) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         hideAlphaView(activity);
         transparentStatusBar(activity);
         addStatusBarColor(activity, color, alpha, isDecor);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param fakeStatusBar 伪造状态栏
+     * @param color         状态栏颜色值
+     */
+    public static void setStatusBarColor(@NonNull final View fakeStatusBar,
+                                         @ColorInt final int color) {
+        setStatusBarColor(fakeStatusBar, color, DEFAULT_ALPHA);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param fakeStatusBar 伪造状态栏
+     * @param color         状态栏颜色值
+     * @param alpha         状态栏透明度，此透明度并非颜色中的透明度
+     */
+    public static void setStatusBarColor(@NonNull final View fakeStatusBar,
+                                         @ColorInt final int color,
+                                         @IntRange(from = 0, to = 255) final int alpha) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
+        fakeStatusBar.setVisibility(View.VISIBLE);
+        transparentStatusBar((Activity) fakeStatusBar.getContext());
+        ViewGroup.LayoutParams layoutParams = fakeStatusBar.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.height = BarUtils.getStatusBarHeight();
+        fakeStatusBar.setBackgroundColor(getStatusBarColor(color, alpha));
     }
 
     /**
@@ -214,44 +288,10 @@ public final class LBarUtilsX {
     public static void setStatusBarAlpha(@NonNull final Activity activity,
                                          @IntRange(from = 0, to = 255) final int alpha,
                                          final boolean isDecor) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         hideColorView(activity);
         transparentStatusBar(activity);
         addStatusBarAlpha(activity, alpha, isDecor);
-    }
-
-    /**
-     * 设置状态栏颜色
-     *
-     * @param fakeStatusBar 伪造状态栏
-     * @param color         状态栏颜色值
-     */
-    public static void setStatusBarColor(@NonNull final View fakeStatusBar,
-                                         @ColorInt final int color) {
-        setStatusBarColor(fakeStatusBar, color, DEFAULT_ALPHA);
-    }
-
-    /**
-     * 设置状态栏颜色
-     *
-     * @param fakeStatusBar 伪造状态栏
-     * @param color         状态栏颜色值
-     * @param alpha         状态栏透明度，此透明度并非颜色中的透明度
-     */
-    public static void setStatusBarColor(@NonNull final View fakeStatusBar,
-                                         @ColorInt final int color,
-                                         @IntRange(from = 0, to = 255) final int alpha) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        fakeStatusBar.setVisibility(View.VISIBLE);
-        transparentStatusBar((Activity) fakeStatusBar.getContext());
-        ViewGroup.LayoutParams layoutParams = fakeStatusBar.getLayoutParams();
-        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = LBarUtilsX.getStatusBarHeight();
-        fakeStatusBar.setBackgroundColor(getStatusBarColor(color, alpha));
     }
 
     /**
@@ -271,14 +311,12 @@ public final class LBarUtilsX {
      */
     public static void setStatusBarAlpha(@NonNull final View fakeStatusBar,
                                          @IntRange(from = 0, to = 255) final int alpha) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         fakeStatusBar.setVisibility(View.VISIBLE);
         transparentStatusBar((Activity) fakeStatusBar.getContext());
         ViewGroup.LayoutParams layoutParams = fakeStatusBar.getLayoutParams();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = LBarUtilsX.getStatusBarHeight();
+        layoutParams.height = BarUtils.getStatusBarHeight();
         fakeStatusBar.setBackgroundColor(Color.argb(alpha, 0, 0, 0));
     }
 
@@ -317,9 +355,7 @@ public final class LBarUtilsX {
                                                 @ColorInt final int color,
                                                 @IntRange(from = 0, to = 255) final int alpha,
                                                 final boolean isTop) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         drawer.setFitsSystemWindows(false);
         transparentStatusBar(activity);
         setStatusBarColor(fakeStatusBar, color, isTop ? alpha : 0);
@@ -364,9 +400,7 @@ public final class LBarUtilsX {
                                                 @NonNull final View fakeStatusBar,
                                                 @IntRange(from = 0, to = 255) final int alpha,
                                                 final boolean isTop) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         drawer.setFitsSystemWindows(false);
         transparentStatusBar(activity);
         setStatusBarAlpha(fakeStatusBar, isTop ? alpha : 0);
@@ -418,25 +452,19 @@ public final class LBarUtilsX {
     private static void hideColorView(final Activity activity) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         View fakeStatusBarView = decorView.findViewWithTag(TAG_COLOR);
-        if (fakeStatusBarView == null) {
-            return;
-        }
+        if (fakeStatusBarView == null) return;
         fakeStatusBarView.setVisibility(View.GONE);
     }
 
     private static void hideAlphaView(final Activity activity) {
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         View fakeStatusBarView = decorView.findViewWithTag(TAG_ALPHA);
-        if (fakeStatusBarView == null) {
-            return;
-        }
+        if (fakeStatusBarView == null) return;
         fakeStatusBarView.setVisibility(View.GONE);
     }
 
     private static int getStatusBarColor(final int color, final int alpha) {
-        if (alpha == 0) {
-            return color;
-        }
+        if (alpha == 0) return color;
         float a = 1 - alpha / 255f;
         int red = (color >> 16) & 0xff;
         int green = (color >> 8) & 0xff;
@@ -474,11 +502,10 @@ public final class LBarUtilsX {
     }
 
     private static void transparentStatusBar(final Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return;
         Window window = activity.getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
             window.getDecorView().setSystemUiVisibility(option);
             window.setStatusBarColor(Color.TRANSPARENT);
@@ -502,6 +529,21 @@ public final class LBarUtilsX {
         if (activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(
                     tv.data, activity.getResources().getDisplayMetrics()
+            );
+        }
+        return 0;
+    }
+
+    /**
+     * Return the action bar's height.
+     *
+     * @return the action bar's height
+     */
+    public static int getActionBarHeight() {
+        TypedValue tv = new TypedValue();
+        if (LCommon.getApp().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(
+                    tv.data, LCommon.getApp().getResources().getDisplayMetrics()
             );
         }
         return 0;
@@ -531,7 +573,7 @@ public final class LBarUtilsX {
     private static void invokePanels(final String methodName) {
         try {
             @SuppressLint("WrongConstant")
-            Object service = LCommon.getApp().getSystemService("statusbar");
+            Object service = Utils.getApp().getSystemService("statusbar");
             @SuppressLint("PrivateApi")
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);
@@ -551,7 +593,7 @@ public final class LBarUtilsX {
      * @return 导航栏高度
      */
     public static int getNavBarHeight() {
-        Resources res = LCommon.getApp().getResources();
+        Resources res = Utils.getApp().getResources();
         int resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId != 0) {
             return res.getDimensionPixelSize(resourceId);
@@ -567,11 +609,21 @@ public final class LBarUtilsX {
      * @param isVisible {@code true}: 可见<br>{@code false}: 不可见
      */
     public static void setNavBarVisibility(final Activity activity, boolean isVisible) {
+        setNavBarVisibility(activity.getWindow(), isVisible);
+    }
+
+    /**
+     * Set the navigation bar's visibility.
+     *
+     * @param window    The window.
+     * @param isVisible True to set notification bar visible, false otherwise.
+     */
+    public static void setNavBarVisibility(@NonNull final Window window, boolean isVisible) {
         if (isVisible) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         } else {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            View decorView = activity.getWindow().getDecorView();
+            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            View decorView = window.getDecorView();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 int visibility = decorView.getSystemUiVisibility();
                 decorView.setSystemUiVisibility(visibility & ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
@@ -584,10 +636,20 @@ public final class LBarUtilsX {
      *
      * @param activity activity
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void setNavBarImmersive(final Activity activity) {
-        View decorView = activity.getWindow().getDecorView();
-        activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    public static void setNavBarImmersive(@NonNull final Activity activity) {
+        setNavBarImmersive(activity.getWindow());
+    }
+
+    /**
+     * Set the navigation bar immersive.
+     *
+     * @param window The window.
+     */
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    public static void setNavBarImmersive(@NonNull final Window window) {
+        View decorView = window.getDecorView();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
@@ -595,18 +657,70 @@ public final class LBarUtilsX {
     }
 
     /**
+     * Set the navigation bar's color.
+     *
+     * @param activity The activity.
+     * @param color    The navigation bar's color.
+     */
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setNavBarColor(@NonNull final Activity activity, @ColorInt final int color) {
+        setNavBarColor(activity.getWindow(), color);
+    }
+
+    /**
+     * Set the navigation bar's color.
+     *
+     * @param window The window.
+     * @param color  The navigation bar's color.
+     */
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setNavBarColor(@NonNull final Window window, @ColorInt final int color) {
+        window.setNavigationBarColor(color);
+    }
+
+    /**
+     * Return the color of navigation bar.
+     *
+     * @param activity The activity.
+     * @return the color of navigation bar
+     */
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    public static int getNavBarColor(@NonNull final Activity activity) {
+        return getNavBarColor(activity.getWindow());
+    }
+
+    /**
+     * Return the color of navigation bar.
+     *
+     * @param window The window.
+     * @return the color of navigation bar
+     */
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    public static int getNavBarColor(@NonNull final Window window) {
+        return window.getNavigationBarColor();
+    }
+
+    /**
+     * Return whether the navigation bar visible.
+     *
+     * @param activity The activity.
+     * @return {@code true}: yes<br>{@code false}: no
+     */
+    public static boolean isNavBarVisible(@NonNull final Activity activity) {
+        return isNavBarVisible(activity.getWindow());
+    }
+
+    /**
      * 判断导航栏是否可见
      *
-     * @param activity activity
+     * @param window The window
      * @return {@code true}: 可见<br>{@code false}: 不可见
      */
-    public static boolean isNavBarVisible(final Activity activity) {
-        boolean isNoLimits = (activity.getWindow().getAttributes().flags
+    public static boolean isNavBarVisible(@NonNull final Window window) {
+        boolean isNoLimits = (window.getAttributes().flags
                 & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) != 0;
-        if (isNoLimits) {
-            return false;
-        }
-        View decorView = activity.getWindow().getDecorView();
+        if (isNoLimits) return false;
+        View decorView = window.getDecorView();
         int visibility = decorView.getSystemUiVisibility();
         return (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
     }

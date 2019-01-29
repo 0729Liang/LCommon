@@ -6,10 +6,8 @@ import android.util.SparseArray;
 
 import com.liang.lcommon.init.LCommon;
 import com.liang.lcommon.utils.LJsonX;
-import com.liang.lcommon.utils.LMapX;
 import com.tencent.mmkv.MMKV;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +22,47 @@ import java.util.Set;
  * mmkv git：https://github.com/Tencent/MMKV
  * mmkv 文档：https://github.com/Tencent/MMKV/wiki/android_tutorial_cn
  * SparseArray：https://www.cnblogs.com/RGogoing/p/5095168.html
+ * <p>
+ * // int
+ * int getInt(String key);
+ * int getInt(String key, int defaultValue);
+ * IKV putInt(String key, int value);
+ * <p>
+ * //float
+ * float getFloat(String key);
+ * float getFloat(String key, float defaultValue);
+ * IKV putFloat(String key, float value);
+ * <p>
+ * //long
+ * long getLong(String key);
+ * long getLong(String key, long defaultValue);
+ * IKV putLong(String key, long value);
+ * <p>
+ * //boolean
+ * boolean getBool(String key);
+ * boolean getBool(String key, boolean defaultValue);
+ * IKV putBool(String key, boolean value);
+ * <p>
+ * //String
+ * String getString(String key);
+ * String getString(String key, String defaultValue);
+ * IKV putString(String key, String value);
+ * <p>
+ * //obj list map set
+ * <T> T getObj(String key, Class<T> clazz);
+ * IKV putObj(String key, Object value);
+ * // list
+ * IKV putList(String key, Object object);
+ * <T> List<T> getList(String key, Class<T> clazz);
+ * // map
+ * IKV putMap(String key, Object object);
+ * <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz);
+ * <V> IKV putStringKeyMap(String key, Map<String, V> map, Class<V> vClass);
+ * <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz);
+ * <p>
+ * //String sets
+ * Set<String> getStringSets(String key);
+ * IKV putStringSets(String key, Set<String> value);
  */
 public class LKVMgr implements LIMgr {
 
@@ -124,16 +163,19 @@ public class LKVMgr implements LIMgr {
         //obj list map
         <T> T getObj(String key, Class<T> clazz);
 
-        <T> List<T> getList(String key, Class<T> clazz);
-
         IKV putObj(String key, Object value);
+
+        // list
+        IKV putList(String key, Object object);
+
+        <T> List<T> getList(String key, Class<T> clazz);
 
         // map
         <V> IKV putStringKeyMap(String key, Map<String, V> map, Class<V> vClass);
 
         <V> Map<String, V> getStingKeyMap(String key, Class<V> vClazz);
 
-        <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz);
+        IKV putMap(String key, Object object);
 
         <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz);
     }
@@ -217,8 +259,30 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
+        public IKV putInt(String key, int value) {
+            kv().putInt(key, value);
+            return this;
+        }
+
+        @Override
+        public int getInt(String key) {
+            return getInt(key, 0);
+        }
+
+        @Override
         public int getInt(String key, int defaultValue) {
             return kv().getInt(key, defaultValue);
+        }
+
+        @Override
+        public IKV putFloat(String key, float value) {
+            kv().putFloat(key, value);
+            return this;
+        }
+
+        @Override
+        public float getFloat(String key) {
+            return getFloat(key, 0);
         }
 
         @Override
@@ -227,8 +291,30 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
+        public IKV putLong(String key, long value) {
+            kv().putLong(key, value);
+            return this;
+        }
+
+        @Override
+        public long getLong(String key) {
+            return getLong(key, 0);
+        }
+
+        @Override
         public long getLong(String key, long defaultValue) {
             return kv().getLong(key, defaultValue);
+        }
+
+        @Override
+        public IKV putBool(String key, boolean value) {
+            kv().putBoolean(key, value);
+            return this;
+        }
+
+        @Override
+        public boolean getBool(String key) {
+            return getBool(key, false);
         }
 
         @Override
@@ -242,29 +328,9 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public Set<String> getStringSets(String key) {
-            HashSet<String> strings = new HashSet<>();
-            return kv().getStringSet(key, strings);
-        }
-
-        @Override
-        public int getInt(String key) {
-            return getInt(key, 0);
-        }
-
-        @Override
-        public float getFloat(String key) {
-            return getFloat(key, 0);
-        }
-
-        @Override
-        public long getLong(String key) {
-            return getLong(key, 0);
-        }
-
-        @Override
-        public boolean getBool(String key) {
-            return getBool(key, false);
+        public IKV putString(String key, String value) {
+            kv().putString(key, value);
+            return this;
         }
 
         @Override
@@ -273,8 +339,20 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
+        public IKV putObj(String key, Object value) {
+            kv().putString(key, LJsonX.toJson(value));
+            return this;
+        }
+
+        @Override
         public <T> T getObj(String key, Class<T> clazz) {
             return LJsonX.toObj(getString(key), clazz);
+        }
+
+        @Override
+        public IKV putList(String key, Object object) {
+            putObj(key, object);
+            return this;
         }
 
         @Override
@@ -283,47 +361,26 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putInt(String key, int value) {
-            kv().putInt(key, value);
+        public IKV putMap(String key, Object object) {
+            putObj(key, object);
+//            String mapKey = key + MAP_KEY;
+//            String mapValue = key + MAP_VALUE;
+//            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
+//            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
+//            kv().putString(mapKey, LJsonX.toJson(keyList));
+//            kv().putString(mapValue, LJsonX.toJson(valueList));
             return this;
         }
 
         @Override
-        public IKV putFloat(String key, float value) {
-            kv().putFloat(key, value);
-            return this;
+        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+//            String mapKey = key + MAP_KEY;
+//            String mapValue = key + MAP_VALUE;
+//            String kJson = getString(mapKey);
+//            String vJson = getString(mapValue);
+//            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
+            return LJsonX.toMap(getString(key), kClazz, vClazz);
         }
-
-        @Override
-        public IKV putLong(String key, long value) {
-            kv().putLong(key, value);
-            return this;
-        }
-
-        @Override
-        public IKV putBool(String key, boolean value) {
-            kv().putBoolean(key, value);
-            return this;
-        }
-
-        @Override
-        public IKV putString(String key, String value) {
-            kv().putString(key, value);
-            return this;
-        }
-
-        @Override
-        public IKV putStringSets(String key, Set<String> value) {
-            kv().putStringSet(key, value);
-            return this;
-        }
-
-        @Override
-        public IKV putObj(String key, Object value) {
-            kv().putString(key, LJsonX.toJson(value));
-            return this;
-        }
-
 
         @Override
         public <V> IKV putStringKeyMap(String key, Map<String, V> value, Class<V> vClass) {
@@ -337,23 +394,15 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
-            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
-            kv().putString(mapKey, LJsonX.toJson(keyList));
-            kv().putString(mapValue, LJsonX.toJson(valueList));
+        public IKV putStringSets(String key, Set<String> value) {
+            kv().putStringSet(key, value);
             return this;
         }
 
         @Override
-        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            String kJson = getString(mapKey);
-            String vJson = getString(mapValue);
-            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
+        public Set<String> getStringSets(String key) {
+            HashSet<String> strings = new HashSet<>();
+            return kv().getStringSet(key, strings);
         }
 
     }
@@ -368,6 +417,12 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
+        public IKV putInt(String key, int value) {
+            mSp.edit().putInt(key, value).apply();
+            return this;
+        }
+
+        @Override
         public int getInt(String key) {
             return getInt(key, 0);
         }
@@ -378,8 +433,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putInt(String key, int value) {
-            mSp.edit().putInt(key, value).apply();
+        public IKV putFloat(String key, float value) {
+            mSp.edit().putFloat(key, value).apply();
             return this;
         }
 
@@ -394,8 +449,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putFloat(String key, float value) {
-            mSp.edit().putFloat(key, value).apply();
+        public IKV putLong(String key, long value) {
+            mSp.edit().putLong(key, value).apply();
             return this;
         }
 
@@ -410,8 +465,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putLong(String key, long value) {
-            mSp.edit().putLong(key, value).apply();
+        public IKV putBool(String key, boolean value) {
+            mSp.edit().putBoolean(key, value).apply();
             return this;
         }
 
@@ -426,8 +481,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putBool(String key, boolean value) {
-            mSp.edit().putBoolean(key, value).apply();
+        public IKV putString(String key, String value) {
+            mSp.edit().putString(key, value).apply();
             return this;
         }
 
@@ -442,20 +497,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putString(String key, String value) {
-            mSp.edit().putString(key, value).apply();
-            return this;
-        }
-
-        @Override
-        public Set<String> getStringSets(String key) {
-            return mSp.getStringSet(key, new HashSet<>());
-        }
-
-        @Override
-        public IKV putStringSets(String key, Set<String> value) {
-            mSp.edit().putStringSet(key, value).apply();
-            return this;
+        public IKV putObj(String key, Object value) {
+            return putString(key, LJsonX.toJson(value));
         }
 
         @Override
@@ -464,13 +507,25 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putObj(String key, Object value) {
-            return putString(key, LJsonX.toJson(value));
+        public IKV putList(String key, Object object) {
+            putObj(key, object);
+            return this;
         }
 
         @Override
         public <T> List<T> getList(String key, Class<T> clazz) {
             return LJsonX.toList(getString(key), clazz);
+        }
+
+        @Override
+        public IKV putMap(String key, Object object) {
+            putObj(key, object);
+            return this;
+        }
+
+        @Override
+        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+            return LJsonX.toMap(getString(key), kClazz, vClazz);
         }
 
         @Override
@@ -485,23 +540,14 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
-            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
-            putString(mapKey, LJsonX.toJson(keyList));
-            putString(mapValue, LJsonX.toJson(valueList));
+        public IKV putStringSets(String key, Set<String> value) {
+            mSp.edit().putStringSet(key, value).apply();
             return this;
         }
 
         @Override
-        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            String kJson = getString(mapKey);
-            String vJson = getString(mapValue);
-            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
+        public Set<String> getStringSets(String key) {
+            return mSp.getStringSet(key, new HashSet<>());
         }
 
     }
@@ -513,6 +559,12 @@ public class LKVMgr implements LIMgr {
 
         public MemoryKvImpl() {
             mObjectMap = new HashMap<>();
+        }
+
+        @Override
+        public IKV putInt(String key, int value) {
+            mObjectMap.put(key, value);
+            return this;
         }
 
         @Override
@@ -530,7 +582,7 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putInt(String key, int value) {
+        public IKV putFloat(String key, float value) {
             mObjectMap.put(key, value);
             return this;
         }
@@ -550,7 +602,7 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putFloat(String key, float value) {
+        public IKV putLong(String key, long value) {
             mObjectMap.put(key, value);
             return this;
         }
@@ -570,7 +622,7 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putLong(String key, long value) {
+        public IKV putBool(String key, boolean value) {
             mObjectMap.put(key, value);
             return this;
         }
@@ -590,7 +642,7 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putBool(String key, boolean value) {
+        public IKV putString(String key, String value) {
             mObjectMap.put(key, value);
             return this;
         }
@@ -610,22 +662,7 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putString(String key, String value) {
-            mObjectMap.put(key, value);
-            return this;
-        }
-
-        @Override
-        public Set<String> getStringSets(String key) {
-            Object o = mObjectMap.get(key);
-            if (o != null && o instanceof Set) {
-                return (Set<String>) o;
-            }
-            return new HashSet<>();
-        }
-
-        @Override
-        public IKV putStringSets(String key, Set<String> value) {
+        public IKV putObj(String key, Object value) {
             mObjectMap.put(key, value);
             return this;
         }
@@ -640,8 +677,8 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public IKV putObj(String key, Object value) {
-            mObjectMap.put(key, value);
+        public IKV putList(String key, Object object) {
+            putObj(key, object);
             return this;
         }
 
@@ -650,6 +687,21 @@ public class LKVMgr implements LIMgr {
             Object o = mObjectMap.get(key);
             if (o != null && o instanceof List) {
                 return (List<T>) o;
+            }
+            return null;
+        }
+
+        @Override
+        public IKV putMap(String key, Object object) {
+            putObj(key, object);
+            return this;
+        }
+
+        @Override
+        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
+            Object o = mObjectMap.get(key);
+            if (o != null && o instanceof Map) {
+                return (Map<K, V>) o;
             }
             return null;
         }
@@ -666,32 +718,20 @@ public class LKVMgr implements LIMgr {
         }
 
         @Override
-        public <K, V> IKV putMap(String key, Map<K, V> map, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            List<K> keyList = LMapX.getMapKeyList(map, kClazz, vClazz);
-            List<V> valueList = LMapX.getMapValueListByKey(map, keyList, kClazz, vClazz);
-            putString(mapKey, LJsonX.toJson(keyList));
-            putString(mapValue, LJsonX.toJson(valueList));
+        public IKV putStringSets(String key, Set<String> value) {
+            mObjectMap.put(key, value);
             return this;
         }
 
-//        @Override
-//        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-//            Object o = mObjectMap.get(key);
-//            if (o != null && o instanceof Map) {
-//                return (Map<K, V>) o;
-//            }
-//            return null;
-//        }
-
         @Override
-        public <K, V> Map<K, V> getMap(String key, Class<K> kClazz, Class<V> vClazz) {
-            String mapKey = key + MAP_KEY;
-            String mapValue = key + MAP_VALUE;
-            String kJson = getString(mapKey);
-            String vJson = getString(mapValue);
-            return LJsonX.toMap(kJson, vJson, kClazz, vClazz);
+        public Set<String> getStringSets(String key) {
+            Object o = mObjectMap.get(key);
+            if (o != null && o instanceof Set) {
+                return (Set<String>) o;
+            }
+            return new HashSet<>();
         }
+
+
     }
 }
