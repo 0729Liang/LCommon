@@ -8,8 +8,8 @@ import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.utils.LActivityAnimX
-import com.liang.lcommon.utils.LResourceX
+import com.liang.liangutils.utils.LActivityAnimX
+import com.liang.liangutils.utils.LResourceX
 import kotlinx.android.synthetic.main.demo_activity_start_anim.*
 
 class ActivityStartAnimDemo : LAppActivity() {
@@ -116,17 +116,17 @@ class ActivityStartAnimDemo : LAppActivity() {
 
 
         fadeInToOutBtn0.setOnClickListener({ LRouter.startActivityAnimDemo(this, Anim.ANIM_FADE_IN_FADE_OUT) })
-        translateleftInLeftOutBtn1.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_LEFT_INT_LEFT_OUT) };
-        translateleftInRightOutBtn2.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_LEFT_IN_RIGHT_OUT) }
-        translateRightInRightOutBtn3.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_RIGHT_IN_RIGHT_OUT) }
-        translateRightInLeftOutBtn4.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_RIGHT_IN_LEFT_OUT) }
-        translateBottomInBottomOutBtn5.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_BOTTOM_IN_BOTTOM_OUT) }
-        translateBottomInTopOutBtn6.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_BOTTOM_IN_TOP_OUT) }
-        translateTopInTopOutBtn7.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_TOP_IN_TOP_OUT) }
-        translateTopInBottomOutBtn8.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_TOP_IN_BOTTOM_OUT) }
-        scaleInScaleOutBtn9.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_SCALE_IN_SCALE_OUT) }
-        rotatePositiveInOutBtn10.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_POS_ROTATE_IN_OUT) }
-        rotateReverseInOutBtn11.setOnClickListener() { LRouter.startActivityAnimDemo(this, Anim.ANIM_REV_ROTATE_IN_OUT) }
+        translateleftInLeftOutBtn1.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_LEFT_INT_LEFT_OUT) }
+        translateleftInRightOutBtn2.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_LEFT_IN_RIGHT_OUT) }
+        translateRightInRightOutBtn3.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_RIGHT_IN_RIGHT_OUT) }
+        translateRightInLeftOutBtn4.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_RIGHT_IN_LEFT_OUT) }
+        translateBottomInBottomOutBtn5.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_BOTTOM_IN_BOTTOM_OUT) }
+        translateBottomInTopOutBtn6.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_BOTTOM_IN_TOP_OUT) }
+        translateTopInTopOutBtn7.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_TOP_IN_TOP_OUT) }
+        translateTopInBottomOutBtn8.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_TOP_IN_BOTTOM_OUT) }
+        scaleInScaleOutBtn9.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_SCALE_IN_SCALE_OUT) }
+        rotatePositiveInOutBtn10.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_POS_ROTATE_IN_OUT) }
+        rotateReverseInOutBtn11.setOnClickListener { LRouter.startActivityAnimDemo(this, Anim.ANIM_REV_ROTATE_IN_OUT) }
 
     }
 

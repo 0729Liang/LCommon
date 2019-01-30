@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">LCommon</string>
-    <string name="letter">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-    <string name="positive_integer">0123456789</string>
-    <string name="negative_interger">-0123456789</string>
-    <string name="number">+.0123456789-</string>
 </resources>

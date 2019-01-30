@@ -6,16 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.lcommon.utils.LBarUtilsX;
-import com.liang.lcommon.utils.LResourceX;
-import com.liang.lcommon.view.LSettingArrow;
-import com.liang.lcommon.view.LSettingSwitch;
-import com.liang.lcommon.view.LTitleView;
+import com.liang.liangutils.utils.LLogX;
+import com.liang.liangutils.utils.LResourceX;
+import com.liang.liangutils.view.LSettingArrow;
+import com.liang.liangutils.view.LSettingSwitch;
+import com.liang.liangutils.view.LTitleView;
 
 public class SettingViewDemo extends LAppActivity {
 
@@ -71,7 +70,7 @@ public class SettingViewDemo extends LAppActivity {
         //得到本地sharedPreferences文件管理对象
         sharedPreferences = getSharedPreferences("settingData", MODE_PRIVATE);
         if (sharedPreferences.getString("isExists", null) != null) {
-            //LLogX.e("文件存在->数据恢复");
+            LLogX.e("文件存在->数据恢复");
         } else {
             //1.获取一个Editor对象
             settingDataEditor = getSharedPreferences("settingData", MODE_PRIVATE).edit();
@@ -113,6 +112,7 @@ public class SettingViewDemo extends LAppActivity {
         } else {
             wifiSwitch.setSwitchText("Wifi控制(Off)");
         }
+        settingDataEditor.apply();
     }
 
     //实例化
@@ -150,7 +150,7 @@ public class SettingViewDemo extends LAppActivity {
         });
         bluetoothSwitch.setListener(v -> {
 
-            if (isBluetoothOpen == true) {
+            if (isBluetoothOpen) {
                 isBluetoothOpen = false;
                 bluetoothSwitch.setSwitchThum(LResourceX.getDrawable(SettingViewDemo.this, R.drawable.bluetooth_off));
                 bluetoothSwitch.setSwitchText("蓝牙控制(Off)");
@@ -169,7 +169,7 @@ public class SettingViewDemo extends LAppActivity {
 
         });
         wifiSwitch.setListener(v -> {
-            if (isWifiOpen == true) {
+            if (isWifiOpen) {
                 isWifiOpen = false;
                 wifiSwitch.setSwitchThum(LResourceX.getDrawable(SettingViewDemo.this, R.drawable.wifi_off));
                 wifiSwitch.setSwitchText("Wifi控制(Off)");

@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
 import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.utils.LBarUtilsX
+import com.liang.liangutils.utils.LBarUtilsX
 import kotlinx.android.synthetic.main.demo_bar_ui_activity.*
 
 class BarUiDemo : AppCompatActivity() {
@@ -51,7 +51,7 @@ class BarUiDemo : AppCompatActivity() {
         }
 
         demoBarSetStatusBarVisible.setOnCheckedChangeListener { buttonView, isChecked ->
-            LBarUtilsX.setStatusBarVisibility(this, isChecked);
+            LBarUtilsX.setStatusBarVisibility(this, isChecked)
             ToastUtils.showShort("StatusBar显示+？" + LBarUtilsX.isStatusBarVisible(this))
         }
 
@@ -78,7 +78,7 @@ class BarUiDemo : AppCompatActivity() {
         ////////////////////////////////////NotificationBar///////////////////////////////////////////
 
         demoBarSetNotificationBarVisible.setOnCheckedChangeListener { buttonView, isChecked ->
-            LBarUtilsX.setStatusBarVisibility(this, isChecked);
+            LBarUtilsX.setStatusBarVisibility(this, isChecked)
             ToastUtils.showShort("NotificationBar显示+？" + LBarUtilsX.isStatusBarVisible(this))
         }
 
@@ -100,7 +100,7 @@ class BarUiDemo : AppCompatActivity() {
             if (!supportNavBar) {
                 return@setOnCheckedChangeListener
             }
-            LBarUtilsX.setNavBarVisibility(this, isChecked);
+            LBarUtilsX.setNavBarVisibility(this, isChecked)
             ToastUtils.showShort("NavBar显示+？" + LBarUtilsX.isNavBarVisible(this))
         }
 

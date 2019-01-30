@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:rocker="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +12,8 @@
         android:layout_height="@dimen/dp180"
         android:layout_alignParentRight="true"
         android:orientation="vertical"
-        android:layout_above="@id/rockerXY_View">
+        android:layout_above="@id/rockerXY_View"
+        android:layout_alignParentEnd="true">
 
         <TextView
             android:layout_width="match_parent"
@@ -65,13 +65,13 @@
     </LinearLayout>
 
     <!--摇杆-->
-    <com.liang.lcommon.view.LRockerView
+    <com.liang.liangutils.view.LRockerView
         android:id="@+id/remoteControlView"
         android:layout_width="@dimen/dp200"
         android:layout_height="@dimen/dp200"
         android:layout_above="@id/rockerXY_View" />
 
-    <com.liang.lcommon.view.LRockerViewV2
+    <com.liang.liangutils.view.LRockerViewV2
         android:id="@+id/rockerXY_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,9 +81,10 @@
         rocker:lrocker_rockerBackground="@drawable/rocker"
         rocker:lrocker_rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
         rocker:lrocker_rockerScale="0.5"
-        rocker:lrocker_rockerSpeedLevel="10" />
+        rocker:lrocker_rockerSpeedLevel="10"
+        android:layout_marginStart="25dp" />
 
-    <com.liang.lcommon.view.LRockerViewV2
+    <com.liang.liangutils.view.LRockerViewV2
         android:id="@+id/rockerZ_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,6 +95,8 @@
         rocker:lrocker_rockerBackground="@drawable/rocker"
         rocker:lrocker_rockerCallBackMode="CALL_BACK_MODE_STATE_CHANGE"
         rocker:lrocker_rockerScale="0.5"
-        rocker:lrocker_rockerSpeedLevel="10" />
+        rocker:lrocker_rockerSpeedLevel="10"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp" />
 
 </RelativeLayout>

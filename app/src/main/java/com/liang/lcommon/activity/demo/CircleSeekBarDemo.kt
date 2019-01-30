@@ -8,8 +8,8 @@ import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.utils.LLogX
-import com.liang.lcommon.view.LCircleSeekBar
+import com.liang.liangutils.utils.LLogX
+import com.liang.liangutils.view.LCircleSeekBar
 import kotlinx.android.synthetic.main.dmeo_circle_seek_bar.*
 
 class CircleSeekBarDemo : LAppActivity() {

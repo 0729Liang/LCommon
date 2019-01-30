@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.demo.CircleSeekBarDemo">
 
-    <com.liang.lcommon.view.LCircleSeekBar
+    <com.liang.liangutils.view.LCircleSeekBar
         android:id="@+id/lseekbar"
         android:layout_width="@dimen/dp150"
         android:layout_height="@dimen/dp150"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/lseekbar" />
 
 
-    <com.liang.lcommon.view.LCircleSeekBar
+    <com.liang.liangutils.view.LCircleSeekBar
         android:id="@+id/ringSeekBar"
         android:layout_width="@dimen/dp150"
         android:layout_height="@dimen/dp150"
@@ -40,7 +40,7 @@
         app:lseekbar_thumbPosition="above"
         app:lseekbar_thumb="@color/redPrimary"/>
 
-    <com.liang.lcommon.view.LCircleSeekBar
+    <com.liang.liangutils.view.LCircleSeekBar
         android:id="@+id/circleSeekBar"
         android:layout_width="@dimen/dp150"
         android:layout_height="@dimen/dp150"

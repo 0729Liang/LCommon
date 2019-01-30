@@ -1,18 +1,13 @@
 package com.liang.lcommon.activity;
 
 import android.support.annotation.Nullable;
-import android.util.SparseArray;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.liang.lcommon.R;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.lcommon.view.LRockerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

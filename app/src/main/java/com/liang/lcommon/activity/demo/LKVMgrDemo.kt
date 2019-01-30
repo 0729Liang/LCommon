@@ -6,17 +6,12 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
-import com.google.gson.Gson
-import com.google.gson.internal.LinkedTreeMap
-import com.google.gson.reflect.TypeToken
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.adapter.LJsonAdapter
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.mgrs.LKVMgr
-import com.liang.lcommon.utils.LEmptyX
-import com.march.common.exts.LogX
+import com.liang.liangutils.mgrs.LKVMgr
+import com.liang.liangutils.utils.LEmptyX
 import kotlinx.android.synthetic.main.demo_lkv_mgr.*
 import java.util.HashMap
 
@@ -41,9 +36,9 @@ class LKVMgrDemo : LAppActivity() {
             return LBaseItemBean.ClickEvent { LRouter.startLKVMgrDemoActivity(it) }
         }
 
-        val LKVMGR_SAVE_TYPE = "LKVMGR_SAVE_TYPE";// 保存方式
-        val LKVMGR_WRITER_TYPE = "LKVMGR_WRITER_TYPE"; // 保存类型
-        val LKVMGR_CONTENT = "LKVMGR_CONTENT"; // 保存内容
+        val LKVMGR_SAVE_TYPE = "LKVMGR_SAVE_TYPE"// 保存方式
+        val LKVMGR_WRITER_TYPE = "LKVMGR_WRITER_TYPE" // 保存类型
+        val LKVMGR_CONTENT = "LKVMGR_CONTENT" // 保存内容
 
         // 保存方式：内存、mmkv、shareperfence
         enum class LKVMgrSaveType constructor(val value: Int) {
@@ -75,18 +70,18 @@ class LKVMgrDemo : LAppActivity() {
         restoryState()
         onSaveTypeListener()
         onWriterTypeListener()
-        onBooleanListener();
-        confirmBtn.setOnClickListener() {
+        onBooleanListener()
+        confirmBtn.setOnClickListener {
             writeContent()
 //            when (radioGroupWriterType.checkedRadioButtonId) {
 //                R.id.lkvmgr_string, R.id.lkvmgr_number, R.id.lkvmgr_boolean -> writeContent()
 //            }
         }
-        readBtn.setOnClickListener() { readContent() }
-        clearBtn.setOnClickListener() {
+        readBtn.setOnClickListener { readContent() }
+        clearBtn.setOnClickListener {
             radioGroupSaveType.clearCheck()
             radioGroupWriterType.clearCheck()
-            contentTextView.setText("")
+            contentTextView.text = ""
             contentEditText.setText("")
             radioGroupSaveType.check(R.id.lkvmgr_memory)
             radioGroupWriterType.check(R.id.lkvmgr_string)
@@ -131,7 +126,7 @@ class LKVMgrDemo : LAppActivity() {
 
     // 保存类型监听
     fun onSaveTypeListener() {
-        var type = LKVMgrSaveType.SAVE_ON_MEMORY.value;
+        var type = LKVMgrSaveType.SAVE_ON_MEMORY.value
         radioGroupSaveType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.lkvmgr_memory -> type = LKVMgrSaveType.SAVE_ON_MEMORY.value
@@ -144,7 +139,7 @@ class LKVMgrDemo : LAppActivity() {
 
     // 写入类型监听
     fun onWriterTypeListener() {
-        var type = LKVMgrWriteType.WRITE_STRING.value;
+        var type = LKVMgrWriteType.WRITE_STRING.value
         radioGroupWriterType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.lkvmgr_string -> {
@@ -205,8 +200,8 @@ class LKVMgrDemo : LAppActivity() {
     fun writeContent() {
         when (radioGroupWriterType.checkedRadioButtonId) {
             R.id.lkvmgr_obj, R.id.lkvmgr_list, R.id.lkvmgr_map -> {
-                ToastUtils.showShort("请选择其他类型保存");
-                return;
+                ToastUtils.showShort("请选择其他类型保存")
+                return
             }
         }
 
@@ -214,7 +209,7 @@ class LKVMgrDemo : LAppActivity() {
         mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, 0)
 
         if (LEmptyX.isEmpty(contentEditText.text)) {
-            ToastUtils.showShort("请输入要保存的内容");
+            ToastUtils.showShort("请输入要保存的内容")
             return
         } else {
             mContentText = contentEditText.text.toString()
@@ -327,7 +322,7 @@ class LKVMgrDemo : LAppActivity() {
             ToastUtils.showShort("没有读取到内容")
         } else {
             contentEditText.setText(mContentText)
-            contentTextView.setText(mContentText)
+            contentTextView.text = mContentText
             ToastUtils.showShort("读取成功")
         }
 
@@ -336,7 +331,7 @@ class LKVMgrDemo : LAppActivity() {
 
     private fun mapToString(map: Map<String, Personal>?): String {
         if (LEmptyX.isEmpty(map)) {
-            return "";
+            return ""
         }
         val build: StringBuilder = StringBuilder()
         map?.forEach { key, value ->
@@ -349,7 +344,7 @@ class LKVMgrDemo : LAppActivity() {
 
     private fun listToString(list: MutableList<Personal>?): String {
         if (LEmptyX.isEmpty(list)) {
-            return "";
+            return ""
         }
         if (list == null) {
             return ""

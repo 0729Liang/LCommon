@@ -8,8 +8,7 @@ import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
 import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.lcommon.utils.LLogX
-import com.march.common.exts.LogX
+import com.liang.liangutils.utils.LLogX
 import kotlinx.android.synthetic.main.demo_llog_activity.*
 
 class LLogDemo : LAppActivity() {

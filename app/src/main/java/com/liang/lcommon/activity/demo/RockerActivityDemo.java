@@ -7,17 +7,12 @@ import android.widget.TextView;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
-import com.liang.lcommon.adapter.LJsonAdapter;
+import com.liang.liangutils.adapter.LJsonAdapter;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.lcommon.mgrs.LKVMgr;
-import com.liang.lcommon.view.LRockerViewV2;
+import com.liang.liangutils.mgrs.LKVMgr;
+import com.liang.liangutils.view.LRockerViewV2;
 import com.march.common.exts.LogX;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RockerActivityDemo extends LAppActivity {
 
@@ -68,20 +63,20 @@ public class RockerActivityDemo extends LAppActivity {
     //界面初始化
     private void initView() {
         //文本
-        directionXY_Text = (TextView) findViewById(R.id.directionXY_Text);
-        angleXY_Text = (TextView) findViewById(R.id.angleXY_Text);
-        levelXY_Text = (TextView) findViewById(R.id.levelXY_Text);
+        directionXY_Text = findViewById(R.id.directionXY_Text);
+        angleXY_Text = findViewById(R.id.angleXY_Text);
+        levelXY_Text = findViewById(R.id.levelXY_Text);
 
-        directionZ_Text = (TextView) findViewById(R.id.directionZ_Text);
-        angleZ_Text = (TextView) findViewById(R.id.angleZ_Text);
-        levelZ_Text = (TextView) findViewById(R.id.levelZ_Text);
+        directionZ_Text = findViewById(R.id.directionZ_Text);
+        angleZ_Text = findViewById(R.id.angleZ_Text);
+        levelZ_Text = findViewById(R.id.levelZ_Text);
     }
 
     //摇杆初始化
     private void initMyView() {
         //方向有改变时回调
-        mRockerViewXY = (LRockerViewV2) findViewById(R.id.rockerXY_View);//8方向
-        mRockerViewZ = (LRockerViewV2) findViewById(R.id.rockerZ_View);//2方向
+        mRockerViewXY = findViewById(R.id.rockerXY_View);//8方向
+        mRockerViewZ = findViewById(R.id.rockerZ_View);//2方向
     }
 
     //摇杆点击事件
@@ -147,13 +142,10 @@ public class RockerActivityDemo extends LAppActivity {
             }
         });
         //级别
-        mRockerViewXY.setOnDistanceLevelListener(new LRockerViewV2.OnDistanceLevelListener() {
-            @Override
-            public void onDistanceLevel(int level) {
-                levelXY = ("当前距离级别：" + level);
-                LogX.e("XY轴" + levelXY);
-                levelXY_Text.setText(levelXY);
-            }
+        mRockerViewXY.setOnDistanceLevelListener(level -> {
+            levelXY = ("当前距离级别：" + level);
+            LogX.e("XY轴" + levelXY);
+            levelXY_Text.setText(levelXY);
         });
         //z轴
         mRockerViewZ.setOnShakeListener(LRockerViewV2.DirectionMode.DIRECTION_2_VERTICAL, new LRockerViewV2.OnShakeListener() {
@@ -197,13 +189,10 @@ public class RockerActivityDemo extends LAppActivity {
 
             }
         });
-        mRockerViewZ.setOnDistanceLevelListener(new LRockerViewV2.OnDistanceLevelListener() {
-            @Override
-            public void onDistanceLevel(int level) {
-                levelZ = ("当前距离级别：" + level);
-                LogX.e("Z轴" + levelZ);
-                levelZ_Text.setText(levelZ);
-            }
+        mRockerViewZ.setOnDistanceLevelListener(level -> {
+            levelZ = ("当前距离级别：" + level);
+            LogX.e("Z轴" + levelZ);
+            levelZ_Text.setText(levelZ);
         });
     }
 

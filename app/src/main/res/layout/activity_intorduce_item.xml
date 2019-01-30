@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         style="@style/RippleWhiteRect">
 
-        <com.liang.lcommon.view.LDarkableRoundImageView
+        <com.liang.liangutils.view.LDarkableRoundImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp100"

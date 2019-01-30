@@ -26,6 +26,7 @@
         <activity android:name=".activity.demo.LKVMgrDemo" />
         <activity android:name=".activity.demo.LLogDemo" />
         <activity android:name=".activity.demo.BarUiDemo"></activity>
+        <activity android:name=".app.LAppActivity" />
     </application>
 
 </manifest>
