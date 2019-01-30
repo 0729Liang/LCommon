@@ -1,1 +1,1 @@
-include ':app', ':liangutils'
+include ':demo', ':utils'

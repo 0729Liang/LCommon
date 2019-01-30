@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".demo.activity.demo.BarUiDemo">
+    tools:context=".activity.demo.BarUiDemo">
 
     <Button
         android:id="@+id/demoBarGetStatusBarHeight"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ececec"
-    tools:context=".demo.activity.demo.SettingViewDemo">
+    tools:context=".activity.demo.SettingViewDemo">
 
     <com.liang.liangutils.view.LTitleView
         android:id="@+id/demo_setting_title"
