@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity;
+package com.liang.lcommon.demo.activity;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.liang.lcommon.R;
-import com.liang.lcommon.exts.LRouter;
 
 import java.util.List;
 

@@ -35,35 +35,35 @@ dependencies {
     //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     implementation project(':liangutils')
-
-    //工具
-    implementation libs.utilcode
-    implementation libs.mmkv
-    implementation libs.common
-    // 图片
-    implementation libs.glide4
-    implementation libs.glideOkHttp
-    // 通信
-    implementation libs.eventbus
-    implementation libs.butterknife
-    // json
-    implementation libs.gson
-    //implementation libs.fastjson
-    // 网络
-    implementation libs.okhttp3
-    implementation libs.cookie
-    // retrofit
-    implementation libs.retrofit
-    implementation libs.converter_gson
-    implementation libs.adapter_rxjava2
-    // rx
-    implementation libs.rxjava2
-    implementation libs.rxandroid
-    // 适配器
-    implementation libs.BRVAH
-    // 布局
-    implementation support.cardView_v7
-    // 圆角 image
-    implementation libs.roundImgView
+//
+//    //工具
+//    implementation libs.utilcode
+//    implementation libs.mmkv
+//    implementation libs.common
+//    // 图片
+//    implementation libs.glide4
+//    implementation libs.glideOkHttp
+//    // 通信
+//    implementation libs.eventbus
+//    implementation libs.butterknife
+//    // json
+//    implementation libs.gson
+//    //implementation libs.fastjson
+//    // 网络
+//    implementation libs.okhttp3
+//    implementation libs.cookie
+//    // retrofit
+//    implementation libs.retrofit
+//    implementation libs.converter_gson
+//    implementation libs.adapter_rxjava2
+//    // rx
+//    implementation libs.rxjava2
+//    implementation libs.rxandroid
+//    // 适配器
+//    implementation libs.BRVAH
+//    // 布局
+//    implementation support.cardView_v7
+//    // 圆角 image
+//    implementation libs.roundImgView
 
 }

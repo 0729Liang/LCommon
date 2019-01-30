@@ -1,4 +1,4 @@
-package com.liang.lcommon.app;
+package com.liang.lcommon.demo.app;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,5 +22,6 @@ public class LAppActivity extends AppCompatActivity {
         WeakReference<LAppActivity> reference = new WeakReference<>(this);
         mContext = LCommon.getApp();
         mActivity = reference.get();
+
     }
 }

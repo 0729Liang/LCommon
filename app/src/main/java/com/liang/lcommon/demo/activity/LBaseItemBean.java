@@ -1,8 +1,6 @@
-package com.liang.lcommon.activity;
+package com.liang.lcommon.demo.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 /**
  * @author : Amarao

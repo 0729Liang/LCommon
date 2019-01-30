@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.demo.activity.demo
 
 import android.app.Activity
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.util.ToastUtils
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.exts.LRouter
+import com.liang.lcommon.demo.activity.LBaseItemBean
+import com.liang.lcommon.demo.exts.LRouter
 import com.liang.liangutils.utils.LBarUtilsX
 import kotlinx.android.synthetic.main.demo_bar_ui_activity.*
 

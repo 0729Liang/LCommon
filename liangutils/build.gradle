@@ -44,15 +44,22 @@ dependencies {
     api libs.utilcode
     api libs.mmkv
     api libs.common
-    // 图片
+    // json
+    api libs.gson
+    //api libs.fastjson
+    // 适配器
+    api libs.BRVAH
+    // 布局
+    api support.cardView_v7
+    // 圆角 image
+    api libs.roundImgView
+
+   /* // 图片
     api libs.glide4
     api libs.glideOkHttp
     // 通信
     api libs.eventbus
     api libs.butterknife
-    // json
-    api libs.gson
-    //api libs.fastjson
     // 网络
     api libs.okhttp3
     api libs.cookie
@@ -62,11 +69,6 @@ dependencies {
     api libs.adapter_rxjava2
     // rx
     api libs.rxjava2
-    api libs.rxandroid
-    // 适配器
-    api libs.BRVAH
-    // 布局
-    api support.cardView_v7
-    // 圆角 image
-    api libs.roundImgView
+    api libs.rxandroid*/
+
 }

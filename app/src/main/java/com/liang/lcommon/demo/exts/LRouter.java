@@ -1,15 +1,15 @@
-package com.liang.lcommon.exts;
+package com.liang.lcommon.demo.exts;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
-import com.liang.lcommon.activity.demo.BarUiDemo;
-import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
-import com.liang.lcommon.activity.demo.LKVMgrDemo;
-import com.liang.lcommon.activity.demo.LLogDemo;
-import com.liang.lcommon.activity.demo.RockerActivityDemo;
-import com.liang.lcommon.activity.demo.SettingViewDemo;
+import com.liang.lcommon.demo.activity.demo.ActivityStartAnimDemo;
+import com.liang.lcommon.demo.activity.demo.BarUiDemo;
+import com.liang.lcommon.demo.activity.demo.CircleSeekBarDemo;
+import com.liang.lcommon.demo.activity.demo.LKVMgrDemo;
+import com.liang.lcommon.demo.activity.demo.LLogDemo;
+import com.liang.lcommon.demo.activity.demo.RockerActivityDemo;
+import com.liang.lcommon.demo.activity.demo.SettingViewDemo;
 
 /**
  * @author : Amarao
@@ -46,7 +46,7 @@ public class LRouter {
         LLogDemo.startActivity(activity);
     }
 
-    public static void startBarUiDemo(Activity activity){
+    public static void startBarUiDemo(Activity activity) {
         BarUiDemo.startActivity(activity);
     }
 }

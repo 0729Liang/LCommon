@@ -1,11 +1,10 @@
-package com.liang.lcommon.activity
+package com.liang.lcommon.demo.activity
 
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.util.SparseArray
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.demo.*
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.demo.activity.demo.*
+import com.liang.lcommon.demo.app.LAppActivity
 import kotlinx.android.synthetic.main.activity_lbase.*
 import java.util.ArrayList
 
@@ -20,7 +19,7 @@ class LBaseActivity : LAppActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lbase)
 
-        initView();
+        initView()
 
         addItem(ActivityStartAnimDemo.getItem(), ActivityStartAnimDemo.getClickEvent())
 
@@ -56,7 +55,7 @@ class LBaseActivity : LAppActivity() {
     private fun addItem(intro: String, src: Int, click: LBaseItemBean.ClickEvent) {
         val index = mList.size
         val bean = LBaseItemBean(intro, src)
-        mList.add(0,bean)
+        mList.add(0, bean)
         mAdapter.notifyItemInserted(0)
         clickMap.add(0, click)
     }

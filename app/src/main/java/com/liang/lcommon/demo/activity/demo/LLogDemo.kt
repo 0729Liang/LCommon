@@ -1,13 +1,13 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.demo.activity.demo
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.blankj.utilcode.util.LogUtils
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
-import com.liang.lcommon.exts.LRouter
+import com.liang.lcommon.demo.activity.LBaseItemBean
+import com.liang.lcommon.demo.app.LAppActivity
+import com.liang.lcommon.demo.exts.LRouter
 import com.liang.liangutils.utils.LLogX
 import kotlinx.android.synthetic.main.demo_llog_activity.*
 

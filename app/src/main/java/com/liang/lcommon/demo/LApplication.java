@@ -1,7 +1,8 @@
-package com.liang.lcommon;
+package com.liang.lcommon.demo;
 
 import android.app.Application;
 
+import com.liang.lcommon.BuildConfig;
 import com.liang.liangutils.init.LCommon;
 import com.march.common.Common;
 
