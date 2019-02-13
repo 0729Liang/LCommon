@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/dp15"
     android:paddingRight="@dimen/dp15"
     style="@style/RippleWhiteRect"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/larrow_title_icon"

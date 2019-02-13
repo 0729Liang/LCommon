@@ -2,10 +2,18 @@ package com.liang.lcommon.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import com.liang.lcommon.R;
 import com.liang.liangutils.init.LCommon;
 
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
@@ -22,6 +30,5 @@ public class LAppActivity extends AppCompatActivity {
         WeakReference<LAppActivity> reference = new WeakReference<>(this);
         mContext = LCommon.getApp();
         mActivity = reference.get();
-
     }
 }
