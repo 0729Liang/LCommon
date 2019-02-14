@@ -67,4 +67,5 @@ dependencies {
 //    // 圆角 image
 //    implementation libs.roundImgView
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

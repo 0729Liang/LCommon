@@ -12,21 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.liang.lcommon.activity.LBaseActivity">
+        <activity android:name=".activity.LBaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.liang.lcommon.activity.demo.ActivityStartAnimDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.RockerActivityDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.SettingViewDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.CircleSeekBarDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.LKVMgrDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.LLogDemo" />
-        <activity android:name="com.liang.lcommon.activity.demo.BarUiDemo"></activity>
+        <activity android:name=".activity.demo.ActivityStartAnimDemo" />
+        <activity android:name=".activity.demo.RockerActivityDemo" />
+        <activity android:name=".activity.demo.SettingViewDemo" />
+        <activity android:name=".activity.demo.CircleSeekBarDemo" />
+        <activity android:name=".activity.demo.LKVMgrDemo" />
+        <activity android:name=".activity.demo.LLogDemo" />
+        <activity android:name=".activity.demo.BarUiDemo" />
         <activity android:name=".app.LAppActivity" />
+        <activity android:name=".activity.demo.AnnotationDemo"></activity>
     </application>
 
 </manifest>

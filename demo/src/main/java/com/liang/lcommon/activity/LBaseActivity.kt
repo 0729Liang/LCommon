@@ -34,6 +34,8 @@ class LBaseActivity : LAppActivity() {
         addItem(LLogDemo.getItem(), LLogDemo.getClickEvent())
 
         addItem(BarUiDemo.getItem(), BarUiDemo.getClickEvent())
+
+        addItem(AnnotationDemo.getItem(), AnnotationDemo.getClickEvent())
     }
 
     private fun initView() {

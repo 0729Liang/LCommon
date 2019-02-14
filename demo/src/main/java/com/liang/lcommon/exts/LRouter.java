@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
+import com.liang.lcommon.activity.demo.AnnotationDemo;
 import com.liang.lcommon.activity.demo.BarUiDemo;
 import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
 import com.liang.lcommon.activity.demo.LKVMgrDemo;
@@ -48,5 +49,9 @@ public class LRouter {
 
     public static void startBarUiDemo(Activity activity) {
         BarUiDemo.startActivity(activity);
+    }
+
+    public static void startAnnotationDemo(Activity activity) {
+        AnnotationDemo.startActivity(activity);
     }
 }

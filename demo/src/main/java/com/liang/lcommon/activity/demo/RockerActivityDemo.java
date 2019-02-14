@@ -7,11 +7,13 @@ import android.widget.TextView;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.LBaseItemBean;
+import com.liang.lcommon.ant.ClassLog;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
 import com.liang.liangutils.view.LRockerViewV2;
 import com.march.common.exts.LogX;
 
+@ClassLog
 public class RockerActivityDemo extends LAppActivity {
 
     public static void startActivity(Activity activity) {
@@ -45,6 +47,7 @@ public class RockerActivityDemo extends LAppActivity {
     private TextView      angleZ_Text;
     private TextView      levelZ_Text;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,7 @@ public class RockerActivityDemo extends LAppActivity {
     }
 
     //摇杆初始化
-    private void initMyView() {
+    public void initMyView() {
         //方向有改变时回调
         mRockerViewXY = findViewById(R.id.rockerXY_View);//8方向
         mRockerViewZ = findViewById(R.id.rockerZ_View);//2方向

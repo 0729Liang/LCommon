@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.liang.lcommon.R;
+import com.liang.lcommon.ant.TestLogProcress;
 import com.liang.liangutils.init.LCommon;
 
 import java.lang.ref.ReferenceQueue;
@@ -30,5 +31,6 @@ public class LAppActivity extends AppCompatActivity {
         WeakReference<LAppActivity> reference = new WeakReference<>(this);
         mContext = LCommon.getApp();
         mActivity = reference.get();
+        TestLogProcress.classLog(this);
     }
 }

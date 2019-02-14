@@ -19,4 +19,6 @@ public class LApplication extends Application {
         LCommon.init(this, BuildConfig.class);
         Common.init(this, BuildConfig.class);
     }
+
+
 }
