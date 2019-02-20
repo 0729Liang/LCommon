@@ -6,8 +6,6 @@ apply from: '../scripts/config/dependence.gradle'
 android {
     compileSdkVersion 28
 
-
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
@@ -51,6 +49,7 @@ dependencies {
     api libs.BRVAH
     // 布局
     api support.cardView_v7
+    api support.recyclerView_v7
     // 圆角 image
     api libs.roundImgView
 

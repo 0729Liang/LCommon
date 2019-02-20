@@ -39,6 +39,7 @@ class LBaseActivity : LAppActivity() {
     }
 
     private fun initView() {
+
         val layout = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.layoutManager = layout
         recyclerView.adapter = mAdapter
