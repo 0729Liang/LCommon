@@ -1,6 +1,5 @@
 package com.liang.liangutils.utils;
 
-import com.march.common.exts.LogX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +71,7 @@ public class LMapX {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             K entryKey = entry.getKey();
             V value = entry.getValue();
-            LogX.e(" key = " + entryKey + " value = " + value);
+            LLogX.e(" key = " + entryKey + " value = " + value);
         }
     }
 }
