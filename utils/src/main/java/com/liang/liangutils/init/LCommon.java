@@ -1,5 +1,6 @@
 package com.liang.liangutils.init;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
@@ -28,6 +29,13 @@ public class LCommon {
         exports.jsonParser = LJsonAdapter.getAdapter();
     }
 
+    public LCommon(Activity activity) {
+        exports.init = true;
+        exports.app = activity.getApplication();
+        exports.kvStrategy = LKVMgr.LKVMgrParams.STRATEGY_MMKV;
+        exports.jsonParser = LJsonAdapter.getAdapter();
+    }
+
     public static Exports getExports() {
         return exports;
     }
@@ -40,10 +48,6 @@ public class LCommon {
         return exports.app;
     }
 
-    public static LAppBuildConfig getAppBuildConfig() {
-        return exports.appConfig;
-    }
-
     public static LKVMgr.LKVMgrParams getKvStrategy() {
         return exports.kvStrategy;
     }
@@ -52,5 +56,7 @@ public class LCommon {
         return exports.jsonParser;
     }
 
-
+//    public static LAppBuildConfig getAppBuildConfig() {
+//        return exports.appConfig;
+//    }
 }
