@@ -10,8 +10,8 @@ import com.liang.lcommon.activity.LBaseItemBean;
 import com.liang.lcommon.ant.ClassLog;
 import com.liang.lcommon.app.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
+import com.liang.liangutils.utils.LLogX;
 import com.liang.liangutils.view.LRockerViewV2;
-import com.march.common.exts.LogX;
 
 @ClassLog
 public class RockerActivityDemo extends LAppActivity {
@@ -113,8 +113,8 @@ public class RockerActivityDemo extends LAppActivity {
                     directionXY = ("当前方向：右上");
                 }
 
-                LogX.e("XY轴" + directionXY);
-                LogX.e("-----------------------------------------------");
+                LLogX.e("XY轴" + directionXY);
+                LLogX.e("-----------------------------------------------");
                 directionXY_Text.setText(directionXY);
             }
 
@@ -133,7 +133,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void angle(double angle) {
                 angleXY = ("当前角度：" + angle);
-                LogX.e("XY轴" + angleXY);
+                LLogX.e("XY轴" + angleXY);
                 angleXY_Text.setText(angleXY);
             }
 
@@ -145,7 +145,7 @@ public class RockerActivityDemo extends LAppActivity {
         //级别
         mRockerViewXY.setOnDistanceLevelListener(level -> {
             levelXY = ("当前距离级别：" + level);
-            LogX.e("XY轴" + levelXY);
+            LLogX.e("XY轴" + levelXY);
             levelXY_Text.setText(levelXY);
         });
         //z轴
@@ -162,8 +162,8 @@ public class RockerActivityDemo extends LAppActivity {
                 } else if (direction == LRockerViewV2.Direction.DIRECTION_DOWN) {
                     directionZ = ("当前方向：下");
                 }
-                LogX.e("Z轴" + directionZ);
-                LogX.e("-----------------------------------------------");
+                LLogX.e("Z轴" + directionZ);
+                LLogX.e("-----------------------------------------------");
                 directionZ_Text.setText(directionZ);
             }
 
@@ -181,7 +181,7 @@ public class RockerActivityDemo extends LAppActivity {
             @Override
             public void angle(double angle) {
                 angleZ = ("当前角度：" + angle);
-                LogX.e("Z轴" + angleZ);
+                LLogX.e("Z轴" + angleZ);
                 angleZ_Text.setText(angleZ);
             }
 
@@ -192,7 +192,7 @@ public class RockerActivityDemo extends LAppActivity {
         });
         mRockerViewZ.setOnDistanceLevelListener(level -> {
             levelZ = ("当前距离级别：" + level);
-            LogX.e("Z轴" + levelZ);
+            LLogX.e("Z轴" + levelZ);
             levelZ_Text.setText(levelZ);
         });
     }
