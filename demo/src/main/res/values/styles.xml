@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="selectableItemBackgroundBorderless">?attr/selectableItemBackgroundBorderless</item>
         <item name="colorControlHighlight">@color/colorRipple</item>
-
     </style>
 
     <!--横线-->

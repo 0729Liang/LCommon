@@ -21,21 +21,21 @@ class LBaseActivity : LAppActivity() {
 
         initView()
 
-        addItem(ActivityStartAnimDemo.getItem(), ActivityStartAnimDemo.getClickEvent())
+        forwardInsertItem(ActivityStartAnimDemo.getItem(), ActivityStartAnimDemo.getClickEvent())
 
-        addItem(CircleSeekBarDemo.getItem(), CircleSeekBarDemo.getClickEvent())
+        forwardInsertItem(CircleSeekBarDemo.getItem(), CircleSeekBarDemo.getClickEvent())
 
-        addItem(SettingViewDemo.getItem(), SettingViewDemo.getClickEvent())
+        forwardInsertItem(SettingViewDemo.getItem(), SettingViewDemo.getClickEvent())
 
-        addItem(RockerActivityDemo.getItem(), RockerActivityDemo.getClickEvent())
+        forwardInsertItem(RockerActivityDemo.getItem(), RockerActivityDemo.getClickEvent())
 
-        addItem(LKVMgrDemo.getItem(), LKVMgrDemo.getClickEvent())
+        forwardInsertItem(LKVMgrDemo.getItem(), LKVMgrDemo.getClickEvent())
 
-        addItem(LLogDemo.getItem(), LLogDemo.getClickEvent())
+        forwardInsertItem(LLogDemo.getItem(), LLogDemo.getClickEvent())
 
-        addItem(BarUiDemo.getItem(), BarUiDemo.getClickEvent())
+        forwardInsertItem(BarUiDemo.getItem(), BarUiDemo.getClickEvent())
 
-        addItem(AnnotationDemo.getItem(), AnnotationDemo.getClickEvent())
+        forwardInsertItem(AnnotationDemo.getItem(), AnnotationDemo.getClickEvent())
     }
 
     private fun initView() {
@@ -49,13 +49,15 @@ class LBaseActivity : LAppActivity() {
         }
     }
 
-    private fun addItem(bean: LBaseItemBean, click: LBaseItemBean.ClickEvent) {
+    // 前插
+    private fun forwardInsertItem(bean: LBaseItemBean, click: LBaseItemBean.ClickEvent) {
         mList.add(0, bean)
         mAdapter.notifyItemInserted(0)
         clickMap.add(0, click)
     }
 
-    private fun addItem(intro: String, src: Int, click: LBaseItemBean.ClickEvent) {
+
+    private fun forwardInsertItem(intro: String, src: Int, click: LBaseItemBean.ClickEvent) {
         val index = mList.size
         val bean = LBaseItemBean(intro, src)
         mList.add(0, bean)
