@@ -33,6 +33,7 @@
             android:textColor="@color/color333"
             android:textSize="15.0sp"
             tools:text="标题"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
