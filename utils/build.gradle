@@ -43,7 +43,7 @@ dependencies {
     //工具
     api libs.utilcode
     api libs.mmkv
-    api libs.common
+    //api libs.common
     // json
     api libs.gson
     //api libs.fastjson
