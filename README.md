@@ -13,11 +13,13 @@ Add it in your root build.gradle at the end of repositories:
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
+			maven { url "https://maven.google.com" }
 		}
 	}
 
 Step 2. Add the dependency
 
+	{
 	        implementation 'com.github.0729Liang:LCommon:0.0.3'
 	}
 
