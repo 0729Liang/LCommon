@@ -10,7 +10,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/wifi_1" />
+        android:background="@drawable/wifi" />
 
     <Switch
         android:id="@+id/switch_button"
