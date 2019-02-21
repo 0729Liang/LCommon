@@ -12,6 +12,13 @@ blankj工具集
 git：https://github.com/Blankj/AndroidUtilCode
 说明：https://blankj.com/2016/07/31/android-utils-code/
 
+gitflow工作流，部分流程
+
+    feature 分支开发完 merge 到dev分支
+    dev 分支检查无错误，push，之后 merge 到 master分支
+    master 分支检查无错误，push 之后，打Tag值，之后 push
+    最新从 master 迁出新分支到 release 下，分部新版本
+    最后删除无用的featrue分支，并迁出新的feature分支继续开发
 
 # *点击效果说明*
 1. 按钮圆形波纹效果，比如标题栏左右按钮，音乐播放器按钮
