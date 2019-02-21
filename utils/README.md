@@ -19,6 +19,48 @@ gitflow工作流，部分流程
     master 分支检查无错误，push 之后，打Tag值，之后 push
     最新从 master 迁出新分支到 release 下，分部新版本
     最后删除无用的featrue分支，并迁出新的feature分支继续开发
+    
+Tag操作
+    
+    参考：    
+    https://blog.csdn.net/u011458979/article/details/78063803
+    https://blog.csdn.net/revitalizing/article/details/49056411 
+    1.创建分支
+    
+    git branch branchname
+    //创建并切换到新分支
+    git checkout -b branchname
+    //远程分支
+    git push origin branchname
+    //查看远程分支
+    git branch -r
+    2.删除分支
+    
+    2.1删除本地分支（-D强制删除）
+    
+    git branch -d branchname
+    2.2删除远程分支
+    
+    git push origin :branchname
+    3.打tag
+    
+    git tag -a v1.1 -m "注释"
+    git push origin v1.1
+    //查看所有tag
+    git tag -l
+    4.删除tag
+    
+    4.1删除本地tag
+    
+    git tag -d v1.1
+    4.2删除远程tag
+    
+    git push origin :v1.1 
+    //也可以这样
+    git push origin --delete tag V1.1
+    
+    --------------------- 
+    
 
 # *点击效果说明*
 1. 按钮圆形波纹效果，比如标题栏左右按钮，音乐播放器按钮
