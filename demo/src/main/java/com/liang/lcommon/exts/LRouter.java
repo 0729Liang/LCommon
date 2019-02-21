@@ -11,6 +11,7 @@ import com.liang.lcommon.activity.demo.LKVMgrDemo;
 import com.liang.lcommon.activity.demo.LLogDemo;
 import com.liang.lcommon.activity.demo.RockerActivityDemo;
 import com.liang.lcommon.activity.demo.SettingViewDemo;
+import com.liang.lcommon.activity.demo.eventbus.EventBusDemo;
 
 /**
  * @author : Amarao
@@ -53,5 +54,9 @@ public class LRouter {
 
     public static void startAnnotationDemo(Activity activity) {
         AnnotationDemo.startActivity(activity);
+    }
+
+    public static void startEventBusDemo(Activity activity) {
+        EventBusDemo.startActivity(activity);
     }
 }

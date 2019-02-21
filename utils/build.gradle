@@ -52,6 +52,8 @@ dependencies {
     api support.recyclerView_v7
     // 圆角 image
     api libs.roundImgView
+    // eventBus
+    api libs.eventbus
 
    /* // 图片
     api libs.glide4

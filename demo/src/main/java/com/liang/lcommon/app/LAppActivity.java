@@ -6,12 +6,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.ant.TestLogProcress;
 import com.liang.liangutils.init.LCommon;
+import com.liang.liangutils.msg.Exts;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
@@ -27,10 +31,19 @@ public class LAppActivity extends AppCompatActivity {
     public Context  mContext;
     public Activity mActivity;
 
+
     public LAppActivity() {
         WeakReference<LAppActivity> reference = new WeakReference<>(this);
         mContext = LCommon.getApp();
         mActivity = reference.get();
         TestLogProcress.classLog(this);
+        Exts.registerEvent(this);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Exts.unRegisterEvent(this);
     }
 }

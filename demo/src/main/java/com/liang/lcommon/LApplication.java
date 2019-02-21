@@ -3,6 +3,7 @@ package com.liang.lcommon;
 import android.app.Application;
 
 import com.liang.liangutils.init.LCommon;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * @author : Amarao
@@ -16,6 +17,13 @@ public class LApplication extends Application {
         super.onCreate();
         LCommon.init(this, BuildConfig.class);
         //Common.init(this, BuildConfig.class);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
 

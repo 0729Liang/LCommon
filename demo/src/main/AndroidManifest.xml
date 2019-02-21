@@ -27,7 +27,8 @@
         <activity android:name=".activity.demo.LLogDemo" />
         <activity android:name=".activity.demo.BarUiDemo" />
         <activity android:name=".app.LAppActivity" />
-        <activity android:name=".activity.demo.AnnotationDemo"></activity>
+        <activity android:name=".activity.demo.AnnotationDemo" />
+        <activity android:name=".activity.demo.eventbus.EventBusDemo"></activity>
     </application>
 
 </manifest>

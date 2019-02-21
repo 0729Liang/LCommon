@@ -7,13 +7,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.util.ToastUtils
+import com.liang.lcommon.LApplication
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.LBaseItemBean
+import com.liang.lcommon.app.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.utils.LBarUtilsX
 import kotlinx.android.synthetic.main.demo_bar_ui_activity.*
 
-class BarUiDemo : AppCompatActivity() {
+class BarUiDemo : LAppActivity() {
     companion object {
 
         @JvmStatic
