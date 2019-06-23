@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.demo;
+package com.liang.lcommon.activity.demo.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,10 +9,9 @@ import com.liang.lcommon.ant.FieldLog;
 import com.liang.lcommon.ant.MethodLog;
 import com.liang.lcommon.R;
 import com.liang.lcommon.ant.TestLogProcress;
-import com.liang.lcommon.activity.LBaseItemBean;
-import com.liang.lcommon.app.LAppActivity;
+import com.liang.lcommon.activity.main.LBaseItemBean;
+import com.liang.lcommon.base.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.liangutils.utils.LLogX;
 
 @ClassLog(name = "AnnotationDemo", age = 22)
 public class AnnotationDemo extends LAppActivity {
@@ -21,10 +20,14 @@ public class AnnotationDemo extends LAppActivity {
         activity.startActivity(new Intent(activity, AnnotationDemo.class));
     }
 
-    public static LBaseItemBean getItem() {
-        String intro = "自定义注解";
+    public static LBaseItemBean newItem() {
+        String title = "自定义注解";
+        String intro = "自定义注解\n类注解\n方法注解\n字段注解\n解析成功会打印日志";
         int src = R.drawable.src_null;
-        return new LBaseItemBean(intro, src);
+        LBaseItemBean bean = new LBaseItemBean(title, intro, src);
+        bean.setClickEvent(getClickEvent());
+        bean.setType(LBaseItemBean.BeanType.UTILS);
+        return bean;
     }
 
     public static LBaseItemBean.ClickEvent getClickEvent() {
@@ -40,7 +43,7 @@ public class AnnotationDemo extends LAppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_annotation_demo);
+        setContentView(R.layout.demo_activity_annotation);
 
 
         TestLogProcress.fieldBind(this);

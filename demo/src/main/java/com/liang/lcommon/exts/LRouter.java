@@ -3,15 +3,16 @@ package com.liang.lcommon.exts;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.liang.lcommon.activity.demo.ActivityStartAnimDemo;
-import com.liang.lcommon.activity.demo.AnnotationDemo;
-import com.liang.lcommon.activity.demo.BarUiDemo;
-import com.liang.lcommon.activity.demo.CircleSeekBarDemo;
-import com.liang.lcommon.activity.demo.LKVMgrDemo;
-import com.liang.lcommon.activity.demo.LLogDemo;
-import com.liang.lcommon.activity.demo.RockerActivityDemo;
-import com.liang.lcommon.activity.demo.SettingViewDemo;
-import com.liang.lcommon.activity.demo.eventbus.EventBusDemo;
+import com.liang.lcommon.activity.demo.utils.ActivityStartAnimDemo;
+import com.liang.lcommon.activity.demo.utils.AnnotationDemo;
+import com.liang.lcommon.activity.demo.utils.BarUiDemo;
+import com.liang.lcommon.activity.demo.view.CircleSeekBarDemo;
+import com.liang.lcommon.activity.demo.utils.LKVMgrDemo;
+import com.liang.lcommon.activity.demo.utils.LLogDemo;
+import com.liang.lcommon.activity.demo.view.RockerActivityDemo;
+import com.liang.lcommon.activity.demo.view.SettingViewDemo;
+import com.liang.lcommon.activity.demo.blog.eventbus.EventBusDemo;
+import com.liang.lcommon.activity.demo.blog.fragment.FragmentActivity;
 
 /**
  * @author : Amarao
@@ -58,5 +59,9 @@ public class LRouter {
 
     public static void startEventBusDemo(Activity activity) {
         EventBusDemo.startActivity(activity);
+    }
+
+    public static void startFragmentActivityA(Activity activity) {
+        FragmentActivity.startActivity(activity);
     }
 }

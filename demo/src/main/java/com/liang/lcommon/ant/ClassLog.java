@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author : Amarao
  * CreateAt : 15:18 2019/2/14
- * Describe :
+ * Describe : 类注解
  */
 
 @Target(ElementType.TYPE)

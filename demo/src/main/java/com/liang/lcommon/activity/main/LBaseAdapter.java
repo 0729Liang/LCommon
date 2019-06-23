@@ -1,11 +1,15 @@
-package com.liang.lcommon.activity;
+package com.liang.lcommon.activity.main;
 
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.liang.lcommon.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -25,6 +29,13 @@ public class LBaseAdapter extends BaseQuickAdapter<LBaseItemBean, BaseViewHolder
     protected void convert(BaseViewHolder helper, LBaseItemBean item) {
         helper.setText(R.id.item_intro, item.getIntro());
         helper.setImageResource(R.id.item_image, item.getSrc());
+
+        if (!item.getTitle().isEmpty()) {
+            helper.setText(R.id.item_title, item.getTitle());
+            helper.getView(R.id.item_title).setVisibility(View.VISIBLE);
+        } else {
+            helper.getView(R.id.item_title).setVisibility(View.GONE);
+        }
 
         // imageView接收点击事件，并转移给itemView
         ImageView imageView = helper.getView(R.id.item_image);

@@ -1,12 +1,12 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.activity.demo.utils
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.utils.LActivityAnimX
 import com.liang.liangutils.utils.LResourceX
@@ -25,10 +25,14 @@ class ActivityStartAnimDemo : LAppActivity() {
             activityAnim(anim.type, true, activity)
         }
 
-        fun getItem(): LBaseItemBean {
+        fun newItem(): LBaseItemBean {
+            val title = "Activity启动动画"
             val intro = "这是一个Activity的启动动画"
             val src = R.drawable.demo_activity_start_anim
-            return LBaseItemBean(intro, src)
+            val bean = LBaseItemBean(title, intro, src)
+            bean.clickEvent = getClickEvent()
+            bean.type = LBaseItemBean.BeanType.UTILS
+            return bean
         }
 
         fun getClickEvent(): LBaseItemBean.ClickEvent {

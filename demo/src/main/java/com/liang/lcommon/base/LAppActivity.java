@@ -1,24 +1,13 @@
-package com.liang.lcommon.app;
+package com.liang.lcommon.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
-import com.liang.lcommon.R;
 import com.liang.lcommon.ant.TestLogProcress;
 import com.liang.liangutils.init.LCommon;
 import com.liang.liangutils.msg.Exts;
 
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
@@ -28,16 +17,14 @@ import java.lang.ref.WeakReference;
  */
 public class LAppActivity extends AppCompatActivity {
 
-    public Context  mContext;
-    public Activity mActivity;
-
+    public Context                     mContext;
+    public WeakReference<LAppActivity> mActivity;
 
     public LAppActivity() {
-        WeakReference<LAppActivity> reference = new WeakReference<>(this);
-        mContext = LCommon.getApp();
-        mActivity = reference.get();
         TestLogProcress.classLog(this);
         Exts.registerEvent(this);
+        mContext = LCommon.getApp();
+        mActivity = new WeakReference<>(this);
     }
 
 

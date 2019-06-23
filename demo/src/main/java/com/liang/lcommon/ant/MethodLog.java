@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author : Amarao
  * CreateAt : 14:47 2019/2/14
- * Describe :
+ * Describe : 方法注解
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

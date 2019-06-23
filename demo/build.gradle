@@ -30,15 +30,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation support.appcompat_v7
     implementation support.constraint
-    //testImplementation 'junit:junit:4.12'
-    //androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation support.design
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
     implementation project(':utils')
+
 
 //
 //    //工具
@@ -71,5 +70,4 @@ dependencies {
 //    // 圆角 image
 //    implementation libs.roundImgView
 
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

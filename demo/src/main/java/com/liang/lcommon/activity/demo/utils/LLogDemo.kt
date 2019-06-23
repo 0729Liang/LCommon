@@ -1,12 +1,12 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.activity.demo.utils
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.blankj.utilcode.util.LogUtils
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.utils.LLogX
 import kotlinx.android.synthetic.main.demo_llog_activity.*
@@ -21,10 +21,14 @@ class LLogDemo : LAppActivity() {
         }
 
         @JvmStatic
-        fun getItem(): LBaseItemBean {
+        fun newItem(): LBaseItemBean {
+            val title = "日志工具"
             val intro = "日志工具\n摘抄自blank AndroidUtils"
             val src = R.drawable.demo_llogx
-            return LBaseItemBean(intro, src)
+            val bean = LBaseItemBean(title,intro, src)
+            bean.clickEvent = getClickEvent()
+            bean.type = LBaseItemBean.BeanType.UTILS
+            return bean
         }
 
         @JvmStatic

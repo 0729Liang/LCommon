@@ -1,7 +1,8 @@
-package com.liang.lcommon;
+package com.liang.lcommon.base;
 
 import android.app.Application;
 
+import com.liang.lcommon.BuildConfig;
 import com.liang.liangutils.init.LCommon;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -25,6 +26,8 @@ public class LApplication extends Application {
         }
         LeakCanary.install(this);
     }
+
+
 
 
 }

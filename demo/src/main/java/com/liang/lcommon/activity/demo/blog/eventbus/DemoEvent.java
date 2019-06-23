@@ -1,7 +1,6 @@
-package com.liang.lcommon.activity.demo.eventbus;
+package com.liang.lcommon.activity.demo.blog.eventbus;
 
 import com.liang.liangutils.msg.BusEvent;
-import com.liang.liangutils.utils.LLogX;
 
 /**
  * @author : Amarao

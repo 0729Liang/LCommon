@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.demo;
+package com.liang.lcommon.activity.demo.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.liang.lcommon.R;
-import com.liang.lcommon.activity.LBaseItemBean;
-import com.liang.lcommon.app.LAppActivity;
+import com.liang.lcommon.activity.main.LBaseItemBean;
+import com.liang.lcommon.base.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
 import com.liang.liangutils.utils.LLogX;
 import com.liang.liangutils.utils.LResourceX;
@@ -22,10 +22,15 @@ public class SettingViewDemo extends LAppActivity {
         activity.startActivity(new Intent(activity, SettingViewDemo.class));
     }
 
-    public static LBaseItemBean getItem() {
-        String intro = "设置界面按钮\n标题按钮(Title)\n箭头按钮(Arrow)\n选择按钮(Switch)";
+
+    public static LBaseItemBean newItem() {
+        String title = "设置界面按钮";
+        String intro = "具体包括\n标题按钮(Title)\n箭头按钮(Arrow)\n选择按钮(Switch)";
         int src = R.drawable.demo_setting_view;
-        return new LBaseItemBean(intro, src);
+        LBaseItemBean bean = new LBaseItemBean(title, intro, src);
+        bean.setClickEvent(getClickEvent());
+        bean.setType(LBaseItemBean.BeanType.VIEW);
+        return bean;
     }
 
     public static LBaseItemBean.ClickEvent getClickEvent() {

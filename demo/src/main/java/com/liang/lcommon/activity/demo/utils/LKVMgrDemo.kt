@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.activity.demo.utils
 
 import android.app.Activity
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.text.InputType
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.mgrs.LKVMgr
 import com.liang.liangutils.utils.LEmptyX
@@ -25,10 +25,14 @@ class LKVMgrDemo : LAppActivity() {
         }
 
         @JvmStatic
-        fun getItem(): LBaseItemBean {
-            val intro = "文件缓存策略\n通过mmkv 和 sharePerfences实现\n可保存int float String boolean Object等类型;\n可保存到内存或本地;"
+        fun newItem(): LBaseItemBean {
+            val title = "文件缓存策略"
+            val intro = "文件缓存策略\n\t1.通过mmkv 和 sharePerfences实现\n\t2.可保存int float String boolean Object等基本类型，甚至是List，Map,Set等特殊类型;\n\t3.可保存到内存或本地;"
             val src = R.drawable.demo_lkvmgr
-            return LBaseItemBean(intro, src)
+            val bean = LBaseItemBean(title, intro, src)
+            bean.clickEvent = getClickEvent()
+            bean.type = LBaseItemBean.BeanType.UTILS
+            return bean
         }
 
         @JvmStatic
@@ -91,34 +95,34 @@ class LKVMgrDemo : LAppActivity() {
 
     // 还原状态
     private fun restoryState() {
-        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, LKVMgrSaveType.SAVE_ON_MEMORY.value)
-        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, LKVMgrWriteType.WRITE_STRING.value)
+        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value)
+        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, Companion.LKVMgrWriteType.WRITE_STRING.value)
 
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> radioGroupSaveType.check(R.id.lkvmgr_memory)
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> radioGroupSaveType.check(R.id.lkvmgr_mmkv)
-            LKVMgrSaveType.SAVE_ON_SP.value -> radioGroupSaveType.check(R.id.lkvmgr_sp)
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> radioGroupSaveType.check(R.id.lkvmgr_memory)
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> radioGroupSaveType.check(R.id.lkvmgr_mmkv)
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> radioGroupSaveType.check(R.id.lkvmgr_sp)
         }//  when (mSaveType)
 
         lkvmgr_boolean_type.visibility = View.GONE
         when (mWriteType) {
-            LKVMgrWriteType.WRITE_STRING.value -> {
+            Companion.LKVMgrWriteType.WRITE_STRING.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_string)
             }
-            LKVMgrWriteType.WRITE_NUMBER.value -> {
+            Companion.LKVMgrWriteType.WRITE_NUMBER.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_number)
             }
-            LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+            Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_boolean)
                 lkvmgr_boolean_type.visibility = View.VISIBLE
             }
-            LKVMgrWriteType.WRITE_OBJ.value -> {
+            Companion.LKVMgrWriteType.WRITE_OBJ.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_obj)
             }
-            LKVMgrWriteType.WRITE_LIST.value -> {
+            Companion.LKVMgrWriteType.WRITE_LIST.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_list)
             }
-            LKVMgrWriteType.WRITE_MAP.value -> {
+            Companion.LKVMgrWriteType.WRITE_MAP.value -> {
                 radioGroupWriterType.check(R.id.lkvmgr_map)
             }
         }
@@ -126,12 +130,12 @@ class LKVMgrDemo : LAppActivity() {
 
     // 保存类型监听
     fun onSaveTypeListener() {
-        var type = LKVMgrSaveType.SAVE_ON_MEMORY.value
+        var type = Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value
         radioGroupSaveType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
-                R.id.lkvmgr_memory -> type = LKVMgrSaveType.SAVE_ON_MEMORY.value
-                R.id.lkvmgr_mmkv -> type = LKVMgrSaveType.SAVE_ON_MMKV.value
-                R.id.lkvmgr_sp -> type = LKVMgrSaveType.SAVE_ON_SP.value
+                R.id.lkvmgr_memory -> type = Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value
+                R.id.lkvmgr_mmkv -> type = Companion.LKVMgrSaveType.SAVE_ON_MMKV.value
+                R.id.lkvmgr_sp -> type = Companion.LKVMgrSaveType.SAVE_ON_SP.value
             }
             LKVMgr.getInstance().putInt(LKVMGR_SAVE_TYPE, type)
         }
@@ -139,39 +143,39 @@ class LKVMgrDemo : LAppActivity() {
 
     // 写入类型监听
     fun onWriterTypeListener() {
-        var type = LKVMgrWriteType.WRITE_STRING.value
+        var type = Companion.LKVMgrWriteType.WRITE_STRING.value
         radioGroupWriterType.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.lkvmgr_string -> {
-                    type = LKVMgrWriteType.WRITE_STRING.value
+                    type = Companion.LKVMgrWriteType.WRITE_STRING.value
                     lkvmgr_boolean_type.visibility = View.GONE
                     contentEditText.inputType = InputType.TYPE_CLASS_TEXT
                     contentEditText.visibility = View.VISIBLE
                     contentEditText.setText("")
                 }
                 R.id.lkvmgr_number -> {
-                    type = LKVMgrWriteType.WRITE_NUMBER.value
+                    type = Companion.LKVMgrWriteType.WRITE_NUMBER.value
                     lkvmgr_boolean_type.visibility = View.GONE
                     contentEditText.inputType = InputType.TYPE_CLASS_NUMBER
                     contentEditText.visibility = View.VISIBLE
                     contentEditText.setText("")
                 }
                 R.id.lkvmgr_boolean -> {
-                    type = LKVMgrWriteType.WRITE_BOOLEAN.value
+                    type = Companion.LKVMgrWriteType.WRITE_BOOLEAN.value
                     lkvmgr_boolean_type.visibility = View.VISIBLE
                     contentEditText.visibility = View.GONE
                     contentEditText.setText(getWriterBooleanVaule().toString())
                 }
                 R.id.lkvmgr_obj -> {
-                    type = LKVMgrWriteType.WRITE_OBJ.value
+                    type = Companion.LKVMgrWriteType.WRITE_OBJ.value
                     writeObj()
                 }
                 R.id.lkvmgr_list -> {
-                    type = LKVMgrWriteType.WRITE_LIST.value
+                    type = Companion.LKVMgrWriteType.WRITE_LIST.value
                     writeList()
                 }
                 R.id.lkvmgr_map -> {
-                    type = LKVMgrWriteType.WRITE_MAP.value
+                    type = Companion.LKVMgrWriteType.WRITE_MAP.value
                     writeMap()
                 }
 
@@ -216,29 +220,29 @@ class LKVMgrDemo : LAppActivity() {
         }
 
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.memory().putString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.memory().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.memory().putString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.memory().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         LKVMgr.memory().putBool(LKVMGR_CONTENT, getWriterBooleanVaule())
                     }
                 }
             }
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.mmkv().putString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.mmkv().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.mmkv().putString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.mmkv().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         LKVMgr.mmkv().putBool(LKVMGR_CONTENT, getWriterBooleanVaule())
                     }
                 }
             }
-            LKVMgrSaveType.SAVE_ON_SP.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.sp().putString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.sp().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> LKVMgr.sp().putString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> LKVMgr.sp().putFloat(LKVMGR_CONTENT, mContentText.toFloat())
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         LKVMgr.sp().putBool(LKVMGR_CONTENT, getWriterBooleanVaule())
                     }
                 }
@@ -253,66 +257,66 @@ class LKVMgrDemo : LAppActivity() {
 
     // 读取
     fun readContent() {
-        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, LKVMgrSaveType.SAVE_ON_MEMORY.value)
-        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, LKVMgrWriteType.WRITE_STRING.value)
+        mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value)
+        mWriteType = LKVMgr.getInstance().getInt(LKVMGR_WRITER_TYPE, Companion.LKVMgrWriteType.WRITE_STRING.value)
 
         val personal: Personal
 
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.memory().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.memory().getFloat(LKVMGR_CONTENT, 0f).toString()
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.memory().getString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.memory().getFloat(LKVMGR_CONTENT, 0f).toString()
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         mContentText = LKVMgr.memory().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
-                    LKVMgrWriteType.WRITE_OBJ.value -> {
+                    Companion.LKVMgrWriteType.WRITE_OBJ.value -> {
                         personal = LKVMgr.memory().getObj(LKVMGR_CONTENT, Personal::class.java)
                         mContentText = "对象：" + personal.name + personal.age
                     }
-                    LKVMgrWriteType.WRITE_LIST.value -> {
+                    Companion.LKVMgrWriteType.WRITE_LIST.value -> {
                         mContentText = listToString(LKVMgr.memory().getList(LKVMGR_CONTENT, Personal::class.java))
                     }
-                    LKVMgrWriteType.WRITE_MAP.value -> {
+                    Companion.LKVMgrWriteType.WRITE_MAP.value -> {
                         mContentText = mapToString(LKVMgr.memory().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
                     }
                 }
             }
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.mmkv().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.mmkv().getFloat(LKVMGR_CONTENT, 0f).toString()
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.mmkv().getString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.mmkv().getFloat(LKVMGR_CONTENT, 0f).toString()
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         mContentText = LKVMgr.mmkv().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
-                    LKVMgrWriteType.WRITE_OBJ.value -> {
+                    Companion.LKVMgrWriteType.WRITE_OBJ.value -> {
                         personal = LKVMgr.mmkv().getObj(LKVMGR_CONTENT, Personal::class.java)
                         mContentText = "对象：" + personal.name + personal.age
                     }
-                    LKVMgrWriteType.WRITE_LIST.value -> {
+                    Companion.LKVMgrWriteType.WRITE_LIST.value -> {
                         mContentText = listToString(LKVMgr.mmkv().getList(LKVMGR_CONTENT, Personal::class.java))
                     }
-                    LKVMgrWriteType.WRITE_MAP.value -> {
+                    Companion.LKVMgrWriteType.WRITE_MAP.value -> {
                         mContentText = mapToString(LKVMgr.mmkv().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
                     }
                 }
             }
-            LKVMgrSaveType.SAVE_ON_SP.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> {
                 when (mWriteType) {
-                    LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.sp().getString(LKVMGR_CONTENT, mContentText)
-                    LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.sp().getFloat(LKVMGR_CONTENT, 0f).toString()
-                    LKVMgrWriteType.WRITE_BOOLEAN.value -> {
+                    Companion.LKVMgrWriteType.WRITE_STRING.value -> mContentText = LKVMgr.sp().getString(LKVMGR_CONTENT, mContentText)
+                    Companion.LKVMgrWriteType.WRITE_NUMBER.value -> mContentText = LKVMgr.sp().getFloat(LKVMGR_CONTENT, 0f).toString()
+                    Companion.LKVMgrWriteType.WRITE_BOOLEAN.value -> {
                         LKVMgr.sp().getBool(LKVMGR_CONTENT, getWriterBooleanVaule())
                         //mContentText = LKVMgr.sp().getBool(LKVMGR_CONTENT, getWriterBooleanVaule()).toString()
                     }
-                    LKVMgrWriteType.WRITE_OBJ.value -> {
+                    Companion.LKVMgrWriteType.WRITE_OBJ.value -> {
                         personal = LKVMgr.sp().getObj(LKVMGR_CONTENT, Personal::class.java)
                         mContentText = "对象：" + personal.name + personal.age
                     }
-                    LKVMgrWriteType.WRITE_LIST.value -> {
+                    Companion.LKVMgrWriteType.WRITE_LIST.value -> {
                         mContentText = listToString(LKVMgr.sp().getList(LKVMGR_CONTENT, Personal::class.java))
                     }
-                    LKVMgrWriteType.WRITE_MAP.value -> {
+                    Companion.LKVMgrWriteType.WRITE_MAP.value -> {
                         mContentText = mapToString(LKVMgr.sp().getMap(LKVMGR_CONTENT, String::class.java, Personal::class.java))
                     }
                 }
@@ -360,13 +364,13 @@ class LKVMgrDemo : LAppActivity() {
         val p1 = Personal("aa", 11)
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 LKVMgr.memory().putObj(LKVMGR_CONTENT, p1)
             }
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 LKVMgr.mmkv().putObj(LKVMGR_CONTENT, p1)
             }
-            LKVMgrSaveType.SAVE_ON_SP.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> {
                 LKVMgr.sp().putObj(LKVMGR_CONTENT, p1)
             }
         }//  when (mSaveType)
@@ -387,13 +391,13 @@ class LKVMgrDemo : LAppActivity() {
         list.add(p5)
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 LKVMgr.memory().putList(LKVMGR_CONTENT, list)
             }
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 LKVMgr.mmkv().putList(LKVMGR_CONTENT, list)
             }
-            LKVMgrSaveType.SAVE_ON_SP.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> {
                 LKVMgr.sp().putList(LKVMGR_CONTENT, list)
             }
         }//  when (mSaveType)
@@ -414,13 +418,13 @@ class LKVMgrDemo : LAppActivity() {
         map.put("A5", p5)
         mSaveType = LKVMgr.getInstance().getInt(LKVMGR_SAVE_TYPE, 0)
         when (mSaveType) {
-            LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MEMORY.value -> {
                 LKVMgr.memory().putMap(LKVMGR_CONTENT, map)
             }
-            LKVMgrSaveType.SAVE_ON_MMKV.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_MMKV.value -> {
                 LKVMgr.mmkv().putMap(LKVMGR_CONTENT, map)
             }
-            LKVMgrSaveType.SAVE_ON_SP.value -> {
+            Companion.LKVMgrSaveType.SAVE_ON_SP.value -> {
                 LKVMgr.sp().putMap(LKVMGR_CONTENT, map)
             }
         }//  when (mSaveType)

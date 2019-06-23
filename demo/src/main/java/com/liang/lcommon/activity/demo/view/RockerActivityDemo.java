@@ -1,4 +1,4 @@
-package com.liang.lcommon.activity.demo;
+package com.liang.lcommon.activity.demo.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.liang.lcommon.R;
-import com.liang.lcommon.activity.LBaseItemBean;
+import com.liang.lcommon.activity.main.LBaseItemBean;
 import com.liang.lcommon.ant.ClassLog;
-import com.liang.lcommon.app.LAppActivity;
+import com.liang.lcommon.base.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
 import com.liang.liangutils.utils.LLogX;
 import com.liang.liangutils.view.LRockerViewV2;
@@ -20,10 +20,14 @@ public class RockerActivityDemo extends LAppActivity {
         activity.startActivity(new Intent(activity, RockerActivityDemo.class));
     }
 
-    public static LBaseItemBean getItem() {
+    public static LBaseItemBean newItem() {
+        String title = "虚拟摇杆";
         String intro = "虚拟摇杆\n1.仿王者荣耀摇杆\n2.自定义虚拟摇杆\n  锚点偏移级别 0-9\n  可监听角度变化\n摇杆方向可设置为二四八个方向";
         int src = R.drawable.demo_rocker_view;
-        return new LBaseItemBean(intro, src);
+        LBaseItemBean bean = new LBaseItemBean(title, intro, src);
+        bean.setClickEvent(getClickEvent());
+        bean.setType(LBaseItemBean.BeanType.VIEW);
+        return bean;
     }
 
     public static LBaseItemBean.ClickEvent getClickEvent() {

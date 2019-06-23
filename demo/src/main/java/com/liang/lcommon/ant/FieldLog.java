@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @author : Amarao
  * CreateAt : 14:37 2019/2/14
- * Describe :
+ * Describe : 字段注解
  */
 
 @Target(ElementType.FIELD)

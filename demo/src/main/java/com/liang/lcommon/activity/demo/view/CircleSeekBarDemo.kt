@@ -1,16 +1,17 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.activity.demo.view
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.activity.demo.utils.BarUiDemo
+import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.utils.LLogX
 import com.liang.liangutils.view.LCircleSeekBar
-import kotlinx.android.synthetic.main.dmeo_circle_seek_bar.*
+import kotlinx.android.synthetic.main.demo_circle_seek_bar.*
 
 class CircleSeekBarDemo : LAppActivity() {
 
@@ -21,10 +22,14 @@ class CircleSeekBarDemo : LAppActivity() {
         }
 
         @JvmStatic
-        fun getItem(): LBaseItemBean {
+        fun newItem(): LBaseItemBean {
+            val title = "环形SeekBar"
             val intro = "自定义SeekBar\n支持环形，圆形;\n锚点可隐藏，可修改位置;\n可以监听缓冲进度"
             val src = R.drawable.demo_circle_seek_bar
-            return LBaseItemBean(intro, src)
+            val bean = LBaseItemBean(title,intro, src)
+            bean.clickEvent = getClickEvent()
+            bean.type = LBaseItemBean.BeanType.VIEW
+            return bean
         }
 
         @JvmStatic
@@ -35,7 +40,7 @@ class CircleSeekBarDemo : LAppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dmeo_circle_seek_bar)
+        setContentView(R.layout.demo_circle_seek_bar)
 
         lseekbar.setStartTouchListener { view: LCircleSeekBar? -> LLogX.e("开始") }
         lseekbar.setStopTouchListener { view: LCircleSeekBar? -> LLogX.e("结束") }

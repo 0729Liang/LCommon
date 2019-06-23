@@ -1,16 +1,14 @@
-package com.liang.lcommon.activity.demo
+package com.liang.lcommon.activity.demo.utils
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.blankj.utilcode.util.ToastUtils
-import com.liang.lcommon.LApplication
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.LBaseItemBean
-import com.liang.lcommon.app.LAppActivity
+import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.utils.LBarUtilsX
 import kotlinx.android.synthetic.main.demo_bar_ui_activity.*
@@ -24,10 +22,14 @@ class BarUiDemo : LAppActivity() {
         }
 
         @JvmStatic
-        fun getItem(): LBaseItemBean {
+        fun newItem(): LBaseItemBean {
+            val title = "AndroidBar工具类"
             val intro = "通知栏导航栏相关\n参照 AndroidUtils"
             val src = R.drawable.demo_barui
-            return LBaseItemBean(intro, src)
+            val bean = LBaseItemBean(title,intro, src)
+            bean.clickEvent = getClickEvent()
+            bean.type = LBaseItemBean.BeanType.UTILS
+            return bean
         }
 
         @JvmStatic
