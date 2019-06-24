@@ -3,7 +3,6 @@ package com.liang.lcommon.activity.demo.utils
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.blankj.utilcode.util.LogUtils
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.main.LBaseItemBean
 import com.liang.lcommon.base.LAppActivity
@@ -63,7 +62,7 @@ class LLogDemo : LAppActivity() {
             }
         } else {
             for (i in 1..count) {
-                LogUtils.e(t.toString() + i)
+                LLogX.e(t.toString() + i)
             }
         }
     }

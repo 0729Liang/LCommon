@@ -5,9 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
-import com.blankj.utilcode.util.ToastUtils
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.main.LBaseItemBean
+import com.liang.lcommon.activity.main2.ToastUtils
 import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
 import com.liang.liangutils.mgrs.LKVMgr

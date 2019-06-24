@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.blankj.utilcode.util.Utils;
+import com.liang.liangutils.init.LCommon;
 
 import java.lang.reflect.Method;
 
@@ -424,11 +424,12 @@ public final class LBarUtilsX {
      */
     public static int getActionBarHeight() {
         TypedValue tv = new TypedValue();
-        if (Utils.getApp().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+        if (LCommon.getApp().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(
-                    tv.data, Utils.getApp().getResources().getDisplayMetrics()
+                    tv.data, LCommon.getApp().getResources().getDisplayMetrics()
             );
         }
+
         return 0;
     }
 
@@ -456,7 +457,7 @@ public final class LBarUtilsX {
     private static void invokePanels(final String methodName) {
         try {
             @SuppressLint("WrongConstant")
-            Object service = Utils.getApp().getSystemService("statusbar");
+            Object service = LCommon.getApp().getSystemService("statusbar");
             @SuppressLint("PrivateApi")
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);
@@ -510,7 +511,7 @@ public final class LBarUtilsX {
             final View child = decorView.getChildAt(i);
             final int id = child.getId();
             if (id != View.NO_ID) {
-                String resourceEntryName = Utils.getApp()
+                String resourceEntryName = LCommon.getApp()
                         .getResources()
                         .getResourceEntryName(id);
                 if ("navigationBarBackground".equals(resourceEntryName)) {
@@ -553,7 +554,7 @@ public final class LBarUtilsX {
             final View child = decorView.getChildAt(i);
             final int id = child.getId();
             if (id != View.NO_ID) {
-                String resourceEntryName = Utils.getApp()
+                String resourceEntryName = LCommon.getApp()
                         .getResources()
                         .getResourceEntryName(id);
                 if ("navigationBarBackground".equals(resourceEntryName)
@@ -621,7 +622,7 @@ public final class LBarUtilsX {
      */
     public static boolean isSupportNavBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            WindowManager wm = (WindowManager) Utils.getApp().getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm = (WindowManager) LCommon.getApp().getSystemService(Context.WINDOW_SERVICE);
             if (wm == null) return false;
             Display display = wm.getDefaultDisplay();
             Point size = new Point();
@@ -630,7 +631,7 @@ public final class LBarUtilsX {
             display.getRealSize(realSize);
             return realSize.y != size.y || realSize.x != size.x;
         }
-        boolean menu = ViewConfiguration.get(Utils.getApp()).hasPermanentMenuKey();
+        boolean menu = ViewConfiguration.get(LCommon.getApp()).hasPermanentMenuKey();
         boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
         return !menu && !back;
     }

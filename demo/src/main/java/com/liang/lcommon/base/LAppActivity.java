@@ -1,10 +1,9 @@
 package com.liang.lcommon.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
-import com.liang.lcommon.ant.TestLogProcress;
+import com.liang.lcommon.activity.demo.utils.ant.TestLogProcress;
 import com.liang.liangutils.init.LCommon;
 import com.liang.liangutils.msg.Exts;
 

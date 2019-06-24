@@ -36,7 +36,7 @@ dependencies {
     // implementation 编译过程无法访问，运行期间可以访问
     // api 在编译和运行期间都可以将a模块的h库的接口暴露给其他模块，就如同原来compile方法
     //工具
-    api libs.utilcode
+    //api libs.utilcode
     api libs.mmkv
     //api libs.common
     // json

@@ -1,12 +1,9 @@
-package com.liang.lcommon.ant;
+package com.liang.lcommon.activity.demo.utils.ant;
 
 import android.app.Activity;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.liang.liangutils.utils.LLogX;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
