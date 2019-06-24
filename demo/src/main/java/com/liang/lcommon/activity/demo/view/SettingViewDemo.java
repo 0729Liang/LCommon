@@ -10,11 +10,11 @@ import com.liang.lcommon.R;
 import com.liang.lcommon.activity.main.LBaseItemBean;
 import com.liang.lcommon.base.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.liangutils.utils.LLogX;
+import com.liang.liangutils.libs.utils.LLogX;
 import com.liang.liangutils.utils.LResourceX;
-import com.liang.liangutils.view.LSettingArrow;
-import com.liang.liangutils.view.LSettingSwitch;
-import com.liang.liangutils.view.LTitleView;
+import com.liang.liangutils.libs.view.LSettingArrow;
+import com.liang.liangutils.libs.view.LSettingSwitch;
+import com.liang.liangutils.libs.view.LTitleView;
 
 public class SettingViewDemo extends LAppActivity {
 

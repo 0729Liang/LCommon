@@ -8,13 +8,13 @@
     android:background="#ececec"
     tools:context=".activity.demo.view.SettingViewDemo">
 
-    <com.liang.liangutils.view.LTitleView
+    <com.liang.liangutils.libs.view.LTitleView
         android:id="@+id/demo_setting_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"/>
 
-    <com.liang.liangutils.view.LSettingArrow
+    <com.liang.liangutils.libs.view.LSettingArrow
         android:id="@+id/demo_lsettinh_arrow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:lsetting_arrow_number="30"
         app:lsetting_arrow_title_icon="@drawable/test3_head" />
 
-    <com.liang.liangutils.view.LSettingSwitch
+    <com.liang.liangutils.libs.view.LSettingSwitch
         android:id="@+id/demo_gravity_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -35,7 +35,7 @@
         app:switchThum="@drawable/gravity_1" />
 
     <!--蓝牙-->
-    <com.liang.liangutils.view.LSettingSwitch
+    <com.liang.liangutils.libs.view.LSettingSwitch
         android:id="@+id/demo_bluetooth_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -48,7 +48,7 @@
         app:switchThum="@drawable/bluetooth_1" />
 
     <!--wifi-->
-    <com.liang.liangutils.view.LSettingSwitch
+    <com.liang.liangutils.libs.view.LSettingSwitch
         android:id="@+id/demo_wifi_switch"
         android:layout_width="match_parent"
         android:layout_height="30dp"

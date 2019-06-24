@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import com.liang.lcommon.R;
 import com.liang.lcommon.activity.main.LBaseItemBean;
-import com.liang.lcommon.activity.demo.utils.ant.ClassLog;
+import com.liang.liangutils.libs.utils.ant.ClassLog;
 import com.liang.lcommon.base.LAppActivity;
 import com.liang.lcommon.exts.LRouter;
-import com.liang.liangutils.utils.LLogX;
-import com.liang.liangutils.view.LRockerViewV2;
+import com.liang.liangutils.libs.utils.LLogX;
+import com.liang.liangutils.libs.view.LRockerViewV2;
 
 @ClassLog
 public class RockerActivityDemo extends LAppActivity {

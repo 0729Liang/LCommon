@@ -10,7 +10,7 @@ import com.liang.lcommon.activity.main.LBaseItemBean
 import com.liang.lcommon.activity.main2.ToastUtils
 import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.liangutils.mgrs.LKVMgr
+import com.liang.liangutils.libs.utils.kvmgr.LKVMgr
 import com.liang.liangutils.utils.LEmptyX
 import kotlinx.android.synthetic.main.demo_lkv_mgr.*
 import java.util.HashMap

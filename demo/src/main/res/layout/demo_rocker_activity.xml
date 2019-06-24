@@ -65,13 +65,13 @@
     </LinearLayout>
 
     <!--摇杆-->
-    <com.liang.liangutils.view.LRockerView
+    <com.liang.liangutils.libs.view.LRockerView
         android:id="@+id/remoteControlView"
         android:layout_width="@dimen/dp200"
         android:layout_height="@dimen/dp200"
         android:layout_above="@id/rockerXY_View" />
 
-    <com.liang.liangutils.view.LRockerViewV2
+    <com.liang.liangutils.libs.view.LRockerViewV2
         android:id="@+id/rockerXY_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         rocker:lrocker_rockerSpeedLevel="10"
         android:layout_marginStart="25dp" />
 
-    <com.liang.liangutils.view.LRockerViewV2
+    <com.liang.liangutils.libs.view.LRockerViewV2
         android:id="@+id/rockerZ_View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

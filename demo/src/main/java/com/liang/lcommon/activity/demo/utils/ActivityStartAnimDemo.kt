@@ -8,7 +8,7 @@ import com.liang.lcommon.R
 import com.liang.lcommon.activity.main.LBaseItemBean
 import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.liangutils.utils.LActivityAnimX
+import com.liang.liangutils.libs.utils.LActivityAnimX
 import com.liang.liangutils.utils.LResourceX
 import kotlinx.android.synthetic.main.demo_activity_start_anim.*
 

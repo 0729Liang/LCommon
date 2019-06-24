@@ -29,6 +29,7 @@ open class LBaseFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         Exts.unRegisterEvent(this)
+        LApplication.getRefWatcher(getContext()).watch(this,"fragment");
     }
 
 }

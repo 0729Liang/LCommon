@@ -2,7 +2,6 @@ package com.liang.lcommon.activity.main2
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import com.liang.lcommon.R
 import com.liang.lcommon.activity.demo.blog.eventbus.EventBusDemo
 import com.liang.lcommon.activity.demo.blog.fragment.FragmentActivity
@@ -16,9 +15,7 @@ import com.liang.lcommon.activity.main2.fragment.BlogFragment
 import com.liang.lcommon.activity.main2.fragment.UtilsFragment
 import com.liang.lcommon.activity.main2.fragment.ViewFragment
 import com.liang.lcommon.activity.main2.viewpager.LFragmentPagerAdapter
-import com.liang.liangutils.utils.LLogX
 import kotlinx.android.synthetic.main.activity_lmain.*
-import java.lang.ref.WeakReference
 import kotlin.collections.ArrayList
 
 /**

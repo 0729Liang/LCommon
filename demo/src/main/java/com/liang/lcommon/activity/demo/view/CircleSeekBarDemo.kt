@@ -5,12 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import com.liang.lcommon.R
-import com.liang.lcommon.activity.demo.utils.BarUiDemo
 import com.liang.lcommon.activity.main.LBaseItemBean
 import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.liangutils.utils.LLogX
-import com.liang.liangutils.view.LCircleSeekBar
+import com.liang.liangutils.libs.utils.LLogX
+import com.liang.liangutils.libs.view.LCircleSeekBar
 import kotlinx.android.synthetic.main.demo_circle_seek_bar.*
 
 class CircleSeekBarDemo : LAppActivity() {

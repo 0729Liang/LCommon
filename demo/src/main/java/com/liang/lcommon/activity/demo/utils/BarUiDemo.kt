@@ -10,7 +10,7 @@ import com.liang.lcommon.R
 import com.liang.lcommon.activity.main.LBaseItemBean
 import com.liang.lcommon.base.LAppActivity
 import com.liang.lcommon.exts.LRouter
-import com.liang.liangutils.utils.LBarUtilsX
+import com.liang.liangutils.libs.utils.LBarUtilsX
 import kotlinx.android.synthetic.main.demo_bar_ui_activity.*
 
 class BarUiDemo : LAppActivity() {
