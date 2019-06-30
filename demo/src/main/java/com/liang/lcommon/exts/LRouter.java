@@ -2,17 +2,18 @@ package com.liang.lcommon.exts;
 
 import android.app.Activity;
 import android.content.Intent;
-
-import com.liang.lcommon.activity.demo.utils.ActivityStartAnimDemo;
-import com.liang.lcommon.activity.demo.utils.AnnotationDemo;
-import com.liang.lcommon.activity.demo.utils.BarUiDemo;
-import com.liang.lcommon.activity.demo.view.CircleSeekBarDemo;
-import com.liang.lcommon.activity.demo.utils.LKVMgrDemo;
-import com.liang.lcommon.activity.demo.utils.LLogDemo;
-import com.liang.lcommon.activity.demo.view.RockerActivityDemo;
-import com.liang.lcommon.activity.demo.view.SettingViewDemo;
-import com.liang.lcommon.activity.demo.blog.eventbus.EventBusDemo;
-import com.liang.lcommon.activity.demo.blog.fragment.FragmentActivity;
+import com.liang.lcommon.demo.blog.eventbus.EventBusDemo;
+import com.liang.lcommon.demo.blog.fragment.FragmentActivity;
+import com.liang.lcommon.demo.blog.lineChart.LineChartDemo;
+import com.liang.lcommon.demo.blog.popupwindow.PopupWindowDemo;
+import com.liang.lcommon.demo.utils.ActivityStartAnimDemo;
+import com.liang.lcommon.demo.utils.AnnotationDemo;
+import com.liang.lcommon.demo.utils.BarUiDemo;
+import com.liang.lcommon.demo.utils.LKVMgrDemo;
+import com.liang.lcommon.demo.utils.LogDemo;
+import com.liang.lcommon.demo.view.CircleSeekBarDemo;
+import com.liang.lcommon.demo.view.RockerActivityDemo;
+import com.liang.lcommon.demo.view.SettingViewDemo;
 
 /**
  * @author : Amarao
@@ -33,20 +34,20 @@ public class LRouter {
         CircleSeekBarDemo.startActivity(activity);
     }
 
-    public static void startRockerActivity(Activity activity) {
+    public static void startRockerDemo(Activity activity) {
         RockerActivityDemo.startActivity(activity);
     }
 
-    public static void startSettingViewActivity(Activity activity) {
+    public static void startSettingViewDemo(Activity activity) {
         SettingViewDemo.startActivity(activity);
     }
 
-    public static void startLKVMgrDemoActivity(Activity activity) {
+    public static void startLKVMgrDemoDemo(Activity activity) {
         LKVMgrDemo.startActivity(activity);
     }
 
-    public static void startLLogDemoAcvtvity(Activity activity) {
-        LLogDemo.startActivity(activity);
+    public static void startLLogDemoDemo(Activity activity) {
+        LogDemo.startActivity(activity);
     }
 
     public static void startBarUiDemo(Activity activity) {
@@ -61,7 +62,15 @@ public class LRouter {
         EventBusDemo.startActivity(activity);
     }
 
-    public static void startFragmentActivityA(Activity activity) {
+    public static void startFragmentDemo(Activity activity) {
         FragmentActivity.startActivity(activity);
+    }
+
+    public static void startLineChartDemo(Activity activity) {
+        LineChartDemo.startActivity(activity);
+    }
+
+    public static void startPopupWindowDemo(Activity activity) {
+        PopupWindowDemo.startActivity(activity);
     }
 }

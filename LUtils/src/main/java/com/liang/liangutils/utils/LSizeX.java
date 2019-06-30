@@ -23,14 +23,6 @@ public class LSizeX {
     private static float DENSITY        = getDisplayMetrics().density;
     private static float SCALED_DENSITY = getDisplayMetrics().scaledDensity;
 
-//    public static void init() {
-//        DisplayMetrics metrics = getDisplayMetrics();
-//        WIDTH = metrics.widthPixels;
-//        HEIGHT = metrics.heightPixels;
-//        DENSITY = metrics.density;
-//        SCALED_DENSITY = metrics.scaledDensity;
-//    }
-
     private static DisplayMetrics getDisplayMetrics() {
         return LCommon.getApp().getResources().getDisplayMetrics();
     }

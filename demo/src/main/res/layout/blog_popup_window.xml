@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp100"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_popup_window_bg"
+    android:paddingLeft="@dimen/dp10"
+    android:paddingRight="@dimen/dp10">
+
+    <TextView
+        android:id="@+id/mvWindowTestPause"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:gravity="left|center"
+        android:text="暂停测试"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/mvWindowTestPause"
+        app:layout_constraintRight_toRightOf="@id/mvWindowTestPause"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowTestPause" />
+
+    <TextView
+        android:id="@+id/mvWindowTestResume"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:gravity="left|center"
+        android:text="恢复测试"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowTestPause" />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/mvWindowTestPause"
+        app:layout_constraintRight_toRightOf="@id/mvWindowTestPause"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowTestResume" />
+
+    <TextView
+        android:id="@+id/mvWindowStop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:gravity="left|center"
+        android:text="停止设备"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowTestResume" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/mvWindowTestPause"
+        app:layout_constraintRight_toRightOf="@id/mvWindowTestPause"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowStop" />
+
+    <TextView
+        android:id="@+id/mvWindowQueryData"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:gravity="left|center"
+        android:text="查询数据"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowStop" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp1"
+        android:background="@color/white"
+        app:layout_constraintLeft_toLeftOf="@id/mvWindowTestPause"
+        app:layout_constraintRight_toRightOf="@id/mvWindowTestPause"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowQueryData" />
+
+    <TextView
+        android:id="@+id/mvWindowQueryChannelStatus"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:gravity="left|center"
+        android:text="查询状态"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/mvWindowQueryData" />
+
+
+</android.support.constraint.ConstraintLayout>

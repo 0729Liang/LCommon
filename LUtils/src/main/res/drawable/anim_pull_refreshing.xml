@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <!--下拉正在刷新特效：眨眼睛特效
+    animation-list：根标签，
+    item标签对动画中的每一个图片进行声明，
+    oneshot：true只展示一遍，false循环播放动画，
+    android:duration 表示展示所用的该图片的时间长度 -->
+    <item
+        android:drawable="@drawable/refreshing_image_frame_01"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/refreshing_image_frame_02"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/refreshing_image_frame_03"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/refreshing_image_frame_04"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/refreshing_image_frame_05"
+        android:duration="200" />
+    <item
+        android:drawable="@drawable/refreshing_image_frame_06"
+        android:duration="200" />
+</animation-list>

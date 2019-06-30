@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">LCommon</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blog">博客介绍，详情请点击此处</string>
 
 
 </resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/demo_blog"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp50"
+            android:text="@string/blog"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/sp16"
+            android:padding="@dimen/dp5"
+            android:gravity="center_vertical"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/demo_linechart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp200"/>
+
+    <CheckBox
+            android:id="@+id/demo_checkbox1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="折线1"/>
+
+    <CheckBox
+            android:id="@+id/demo_checkbox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="折线2"/>
+
+    <CheckBox
+            android:id="@+id/demo_checkbox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="折线3"/>
+
+    <Button
+            android:id="@+id/demo_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+
+    <Button
+            android:id="@+id/demo_pause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+
+</LinearLayout>

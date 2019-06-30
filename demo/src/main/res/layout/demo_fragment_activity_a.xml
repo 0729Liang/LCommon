@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".activity.demo.blog.fragment.FragmentActivity">
+    tools:context=".demo.blog.fragment.FragmentActivity">
 
     <fragment
         android:id="@+id/demo_left_fragment"
-        android:name="com.liang.lcommon.activity.demo.blog.fragment.LeftFragment"
+        android:name="com.liang.lcommon.demo.blog.fragment.LeftFragment"
         android:layout_width="@dimen/dp0"
         android:layout_height="match_parent"
         android:layout_weight="1" />
