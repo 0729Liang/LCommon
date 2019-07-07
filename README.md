@@ -12,23 +12,16 @@ Demo界面分为三个模块，分别是Utils工具类，View自定义控件，B
 
 # 界面展示
 
-<figure class="half">
-    <img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_View.png" width="200"/>
-    <img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="200"/>
-    <img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Utils.png" width="200"/>
-</figure>
-
-<img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon.gif" width="200"/>
-
-<table>     
+<table>  
+    <tr>
+        <td><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_View.png" width="200">图3 View界面</center></td>
+        <td ><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon.gif" width="200">图4 Demo Gif</center></td> 
+     </tr>    
     <tr>
         <td><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Utils.png" width="200">图1 Utils界面</center></td>
         <td ><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="200">图2 Blog界面</center></td>
     </tr>
-    <tr>
-        <td><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_View.png" width="200">图3 View界面</center></td>
-        <td ><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon.gif" width="200">图4 Demo Gif</center></td> 
-     </tr> 
+    
 </table>
 
 
