@@ -144,9 +144,6 @@ Observable里面的接口，实现了Action1
 
 
 
-
- 
-
 # *RxJava2*
 
 1.Observable 被观察者 不支持背压
@@ -280,5 +277,4 @@ Observable里面的接口，实现了Action1
 
 
 
- 
  
