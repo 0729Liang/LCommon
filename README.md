@@ -10,16 +10,15 @@ Demo界面分为三个模块，分别是Utils工具类，View自定义控件，B
 
 而*Blog/Learn*模块只是一些教程和自己平时学习的内容，没有封装，仅供查看
 
-
-# 界面展示
-
 <figure class="half">
     <img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_View.png" width="200"/><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="200"/>
     <img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Utils.png" width="200"/>
 
 </figure>
 
-![image](https://github.com/0729Liang/LCommon/blob/dev/image/LCommon.gif)
+<img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon.gif" width="200"/>
+
+
 # 一、导入依赖
 
 To get a Git project into your build:
