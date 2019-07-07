@@ -45,7 +45,7 @@ Add it in your root build.gradle at the end of repositories:
 
 ```
 { 
-    implementation 'com.github.0729Liang:LCommon:0.0.5' 
+    implementation 'com.github.0729Liang:LCommon:0.0.8' 
 }
 ```
 
