@@ -11,7 +11,6 @@ android {
         targetSdkVersion sdkVersions.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -23,53 +22,30 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation support.appcompat_v7
-    implementation support.constraint
-    //testImplementation 'junit:junit:4.12'
-    //androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    //androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation(support.appcompat_v7)
+    implementation(support.constraint)
+    implementation(support.design)
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    // Optional, if you use support library fragments:
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
-    implementation project(':utils')
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    debugImplementation libs.leakCanaryDebug
+    releaseImplementation libs.leakCanaryRelease
+    debugImplementation libs.leakCanaryDebugImpl
 
-//
-//    //工具
-//    implementation libs.utilcode
-//    implementation libs.mmkv
-//    implementation libs.common
-//    // 图片
-//    implementation libs.glide4
-//    implementation libs.glideOkHttp
-//    // 通信
-//    implementation libs.eventbus
-//    implementation libs.butterknife
-//    // json
-//    implementation libs.gson
-//    //implementation libs.fastjson
-//    // 网络
-//    implementation libs.okhttp3
-//    implementation libs.cookie
-//    // retrofit
-//    implementation libs.retrofit
-//    implementation libs.converter_gson
-//    implementation libs.adapter_rxjava2
-//    // rx
-//    implementation libs.rxjava2
-//    implementation libs.rxandroid
-//    // 适配器
-//    implementation libs.BRVAH
-//    // 布局
-//    implementation support.cardView_v7
-//    // 圆角 image
-//    implementation libs.roundImgView
+    implementation(libs.MPAndroidChart) {
+        exclude group: 'androidx'
+//        exclude group: 'com.android.support'
+    }
 
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation project(':LUtils')
+
+
 }

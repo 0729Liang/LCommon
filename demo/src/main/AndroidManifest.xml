@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.liang.lcommon">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.liang.lcommon">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".LApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.LBaseActivity">
+            android:name=".base.LApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".demo.blog.popupwindow.PopupWindowDemo">
+        </activity>
+        <activity android:name=".moudle.main2.LMainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.demo.ActivityStartAnimDemo" />
-        <activity android:name=".activity.demo.RockerActivityDemo" />
-        <activity android:name=".activity.demo.SettingViewDemo" />
-        <activity android:name=".activity.demo.CircleSeekBarDemo" />
-        <activity android:name=".activity.demo.LKVMgrDemo" />
-        <activity android:name=".activity.demo.LLogDemo" />
-        <activity android:name=".activity.demo.BarUiDemo" />
-        <activity android:name=".app.LAppActivity" />
-        <activity android:name=".activity.demo.AnnotationDemo" />
-        <activity android:name=".activity.demo.eventbus.EventBusDemo"></activity>
+        <activity android:name=".moudle.main.LBaseActivity"/>
+        <activity android:name=".demo.blog.fragment.FragmentActivity"/>
+        <activity android:name=".demo.utils.ActivityStartAnimDemo"/>
+        <activity android:name=".demo.view.RockerActivityDemo"/>
+        <activity android:name=".demo.view.SettingViewDemo"/>
+        <activity android:name=".demo.view.CircleSeekBarDemo"/>
+        <activity android:name=".demo.utils.LKVMgrDemo"/>
+        <activity android:name=".demo.utils.LogDemo"/>
+        <activity android:name=".demo.utils.BarUiDemo"/>
+        <activity android:name=".demo.utils.AnnotationDemo"/>
+        <activity android:name=".demo.blog.eventbus.EventBusDemo"/>
+        <activity android:name=".demo.blog.lineChart.LineChartDemo"/>
+        <activity android:name=".web.LWebActivity"/>
     </application>
 
 </manifest>

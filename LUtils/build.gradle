@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../scripts/config/dependence.gradle'
+
+
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation support.appcompat_v7
+    implementation support.constraint
+
+
+    // 多模块依赖
+    // implementation 编译过程无法访问，运行期间可以访问
+    // api 在编译和运行期间都可以将a模块的h库的接口暴露给其他模块，就如同原来compile方法
+
+
+    //工具
+    api libs.mmkv
+    api libs.gson  // json
+    // 适配器
+    api libs.BRVAH
+    // 布局
+    api support.design
+    api support.cardView_v7
+    api support.recyclerView_v7
+    api libs.roundImgView     // 圆角 image
+    api libs.eventbus     // eventBus
+
+    api libs.smartRefresh // 智能刷新
+    api libs.smartRefreshHeader
+    api libs.butterknife // butterknife
+    api libs.drawableGif
+
+    /* // 图片
+     api libs.glide4
+     api libs.glideOkHttp
+     // 通信
+     api libs.butterknife
+     // 网络
+     api libs.okhttp3
+     api libs.cookie
+     // retrofit
+     api libs.retrofit
+     api libs.converter_gson
+     api libs.adapter_rxjava2
+     // rx
+     api libs.rxjava2
+     api libs.rxandroid*/
+
+}

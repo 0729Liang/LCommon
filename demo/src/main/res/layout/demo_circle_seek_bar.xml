@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".demo.view.CircleSeekBarDemo">
+
+    <com.liang.liangutils.libs.view.LCircleSeekBar
+        android:id="@+id/lseekbar"
+        android:layout_width="@dimen/dp150"
+        android:layout_height="@dimen/dp150"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:lseekbar_lineCap="round"
+        app:lseekbar_progress="20"
+        app:lseekbar_secondProgress="30" />
+
+    <TextView
+        android:id="@+id/progressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/lseekbar"
+        app:layout_constraintRight_toRightOf="@id/lseekbar"
+        app:layout_constraintTop_toBottomOf="@id/lseekbar" />
+
+
+    <com.liang.liangutils.libs.view.LCircleSeekBar
+        android:id="@+id/ringSeekBar"
+        android:layout_width="@dimen/dp150"
+        android:layout_height="@dimen/dp150"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressTv"
+        app:lseekbar_lineCap="square"
+        app:lseekbar_progress="20"
+        app:lseekbar_secondProgress="30"
+        app:lseekbar_shape="ring"
+        app:lseekbar_hideThumb="true"
+        app:lseekbar_thumbPosition="above"
+        app:lseekbar_thumb="@color/redPrimary"/>
+
+    <com.liang.liangutils.libs.view.LCircleSeekBar
+        android:id="@+id/circleSeekBar"
+        android:layout_width="@dimen/dp150"
+        android:layout_height="@dimen/dp150"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressTv"
+        app:lseekbar_lineCap="round"
+        app:lseekbar_progress="40"
+        app:lseekbar_secondProgress="70"
+        app:lseekbar_shape="circle"
+        app:lseekbar_thumbPosition="below"
+        app:lseekbar_thumb="@drawable/icon_forest"/>
+</android.support.constraint.ConstraintLayout>
