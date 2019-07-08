@@ -27,6 +27,7 @@ Demo界面分为三个模块，分别是Utils工具类，View自定义控件，B
     
 </table>
 
+<img alt="git flow 图解1" src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="400"/><figcaption> git flow 图解2</figcaption></figure>
 
 # 一、导入依赖
 
