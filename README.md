@@ -23,7 +23,6 @@ Demo界面分为三个模块，分别是Utils工具类，View自定义控件，B
     </tr>
 </table>
 
-
 # 一、导入依赖
 
 To get a Git project into your build:
