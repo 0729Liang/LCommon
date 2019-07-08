@@ -19,7 +19,7 @@ Demo界面分为三个模块，分别是Utils工具类，View自定义控件，B
      </tr>    
     <tr>
         <td><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Utils.png" width="200">图3 Utils界面</center></td>
-        <td ><center><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="200">图4 Blog界面</center></td>
+        <td ><img src="https://github.com/0729Liang/LCommon/blob/dev/image/LCommon_Blog.png" width="200">图4 Blog界面</td>
     </tr>
     
 </table>
