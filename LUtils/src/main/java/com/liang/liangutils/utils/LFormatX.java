@@ -47,6 +47,40 @@ public class LFormatX {
     }
 
     /**
+     * 格式化播放时间
+     *
+     * @param seconds 秒数
+     *                时间＜1小时显示分秒，显示样式 00:20
+     *                时间≥1小时显示时分秒，显示样式 01:11:12
+     * @param detail 是否详细显示，true详细显示，会显示时分秒三位，false精简显示-只显示两部分
+     */
+    public static String formatSeconds(long seconds,boolean detail) {
+        String standardTime;
+        if (detail){
+            if (seconds <= 0) {
+                standardTime = "00:00:00";
+            } else if (seconds < 60) {
+                standardTime = String.format(Locale.getDefault(), "00:00:%02d", seconds % 60);
+            } else if (seconds < 3600) {
+                standardTime = String.format(Locale.getDefault(), "00:%02d:%02d", seconds / 60, seconds % 60);
+            } else {
+                standardTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", seconds / 3600, seconds % 3600 / 60, seconds % 60);
+            }
+        }else {
+            if (seconds <= 0) {
+                standardTime = "00:00";
+            } else if (seconds < 60) {
+                standardTime = String.format(Locale.getDefault(), "00:%02d", seconds % 60);
+            } else if (seconds < 3600) {
+                standardTime = String.format(Locale.getDefault(), "%02d:%02d", seconds / 60, seconds % 60);
+            } else {
+                standardTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", seconds / 3600, seconds % 3600 / 60, seconds % 60);
+            }
+        }
+        return standardTime;
+    }
+
+    /**
      * 播放量
      *
      * @param playCount:后台返回的播放量（单位：个） 播放量 ＜ 1万，显示样式 1、10、1000

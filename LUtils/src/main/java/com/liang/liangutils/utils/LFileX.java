@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.widget.Toast;
 
 import com.liang.liangutils.init.LCommon;
 import com.liang.liangutils.libs.utils.LLogX;
@@ -12,6 +13,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -21,6 +23,37 @@ import java.io.IOException;
  * Describe : 文件相关操作
  */
 public class LFileX {
+
+    /**
+     * 描述：向指定文件中写入一行内容
+     *
+     * @param pathFile   Environment.getExternalStorageDirectory() + "/Download/" + fileName
+     * @param path       Environment.getExternalStorageDirectory() + "/Download/" + fileName
+     * @param writeTytpe ture-append
+     * @param line       写入一行内容
+     */
+    public static void writeLineToFile(File pathFile, String path, boolean writeTytpe, String line) {
+
+        try {
+            if (!pathFile.exists()) {
+                pathFile.createNewFile();
+            }
+
+            try {
+                FileOutputStream fos = new FileOutputStream(path, writeTytpe);
+                fos.write(line.getBytes());
+                fos.write("\n".getBytes());
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 复制文件到
