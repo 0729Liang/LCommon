@@ -70,6 +70,8 @@ class LMainActivity : AppCompatActivity() {
 
         // 分流
         shuntData()
+
+
     }
 
     /**

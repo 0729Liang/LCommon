@@ -12,6 +12,7 @@ import com.liang.liangutils.init.LCommon;
 public class ToastUtils {
 
     public static void showShort(String s) {
+
         Toast.makeText(LCommon.getContext(), s, Toast.LENGTH_SHORT).show();
     }
 }
